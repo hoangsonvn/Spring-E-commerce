@@ -69,7 +69,7 @@ public class ProductManagementAdminController {
         return "admin/product/listProductByCategory";
     }
 
-    @PreAuthorize("hasAnyAuthority('ADMIN_DELETE')")
+    //@PreAuthorize("hasAnyAuthority('ADMIN_DELETE')")
     @GetMapping(value = "/product-create")
     public String insert(HttpServletRequest request) {
         request.setAttribute("categories", categoryService.findAll());
@@ -77,7 +77,7 @@ public class ProductManagementAdminController {
         return "admin/product/createNewProduct";
     }
 
-    @PreAuthorize("hasAnyAuthority('ADMIN_DELETE')")
+  //  @PreAuthorize("hasAnyAuthority('ADMIN_DELETE')")
     @PostMapping(value = "/product-create")
     public String insertPost(@RequestParam(name = "categoryId") long categoryId, @RequestParam(name = "productName") String productName, @RequestParam(name = "description") String description,
                              @RequestParam(name = "price") float price, @RequestParam(name = "quantity") int quantity,
@@ -85,7 +85,7 @@ public class ProductManagementAdminController {
         productService.persist(categoryId, productName, description, price, quantity, saleId, imageFile);
         return "redirect:/admin/product-list";
     }
-    @PreAuthorize("hasAnyAuthority('ADMIN_UPDATE')")
+  //  @PreAuthorize("hasAnyAuthority('ADMIN_UPDATE')")
     @GetMapping(value = "/product-update")
     public String update(HttpServletRequest request, @RequestParam(name = "productId") long productId) {
         request.setAttribute("product", productService.findById(productId));
@@ -94,7 +94,7 @@ public class ProductManagementAdminController {
         return "admin/product/updateProduct";
     }
 
-    @PreAuthorize("hasAnyAuthority('ADMIN_UPDATE')")
+  //  @PreAuthorize("hasAnyAuthority('ADMIN_UPDATE')")
     @PostMapping(value = "/product-update")
     public String update(@RequestParam(value = "newPrice", required = false) Float newPrice, @RequestParam(value = "imageFile", required = false) MultipartFile imageFile,
                          @RequestParam(value = "productId", required = false) Long productId, @RequestParam(value = "categoryId", required = false) Long categoryId, @RequestParam(value = "oldPrice", required = false) Float oldPrice,
@@ -105,7 +105,7 @@ public class ProductManagementAdminController {
         productService.merge(newPrice, imageFile, productId, categoryId, oldPrice, productName, description, quantity, image, saleId);
         return "redirect:/admin/product-list";
     }
-    @PreAuthorize("hasAnyAuthority('ADMIN_DELETE')")
+   // @PreAuthorize("hasAnyAuthority('ADMIN_DELETE')")
     @PostMapping(value = "/product-delete")
     public String delete(HttpServletRequest request) {
         String[] productIds = request.getParameterValues("productId");

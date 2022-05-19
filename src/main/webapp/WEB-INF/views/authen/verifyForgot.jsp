@@ -6,7 +6,7 @@
 <head>
     <meta charset="ISO-8859-1">
 
-    <link rel="stylesheet" type="text/css" href="resource/common/authen.css">
+    <link rel="stylesheet" type="text/css" href="../resource/common/authen.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
           rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -18,7 +18,7 @@
 <form action="<c:url value="/codecheck"/>" method="post">
     <div class="auth-form" style="background-color: white;">
         <div class="auth-form-container">
-            <a href="<c:url value="/client/client/home"/>"><h5 class="auth-form-title"
+            <a href="<c:url value="/client/home"/>"><h5 class="auth-form-title"
                                       style="text-align: center; padding-top: 20px;">Welcome to
                 PiFood</h5></a>
             <c:if test="${mess != null}">

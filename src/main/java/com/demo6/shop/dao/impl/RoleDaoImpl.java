@@ -19,6 +19,7 @@ public class RoleDaoImpl implements RoleDao {
 	
 	@Override
 	public List<Role> findAll() {
+
 		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(Role.class);
 		return criteria.list();
 	}

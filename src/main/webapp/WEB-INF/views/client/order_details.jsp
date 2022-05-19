@@ -55,7 +55,7 @@
 										<c:forEach items="${items}" var="item">
 											<tr>
 												<td><a
-													href="product-details?productId=${item.productDTO.productId}"><img
+													href="<c:url value="/client/product-details?productId=${item.productDTO.productId}"/>"><img
 														src="../download?image=${item.productDTO.image}" alt=""></a></td>
 												<td>
 													<div class="shop-details">
@@ -106,7 +106,7 @@
 									</tbody>
 									<tfoot>
 										<tr>
-											<td colspan="6"><a href="home"><button
+											<td colspan="6"><a href="<c:url value="/client/home"/>"><button
 														class="pull-left">Continue Shopping</button></a>
 												<p class="pull-right" style="display: flex; border: none;">
 													<i class="material-icons"

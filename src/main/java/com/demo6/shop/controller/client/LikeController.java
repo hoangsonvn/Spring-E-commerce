@@ -4,12 +4,9 @@ import com.demo6.shop.model.ProductDTO;
 import com.demo6.shop.service.LikeService;
 import com.demo6.shop.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -22,7 +19,7 @@ public class LikeController {
     @Autowired
     private ProductService productService;
 
-    @GetMapping("like/{productId}")
+    @GetMapping("client/like/{productId}")
     public String insert(@PathVariable(value = "productId") Long id, HttpSession session, HttpServletRequest request) {
         HashMap<Long, ProductDTO> likeMap = (HashMap<Long, ProductDTO>) session.getAttribute("likeMap");
         if (likeMap == null) {
@@ -34,7 +31,7 @@ public class LikeController {
         return "redirect:" + request.getHeader("Referer");
     }
 
-    @GetMapping("deletelike/{id}")
+    @GetMapping("client/deletelike/{id}")
     public String deleteLike(HttpSession session, @PathVariable(value = "id") Long id, HttpServletRequest request) {
         HashMap<Long, ProductDTO> likeMap = (HashMap<Long, ProductDTO>) session.getAttribute("likeMap");
         likeService.delete(id, likeMap);
@@ -45,7 +42,7 @@ public class LikeController {
 
     }
 
-    @GetMapping("listlike")
+    @GetMapping("client/listlike")
     public String listLike(HttpSession session) {
         HashMap<Long, ProductDTO> likeMap = (HashMap<Long, ProductDTO>) session.getAttribute("likeMap");
         return "client/like";

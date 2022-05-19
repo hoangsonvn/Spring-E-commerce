@@ -18,7 +18,7 @@
 					<h3 class="auth-form-title">Login</h3>
 					<a href="register" class="auth-form-subtitle">Register</a>
 				</div>
-				<p style="color: red; margin-top: -15px; margin-left: 3x; margin-bottom: 5px;">${err}</p>
+				<p style="color: red; margin-top: -15px; margin-left: auto; margin-bottom: 5px;">${err}</p>
 				<div class="auth-form-form" style="margin-top: 15px;">
 					<div class="auth-form-group">
 						<input class="auth-form-input" type="text" name="account"

@@ -64,8 +64,7 @@
 														<span class="label label-danger"
 															style="font-size: 15px; margin-right: 15px;">Delete</span>
 													</button>
-													<a href="#"><span class="label label-success"
-														style="font-size: 15px;">Create new order</span></a>
+
 												</div>
 											</div>
 											<div class="panel-body no-padding">
@@ -95,19 +94,21 @@
 															<td>$${order.priceTotal}0</td>
 															<td>${order.buyDate}</td>
 															<c:if test="${order.status eq 'PENDING'}">
-																<td><a href="order-update?orderId=${order.orderId}&pageIndex=${pageIndex}
-																"><span class="label label-warning">PENDING</span></a></td>
+																<td><a href="<c:url value="/admin/order-update?orderId=${order.orderId}&pageIndex=${pageIndex}"/>">
+																<span class="label label-warning">PENDING</span></a></td>
 															</c:if>
 															<c:if test="${order.status eq 'SUCCESS'}">
 																<td><span class="label label-success">SUCCESS</span></td>
 															</c:if>
-															<td><a href="order-details?orderId=${order.orderId}" style="text-decoration: underline;">Details</a></td>
+															<td><a href="<c:url value="/admin/order-details?orderId=${order.orderId}"/>" style="text-decoration: underline;">Details</a></td>
 															</tr>
 														</c:forEach>
 													</tbody>
 												</table>
 											</div>
 										</div>
+										<c:if test="${totalPage != 0}">
+
 										<nav aria-label="Page navigation example"
 											style="margin-top: -30px;">
 											<ul class="pagination">
@@ -116,10 +117,10 @@
 														<c:if test="${i == pageIndex}">
 															style="background-color: #F0AD4E; color: white;"
 														</c:if>
-														href="order-list?pageIndex=${i}">${i + 1}</a></li>
+														href="<c:url value="/admin/order-list?pageIndex=${i}"/>">${i + 1}</a></li>
 												</c:forEach>
 											</ul>
-										</nav>
+										</nav></c:if>
 									</div>
 									<div id="headline-chart" class="ct-chart"></div>
 								</div>

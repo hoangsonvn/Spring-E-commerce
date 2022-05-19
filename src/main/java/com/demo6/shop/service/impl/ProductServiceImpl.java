@@ -86,6 +86,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Integer> listYears() {
+
         List<Integer> integerList = productDao.listYears();
         int count = (int) integerList.stream().count();
         List<Integer> newList = new ArrayList<>();

@@ -52,7 +52,7 @@
 					<div class="col-md-9">
 						<div class="checkout-page">
 							<ol class="checkout-steps">
-								<li class="steps active"><a href="my-order"><div
+								<li class="steps active"><a href="<c:url value="client/my-order"/>"><div
 											class="step-title">01. MY ORDER</div></a>
 									<table class="table table-striped" style="font-size: 15px;">
 										<thead>
@@ -76,11 +76,11 @@
 														</c:if> <c:if test="${order.status eq 'SUCCESS'}">
 															<span class="label label-success">${order.status}</span>
 														</c:if></td>
-													<td><a href="order-details?orderId=${order.orderId}"
+													<td><a href="<c:url value="/client/order-details?orderId=${order.orderId}"/>"
 														style="color: blue; text-decoration: underline;">Details</a></td>
 													<td>
 													<c:if test="${order.status eq 'PENDING'}">
-													<a href=""><i class="material-icons" style="color: #F7544A;">&#xe5c9;</i></a>
+													<a href="#"><i class="material-icons" style="color: #F7544A;">&#xe5c9;</i></a>
 														</c:if>
 														
 														<c:if test="${order.status eq 'SUCCESS'}">
@@ -91,7 +91,7 @@
 											</c:forEach>
 										</tbody>
 									</table></li>
-								<li class="steps"><a href="profile"><div
+								<li class="steps"><a href="<c:url value="/client/profile"/>"><div
 											class="step-title">02. BILLING INFORMATION</div></a></li>
 							</ol>
 						</div>

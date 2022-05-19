@@ -44,12 +44,14 @@ public class StatsController {
         List<StatsDTO> statsDTOList = productService.listStats(month, year, pageIndex, SystemConstant.PAGESIZE);
         request.setAttribute("dataPointsList", canvasjsChartProductService.getCanvasjsChartData(month, year));
         logger.info("vẽ ra biểu đồ");
+        request.setAttribute("month",month);
+        request.setAttribute("year",year);
         request.setAttribute("first", first);
         request.setAttribute("last", last);
         request.setAttribute("totalPage", totalPage);
         request.setAttribute("pageIndex", pageIndex);
         request.setAttribute("stats", statsDTOList);
-        logger.info("ds thống kê");
+        logger.info("DS thống kê");
         return "admin/chart/statistical";
     }
 

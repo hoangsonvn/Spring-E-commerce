@@ -55,7 +55,7 @@
 						<div class="panel-body">
 							<div class="row">
 								<div class="col-md-3">
-									<a class="metric-link" href="../admin/order-list" style="color: #676A6D;">
+									<a class="metric-link" href="<c:url value="/admin/order-list"/>" style="color: #676A6D;">
 										<div class="metric" style="box-shadow: 0 0 3px;">
 											<span class="icon"><i class="fa fa-shopping-cart"></i></span>
 											<p>
@@ -65,7 +65,7 @@
 									</a>
 								</div>
 								<div class="col-md-3">
-									<a class="metric-link" href="../admin/product-list"
+									<a class="metric-link" href="<c:url value="/admin/product-list"/>"
 										style="color: #676A6D;">
 										<div class="metric" style="box-shadow: 0 0 3px;">
 											<span class="icon"><i class="fab fa-product-hunt"
@@ -77,7 +77,7 @@
 									</a>
 								</div>
 								<div class="col-md-3">
-									<a class="metric-link" href="user-list" style="color: #676A6D;">
+									<a class="metric-link" href="<c:url value="/admin/user-list"/>" style="color: #676A6D;">
 										<div class="metric" style="box-shadow: 0 0 3px;">
 											<span class="icon"><i
 												style='font-size: 24px; margin-top: 2px;' class='fas'>&#xf0c0;</i></span>
@@ -130,12 +130,12 @@
 															<td>$${order.priceTotal}0</td>
 															<td>${order.buyDate}</td>
 															<c:if test="${order.status eq 'PENDING'}">
-																<td><a href="order-updateHome?orderId=${order.orderId}"><span class="label label-warning">PENDING</span></a></td>
+																<td><a href="<c:url value="/admin/order-updateHome?orderId=${order.orderId}"/>"><span class="label label-warning">PENDING</span></a></td>
 															</c:if>
 															<c:if test="${order.status eq 'SUCCESS'}">
 																<td><span class="label label-success">SUCCESS</span></td>
 															</c:if>
-															<td><a href="order-details?orderId=${order.orderId}" style="text-decoration: underline;">Details</a></td>
+															<td><a href="<c:url value="/admin/order-details?orderId=${order.orderId}"/>" style="text-decoration: underline;">Details</a></td>
 														</tr>
 													</c:forEach>
 												</tbody>
@@ -148,7 +148,7 @@
 														Last 24 hours</span>
 												</div>
 												<div class="col-md-6 text-right">
-													<a href="../admin/order-list" class="btn btn-primary">View All Purchases</a>
+													<a href="<c:url value="/admin/order-list"/>" class="btn btn-primary">View All Purchases</a>
 												</div>
 											</div>
 										</div>

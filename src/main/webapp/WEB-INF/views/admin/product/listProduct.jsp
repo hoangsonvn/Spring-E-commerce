@@ -74,7 +74,7 @@
 															<span class="label label-danger"
 																style="font-size: 15px; margin-right: 15px;">Delete</span>
 														</button>
-														<a href="product-create"><span
+														<a href="<c:url value="/admin/product-create"/>"<span
 															class="label label-success" style="font-size: 15px;">Create
 																new product</span></a>
 													</div>
@@ -90,7 +90,6 @@
 																<th>Quantity</th>
 																<th>Sale</th>
 																<th style="width: 10%;">Image</th>
-																<th style="width: 22%;">Description</th>
 																<th>Edit</th>
 															</tr>
 														</thead>
@@ -113,9 +112,8 @@
 																	<td
 																		style="vertical-align: middle; color: #D9534F; font-weight: bold;">-${product.saleDTO.salePercent}%</td>
 																	<td style="vertical-align: middle;"><img
-																		style="width: 70%;" src="../download?image=${product.image}"></td>
-																	<td style="vertical-align: middle;">${product.description}</td>
-																	<td style="vertical-align: middle;"><a href="product-update?productId=${product.productId}">
+																		style="width: 70%;" src=" <c:url value="/download?image=${product.image}"/>"></td>
+																	<td style="vertical-align: middle;"><a href="<c:url value="/admin/product-update?productId=${product.productId}"/>">
 																			<span class="label label-warning"
 																			style="font-size: 15px;">Update</span>
 																	</a></td>
@@ -125,19 +123,19 @@
 													</table>
 												</div>
 											</div>
+											<c:if test="${totalPage != 0}">
 											<nav aria-label="Page navigation example"
 												style="margin-top: -30px;">
 												<ul class="pagination">
 													<c:forEach begin="0" end="${totalPage-1}" var="i">
 													<li class="page-item">
-													<a class="page-link" href="product-list?pageIndex=${i}"
+													<a class="page-link" href="<c:url value="/admin/product-list?pageIndex=${i}"/>">
 														<c:if test="${pageIndex == i}">
-														style="background-color: #F0AD4E; color: white;"
 														</c:if>
-														>${i+1}</a></li>
+														${i+1}</a></li>
 													</c:forEach>
 												</ul>
-											</nav>
+											</nav></c:if>
 										</div>
 										<div id="headline-chart" class="ct-chart"></div>
 									</div>

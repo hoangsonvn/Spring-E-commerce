@@ -71,25 +71,43 @@
                                                         <div class="right">
                                                             <span style="color: #d5641c">MONTH</span>
                                                             <select name="month">
+                                                                <option
+                                                                        <c:if test="${month == null}">
+                                                                            selected="selected"
+                                                                        </c:if>
+                                                                ></option>
                                                                 <c:forEach begin="1" end="12" var="i">
-                                                                    <option selected="selected"
+
+                                                                    <option  <c:if test="${month == i}">
+                                                                        selected="selected"
+                                                                    </c:if>
                                                                             value="${i}">${i}</option>
                                                                 </c:forEach>
+<%--
                                                                 <option selected="selected"></option>
+--%>
 
                                                             </select>
                                                             <span style="color: #d5641c"> YEAR</span>
                                                             <select name="year">
+                                                                <option
+                                                                        <c:if test="${year == null}">
+                                                                            selected="selected"
+                                                                        </c:if>
+                                                                ></option>
                                                                 <c:forEach begin="${first}" end="${last}" var="i">
-                                                                    <option selected="selected"
+                                                                    <option
+                                                                            <c:if test="${year == i}">
+                                                                                selected="selected"
+                                                                            </c:if>
                                                                             value="${i}">${i}</option>
                                                                 </c:forEach>
+<%--
                                                                 <option selected="selected"></option>
+--%>
 
                                                             </select>
-                                                            <%--
-                                                                                                                        <input name="pageIndex" value="${pageIndex}" type="hidden">
-                                                            --%>
+
                                                             <button style="color: #2bb24c;background: #abdbe3" type="submit" class="btn btn-secondary">Submit
                                                             </button>
                                                              <a style="color: #e7357a" href="<c:url value="/admin/export?month=${month}&year=${year}"/> " class="btn btn-info">Export
@@ -137,7 +155,8 @@
                                                 </table>
                                             </div>
                                         </div>
-                                        <c:if test="${totalPage !=null }">
+                                        <c:if test="${totalPage != 0}">
+
                                             <nav aria-label="Page navigation example"
                                                  style="margin-top: -30px;">
                                                 <ul class="pagination">

@@ -14,7 +14,7 @@
         <div class="sidebar-scroll" style="padding-top: 20px;">
             <nav>
                 <ul class="nav">
-                    <li><a href="<c:url value="/admin/home"/>" class="><i class="lnr lnr-home"></i> <span>Home</span></a></li>
+                    <li><a href="<c:url value="/admin/home"/>" class=""><i class="lnr lnr-home"></i> <span>Home</span></a></li>
                     <li><a href="<c:url value="/admin/user-list"/>" class=""><i class="lnr lnr-users"></i> <span>User</span></a></li>
                     <li><a href="<c:url value="/admin/product-list"/>" class=""><i class="lnr lnr-gift"></i> <span>Product</span></a></li>
                     <li><a href="<c:url value="/admin/order-list"/>" class=""><i class="lnr lnr lnr-dice"></i>

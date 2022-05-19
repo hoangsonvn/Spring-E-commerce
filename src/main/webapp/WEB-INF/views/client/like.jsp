@@ -79,7 +79,7 @@
 
 
                                         <td><a
-                                                href="<c:url value="/deletelike/${item.value.productId}"/>">
+                                                href="<c:url value="/client/deletelike/${item.value.productId}"/>">
                                             <i class="material-icons">&#xe92b;</i>
                                         </a></td>
                                     </tr>

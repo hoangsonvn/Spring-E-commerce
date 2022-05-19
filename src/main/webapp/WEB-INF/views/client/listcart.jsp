@@ -57,8 +57,8 @@
                                 <tbody>
                                 <c:forEach var="item" items="${cart}">
                                     <tr>
-                                        <td><a href="product-details?productId=${item.value.productDTO.productId}"><img
-                                                src="../download?image=${item.value.productDTO.image}"
+                                        <td><a href="<c:url value="/client/product-details?productId=${item.value.productDTO.productId}"/>"><img
+                                                src="<c:url value="/download?image=${item.value.productDTO.image}"/>"
                                                 alt=""></a></td>
                                         <td>
                                             <div class="shop-details">
@@ -84,7 +84,7 @@
                                             </c:if>
                                         </td>
                                         <td>
-                                            <form action="editcart" method="post">
+                                            <form action="<c:url value="/client/editcart"/>" method="post">
                                                 <select name="quantity" onchange="this.form.submit()">
                                                     <c:forEach begin="1" end="5" var="i">
                                                         <option
@@ -106,7 +106,7 @@
                                             </h5>
                                         </td>
                                         <td><a
-                                                href="deletecart/${item.value.productDTO.productId}">
+                                                href="<c:url value="/client/deletecart/${item.value.productDTO.productId}"/>">
                                             <i class="material-icons">&#xe92b;</i>
                                         </a></td>
                                     </tr>
@@ -168,14 +168,14 @@
                                         <c:if test="${user != null}">
                                             <c:if
                                                     test="${user.address == null || user.phone == null}">
-                                                <a href="<c:url value="client/profile-from-cart"/>"><button>Process To Checkout</button></a>
+                                                <a href="<c:url value="/client/profile-from-cart"/>"><button>Process To Checkout</button></a>
                                             </c:if>
                                             <c:if
                                                     test="${user.address != null && user.phone != null }">
-                                                <form action="<c:url value="client/checkout"/>" method="get">
+                                                <form action="<c:url value="/client/checkout"/>" method="get">
                                                     <button type="submit" style="background: #d5d5d5; color: #1a8cff;font-weight: bold">Paypal</button>
                                                 </form>
-                                                <form action="<c:url value="client/checkout"/>" method="get">
+                                                <form action="<c:url value="/client/checkout"/>" method="get">
                                                     <button type="submit">Payment on delivery</button>
                                                     <input type="hidden" name="home" value="home">
 
@@ -183,7 +183,7 @@
                                             </c:if>
                                         </c:if>
                                         <c:if test="${user == null}">
-                                            <a href="../login"><button>Process To Checkout</button></a>
+                                            <a href="<c:url value="/login"/>"><button>Process To Checkout</button></a>
                                         </c:if>
                                     </div>
                                 </div>

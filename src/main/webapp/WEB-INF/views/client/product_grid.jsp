@@ -36,7 +36,7 @@
                         <ul>
                             <c:forEach items="${categories}" var="category">
                                 <li><a
-                                        href="product-grid?categoryId=${category.categoryId}">${category.categoryName}</a>
+                                        href="<c:url value="/client/product-grid?categoryId=${category.categoryId}"/>">${category.categoryName}</a>
                                 </li>
                             </c:forEach>
                         </ul>
@@ -128,9 +128,9 @@
                                             <div class="offer">-${product.saleDTO.salePercent}%</div>
                                         </c:if>
                                         <div class="thumbnail">
-                                            <a href="product-details?productId=${product.productId}"><img
+                                            <a href="<c:url value="/client/product-details?productId=${product.productId}"/>"><img
                                                     style="width: 90%;"
-                                                    src="../download?image=${product.image}" alt="Product Name"></a>
+                                                    src="<c:url value="/download?image=${product.image}"/>" alt="Product Name"></a>
                                         </div>
                                         <div class="productname">${product.productName}</div>
 
@@ -149,10 +149,10 @@
                                         </c:if>
 
                                         <div class="button_group">
-                                            <form action="<c:url value="/addcart"/> " method="post">
+                                            <form action="<c:url value="/client/addcart"/> " method="post">
                                                 <button class="button add-cart" type="submit">Add To Cart</button>
                                                 <input value="${product.productId}" name="productId" type="hidden">
-                                                <a class="button wishlist" type="button" href="<c:url value="/like/${product.productId}"/> ">
+                                                <a class="button wishlist" type="button" href="<c:url value="/client/like/${product.productId}"/> ">
                                                     <i class="fa fa-heart-o"> </i>
                                                 </a>
                                             </form>

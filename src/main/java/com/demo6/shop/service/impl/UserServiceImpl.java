@@ -40,10 +40,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private ICommon iCommon;
 
     @Override
-    public void userUpdate(long userId,String fullName, boolean gender, String phone, String address, long roleId, String password, String repassword, MultipartFile avatarFile, String avatar) {
+    public void userUpdate(long userId, String fullName, boolean gender, String phone, String address, long roleId, String password, String repassword, MultipartFile avatarFile, String avatar) {
         String avatarFilename = iCommon.image(avatarFile);
         Optional<UserDTO> userDTO = Optional.ofNullable(findById(userId));
-       if(userDTO.isPresent()){
+        if (userDTO.isPresent()) {
             throw new UsernameNotFoundException("not found");
         }
 
@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         userDTO.setPhone(phone);
         userDTO.setAddress(address);
         userDTO.setRoleDTO(roleDTO);*/
-       // avatarFilename = iCommon.image(avatarFile);
+        // avatarFilename = iCommon.image(avatarFile);
 
         avatarFilename = avatarFile != null && avatarFile.getSize() > 0 ? avatarFilename : avatar;
       /*  if (avatarFile != null && avatarFile.getSize() > 0) {
@@ -65,8 +65,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             userDTO.setAvatar(avatar);
         }
 */
-       // userDTO.setPassword(new BCryptPasswordEncoder().encode(repassword));
-        UserDTO userUpdate = new UserDTO(userId,  new BCryptPasswordEncoder().encode(repassword), fullName, phone, address, gender, roleDTO, avatarFilename);
+        // userDTO.setPassword(new BCryptPasswordEncoder().encode(repassword));
+        UserDTO userUpdate = new UserDTO(userId, new BCryptPasswordEncoder().encode(repassword), fullName, phone, address, gender, roleDTO, avatarFilename);
         this.update(userUpdate);
     }
 
@@ -225,10 +225,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
         List<SimpleGrantedAuthority> roleList = new ArrayList<>();
 
-         user.getRole().getPermissions().forEach(s->{
-roleList.add(new SimpleGrantedAuthority(s.getPermissionKey()));
+        user.getRole().getPermissions().forEach(s -> {
+            roleList.add(new SimpleGrantedAuthority(s.getPermissionKey()));
         });
-         roleList.add(new SimpleGrantedAuthority(user.getRole().getRoleName()));
+        roleList.add(new SimpleGrantedAuthority(user.getRole().getRoleName()));
 
         UserPrincipal userPrincipal = new UserPrincipal(user.getEmail(), user.getPassword(), roleList, user.getUserId(),
                 user.getEmail(), user.getFullname(), user.getPhone(), user.getAddress(), user.isGender(), user.isVerify(), user.getRole(), user.getAvatar());

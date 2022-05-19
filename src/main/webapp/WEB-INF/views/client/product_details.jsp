@@ -41,7 +41,7 @@
                     <div class="products-details">
                         <div class="preview_image">
                             <div class="preview-small">
-                                <img src="../download?image=${product.image}" alt=""
+                                <img src="<c:url value="/download?image=${product.image}"/>" alt=""
                                      style="margin-left: 35px; width: 78%; margin-top: 2px;">
                             </div>
                             <div class="offer">-${product.saleDTO.salePercent}%</div>
@@ -81,7 +81,7 @@
 											$${product.price}0  </sup> </span>
                             </div>
                             <hr class="border">
-                            <form action="<c:url value="/addcart"/> " method="post">
+                            <form action="<c:url value="/client/addcart"/> " method="post">
 
                                 <div class="wided">
                                     <div class="qty">
@@ -96,7 +96,7 @@
                                     <div class="button_group">
 
                                         <button class="button add-cart" type="submit" >Add To Cart</button>
-                                        <a class="button wishlist" type="button" href="<c:url value="/like/${product.productId}"/> ">
+                                        <a class="button wishlist" type="button" href="<c:url value="/client/like/${product.productId}"/> ">
                                             <i class="fa fa-heart-o"> </i>
                                         </a>
                                         <button class="button favorite">
@@ -106,7 +106,7 @@
                                     </div>
                                 </div>
                             </form>
-                                <form action="<c:url value="/comment"/> " method="post">
+                                <form action="<c:url value="/client/comment"/> " method="post">
 
                                 <textarea id="comment" name="comment" rows="4" cols="50">
 </textarea>
@@ -118,13 +118,6 @@
                                 <div class="clearfix">
                                     <table class="table">
                                         <thead class="thead-light">
-
-                                        <%-- <tr>
-                                             <th scope="col">#</th>
-                                             <th scope="col">First</th>
-                                             <th scope="col">Time</th>
-
-                                         </tr>--%>
                                         </thead>
 
                                         <c:forEach items="${comments}" var="item">

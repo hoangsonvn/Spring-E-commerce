@@ -4,14 +4,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Dashboard | Klorofil - Free Bootstrap Dashboard Template</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <!-- VENDOR CSS -->
 <link rel="stylesheet"
+
 	href="<c:url value='../resource/admin/assets/vendor/bootstrap/css/bootstrap.min.css'/>">
+
 <link rel="stylesheet"
 	href="<c:url value='../resource/admin/assets/vendor/font-awesome/css/font-awesome.min.css'/>">
 <link rel="stylesheet"
@@ -56,7 +57,7 @@
 						<div class="panel-heading"
 							style="display: flex; justify-content: space-between;">
 							<h3 class="panel-title">UPDATE PRODUCT</h3>
-							<a class="btn btn-warning" href="product-list"
+							<a class="btn btn-warning" href="<c:url value="/admin/product-list"/>"
 								style="background-color: #D9534F; padding: 2px 10px; text-decoration: none; border: none; margin-right: 10px; height: 25px;">Back</a>
 						</div>
 						<form action="<c:url value="/admin/product-update"/>" method="post"
@@ -106,21 +107,23 @@
 									class="col-md-6">
 									<tr>
 										<th>Price:</th>
-										<td><input type="text" class="form-control" 
+										<td><input type="number" class="form-control"
+												   min="1" max="1000"
 											style="height: 30px; width: 230px;"
-											placeholder="$${product.price}0" name="newPrice" />
+												   required="required" placeholder="$${product.price}0" name="newPrice" />
 											<input type="hidden" name="oldPrice" value="${product.price}">
 											</td>
 									</tr>
 									<tr>
 										<th>Quantity:</th>
-										<td><input type="text" class="form-control"
+										<td><input type="number" class="form-control"
+												   min="1" max="100"
 											required="required" style="height: 30px; width: 230px;"
 											placeholder="0" name="quantity" value="${product.quantity}" /></td>
 									</tr>
 									<tr>
 										<th>Image:</th>
-										<td><img src="../download?image=${product.image}"
+										<td><img src="<c:url value="/download?image=${product.image}"/>"
 											style="width: 20%; margin-top: -20px;">
 											<input type="hidden" name="image" value="${product.image}" />
 											<input type="file" name="imageFile" />
@@ -135,7 +138,7 @@
 													</c:if>
 													value="${sale.saleId}">${sale.salePercent}%</option>
 												</c:forEach>
-										</select> <a style="margin-left: 10px;" href="">More sale code</a></td>
+										</select> <a style="margin-left: 10px;" href="#">More sale code</a></td>
 									</tr>
 									<tr>
 										<th></th>

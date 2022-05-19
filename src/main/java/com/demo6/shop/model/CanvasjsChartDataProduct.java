@@ -11,21 +11,25 @@ import java.util.List;
 import java.util.Map;
 @Component
 public class CanvasjsChartDataProduct {
+
+
       @Autowired
       private ProductDao productDao;
 
     public Double totalOrderPriceByMonthAndYear(Integer month,Integer year) {
         return productDao.totalOrderPricebyMonthAndYear(month, year);
     }
+
 @Transactional
     public  List<List<Map<Object, Object>>> getCanvasjsDataList(Integer month,Integer year) {
+
         List<List<Map<Object,Object>>> list = new ArrayList<List<Map<Object,Object>>>();
         List<Map<Object,Object>> dataPoints1 = new ArrayList<Map<Object,Object>>();
         List<StatsDTO> statsDTOList = productDao.listStats(month,year,null,null);
         statsDTOList.forEach(s->{
             Map<Object,Object> map = new HashMap<>();
             map.put("name",s.getName());
-            map.put("y",Math.round(s.getTotalprice()/this.totalOrderPriceByMonthAndYear(month,year)*100));
+            map.put("y",(s.getTotalprice()/(this.totalOrderPriceByMonthAndYear(month,year)-5))*100);
             dataPoints1.add(map);
         });
         list.add(dataPoints1);

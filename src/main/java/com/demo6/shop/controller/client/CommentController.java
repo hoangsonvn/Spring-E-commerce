@@ -18,7 +18,7 @@ public class CommentController {
     @Autowired
     private UserService userService;
 
-    @PostMapping("comment")
+    @PostMapping("client/comment")
     public String comment(@RequestParam(value = "comment") String comment,
                           @RequestParam(value = "id") Long id, HttpSession session) {
         Set<CommentDTO> commentDTOS = (HashSet<CommentDTO>) session.getAttribute("comments");

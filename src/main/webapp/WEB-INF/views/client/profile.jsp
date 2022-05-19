@@ -35,7 +35,7 @@
 								Get <strong> newsletter </strong>
 							</h3>
 							<p>Casio G Shock Digital Dial Black.</p>
-							<form action="../get-news" method="post">
+							<form action="<c:url value="/get-news"/>"> method="post">
 								<input class="email" type="text" name="email"
 									placeholder="Your Email..." required="required"> <input class="submit"
 									type="submit" value="Submit">
@@ -49,7 +49,7 @@
 						<div class="checkout-page">
 							<ol class="checkout-steps">
 								<li class="steps">
-									<a href="my-order"><div class="step-title">01. MY ORDER</div></a>
+									<a href="<c:url value="/client/my-order"/>"><div class="step-title">01. MY ORDER</div></a>
 								</li>
 								<li class="steps active">
 									<div style="display: flex;">
@@ -66,7 +66,7 @@
 									<div class="step-description">
 										<div class="row">
 											<div class="col-md-6 col-sm-6">
-												<form action="profile-update" method="post" enctype="multipart/form-data">
+												<form action="<c:url value="/client/profile-update"/>" method="post" enctype="multipart/form-data">
 													<div class="your-details">
 														<h5>Your Persional Details</h5>
 														<input type="hidden" name="userId"

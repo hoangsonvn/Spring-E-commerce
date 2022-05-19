@@ -13,7 +13,7 @@
             <a href="#" class="list"> List </a> <a href="#"
                                                    class="grid active"> Grid </a>
         </div>
-        <form action="search" method="get">
+        <form action="<c:url value="/client/search"/>" method="get">
             <div class="sort-by">
                 Sort By Price: <select name="sort" onchange="this.form.submit()">
                 <option

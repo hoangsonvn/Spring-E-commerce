@@ -33,6 +33,7 @@ public class UserManagementAdminController {
         Integer totalPage = iCommon.totalPage(count, SystemConstant.PAGESIZE);
         request.setAttribute("totalPage", totalPage);
         request.setAttribute("pageIndex", pageIndex);
+
         request.setAttribute("users", userService.findAll(pageIndex, SystemConstant.PAGESIZE));
         return "admin/user/listUser";
     }

@@ -11,18 +11,18 @@
 	content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <!-- VENDOR CSS -->
 <link rel="stylesheet"
-	href="<c:url value='../resource/admin/assets/vendor/bootstrap/css/bootstrap.min.css'/>">
+	href="<c:url value='/resource/admin/assets/vendor/bootstrap/css/bootstrap.min.css'/>">
 <link rel="stylesheet"
-	href="<c:url value='../resource/admin/assets/vendor/font-awesome/css/font-awesome.min.css'/>">
+	href="<c:url value='/resource/admin/assets/vendor/font-awesome/css/font-awesome.min.css'/>">
 <link rel="stylesheet"
-	href="<c:url value='../resource/admin/assets/vendor/linearicons/style.css'/>">
+	href="<c:url value='/resource/admin/assets/vendor/linearicons/style.css'/>">
 <link rel="stylesheet"
-	href="<c:url value='../resource/admin/assets/vendor/chartist/css/chartist-custom.css'/>">
+	href="<c:url value='/resource/admin/assets/vendor/chartist/css/chartist-custom.css'/>">
 <!-- MAIN CSS -->
 <link rel="stylesheet"
-	href="<c:url value='../resource/admin/assets/css/main.css'/>">
+	href="<c:url value='/resource/admin/assets/css/main.css'/>">
 <link rel="stylesheet"
-	href="<c:url value='../resource/admin/assets/css/demo.css'/>">
+	href="<c:url value='/resource/admin/assets/css/demo.css'/>">
 <!-- GOOGLE FONTS -->
 <link
 	href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700"

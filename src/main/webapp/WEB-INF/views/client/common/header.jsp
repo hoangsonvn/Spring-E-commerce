@@ -16,7 +16,9 @@
 <title>Welcome to PiFood</title>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
 
-	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script><script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script><![endif]-->
+	<script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js">
+
+	</script><script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script><![endif]-->
 </head>
 <body id="home">
 
@@ -57,8 +59,8 @@
 								<c:if test="${sessionScope.user == null}">
 									<sec:authorize access="!isAuthenticated()">
 									<ul class="usermenu">
-										<li><a href="../login" class="log">Login</a></li>
-										<li><a href="../register" class="reg">Register</a></li>
+										<li><a href="<c:url value="/login"/>" class="log">Login</a></li>
+										<li><a href="<c:url value="/register"/>" class="reg">Register</a></li>
 									</ul>
 									</sec:authorize>
 									 <sec:authorize access="isAuthenticated()">
@@ -71,7 +73,7 @@
 													style="font-size: 22px; margin-top: -2px; color: #F7544A;"
 													class="fa">&#xf011;</i> <a
 													style="position: absolute; margin-left: -18px;"
-													href="../logout">Logout</a></li>
+													href="<c:url value="/logout"/>">Logout</a></li>
 										</ul>
 									 </sec:authorize>
 
@@ -80,14 +82,14 @@
 								<c:if test="${sessionScope.user != null}">
 									<ul class="usermenu" style="display: flex;">
 										<li> <a href="<c:url value="/client/profile"/>"><img class="img-circle"
-											src="../download?image=${sessionScope.user.avatar}"
+											src="<c:url value="/download?image=${sessionScope.user.avatar}"/>"
 											style="width: 26px;height:26px; margin-top: -4px;">
 											</a><a href="<c:url value="/client/profile"/>" style="margin-left: -22px;"><span style="margin-left: 5px; color: white; font-size: 14px;">${sessionScope.user.fullname}</span></a></li>
 										<li><i
 											style="font-size: 22px; margin-top: -2px; color: #F7544A;"
 											class="fa">&#xf011;</i> <a
 											style="position: absolute; margin-left: -18px;"
-											href="../logout">Logout</a></li>
+											href="<c:url value="/logout"/>">Logout</a></li>
 									</ul>
 								</c:if>
 
@@ -108,11 +110,11 @@
 							<%--<li class="option-cart"><a href="<c:url value="/client/cart"/> "
 														><i class="bi bi-heart"></i>cart <span>${TotalQuantyCart}</span>
 							</a></li>--%>
-							<li class="option-cart"><a href="<c:url value="/listcart"/>"
+							<li class="option-cart"><a href="<c:url value="/client/listcart"/>"
 													   class="cart-icon">cart <span class="cart_no">${TotalQuantyCart}</span>
 							</a></li>
 
-							<li class="option-cart"><a href="<c:url value="/listlike"/> "
+							<li class="option-cart"><a href="<c:url value="/client/listlike"/> "
 							> <span style="size: 20px;" class="bi bi-heart-fill red-color">${size}</span>
 							</a></li>
 
@@ -134,7 +136,7 @@
 								<li><a style="text-transform: none;" href="<c:url value="/client/home"/>">Home</a></li>
 								<c:forEach items="${categories}" var="category">
 									<li><a style="text-transform: none;"
-										href="search?categoryId=${category.categoryId}">${category.categoryName}</a>
+										href="<c:url value="/client/search?categoryId=${category.categoryId}"/>">${category.categoryName}</a>
 									</li>
 								</c:forEach>
 							</ul>

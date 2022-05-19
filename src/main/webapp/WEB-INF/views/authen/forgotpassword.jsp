@@ -17,7 +17,7 @@
     <div class="auth-form" style="background-color: white;">
         <div class="auth-form-container">
             <a href="<c:url value="/client/home"/>"><h5 class="auth-form-title"
-                                      style="text-align: center; padding-top: 20px;">Welcome to
+                                      style="text-align: center; padding-top: 20px;">
                 PiFood</h5></a>
 
             <c:if test="${wrong != null}">

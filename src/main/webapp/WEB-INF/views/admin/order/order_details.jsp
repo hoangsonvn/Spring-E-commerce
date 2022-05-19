@@ -34,7 +34,7 @@
 <link rel="apple-touch-icon" sizes="76x76"
 	href="<c:url value='../resource/admin/assets/img/apple-icon.png'/>">
 <link rel="icon" type="image/png" sizes="96x96"
-	href="<c:url value='../resource/admin/assets/img/favicon.png'/>">
+	href="<c:url value='/resource/admin/assets/img/favicon.png'/>">
 <script src='https://kit.fontawesome.com/a076d05399.js'></script>
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
@@ -58,11 +58,11 @@
 							<h3 class="panel-title">ORDER DETAILS</h3>
 							<div class="right">
 								<button type="submit">
-									<a href="order-list"><span class="label label-danger"
+									<a href="<c:url value="/admin/order-list"/>"><span class="label label-danger"
 										style="font-size: 15px; margin-right: 15px;">Back</span></a>
 								</button>
 								<c:if test="${order.status eq 'PENDING'}">
-								<a href="order-update?orderId=${order.orderId}"><span class="label label-warning" style="font-size: 15px; margin-right: 15px;">Accept</span></a>
+								<a href="<c:url value="/admin/order-update?orderId=${order.orderId}"/>"><span class="label label-warning" style="font-size: 15px; margin-right: 15px;">Accept</span></a>
 								</c:if>
 								<c:if test="${order.status eq 'SUCCESS'}">
 								<span class="label label-success" style="font-size: 15px; margin-right: 15px;">Success</span>
@@ -85,8 +85,8 @@
 									<c:forEach items="${items}" var="item">
 										<tr>
 											<td><a
-												href="product-details?productId=${item.productDTO.productId}"><img
-													src="../download?image=${item.productDTO.image}" alt=""></a></td>
+												href="<c:url value="/client/product-details?productId=${item.productDTO.productId}"/>"><img
+													src="<c:url value="/download?image=${item.productDTO.image}"/>" alt=""></a></td>
 											<td>
 												<div class="shop-details">
 													<div class="productname">${item.productDTO.productName}</div>

@@ -17,6 +17,7 @@ private CanvasjsChartDataProduct canvasjsChartDataProduct;
     @Override
     public List<List<Map<Object, Object>>> getCanvasjsChartProductData(Integer month,Integer year) {
         return canvasjsChartDataProduct.getCanvasjsDataList(month,year);
+
     }
 
     @Override

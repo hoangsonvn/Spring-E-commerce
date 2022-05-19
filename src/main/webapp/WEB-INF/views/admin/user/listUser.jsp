@@ -118,6 +118,8 @@
 												</table>
 											</div>
 										</div>
+										<c:if test="${totalPage != 0}">
+
 										<nav aria-label="Page navigation example"
 											style="margin-top: -30px;">
 											<ul class="pagination">
@@ -131,7 +133,7 @@
 												</c:forEach>
 												
 											</ul>
-										</nav>
+										</nav></c:if>
 									</div>
 									<div id="headline-chart" class="ct-chart"></div>
 								</div>

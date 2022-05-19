@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<link rel="stylesheet" type="text/css" href="resource/common/authen.css">
+<link rel="stylesheet" type="text/css" href="../resource/common/authen.css">
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
 	rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -44,7 +44,7 @@
 						<c:if test="${verifySuccess != null}">
 							<div style="display: flex; margin-bottom: 2px; color: #339900;">
 								<i style='font-size:19px' class='fas'>&#xf058;</i>
-								<span>${verifySuccess}</span> <a href="login" style="margin-left: 10px;"> Login</a>
+								<span>${verifySuccess}</span> <a href="<c:url value="/login"/>" style="margin-left: 10px;"> Login</a>
 							</div>
 						</c:if>
 						

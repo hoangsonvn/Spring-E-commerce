@@ -18,8 +18,6 @@ public class Oauth2Controller {
     private static Logger logger = LoggerFactory.getLogger(Oauth2Controller.class);
 
     @Autowired
-    private UserService userService;
-    @Autowired
     private Oauth2Service oauth2Service;
 
     @GetMapping("/loginSuccess")

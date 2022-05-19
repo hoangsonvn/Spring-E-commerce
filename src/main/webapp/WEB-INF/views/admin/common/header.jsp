@@ -32,22 +32,16 @@
                     <li><a href="<c:url value="/admin/home"/>"> <i class="fa fa-home"
                                                                    style="font-size: 18px;"></i><span> Home</span>
                     </a></li>
-                    <%-- <li><a href="#"> <img src="../download?image=${user.avatar}" class="img-circle" alt="Avatar"
-                                           style="width: 26px;height:26px; margin-top: -4px;">
-                         <span>${username}</span>
-                     </a></li>
-                     <li><a href="../logout"> <i class="material-icons"
-                                                 style="color: red;">&#xe8ac;</i><span>Logout</span>
-                     </a></li>--%>
+
                     <sec:authorize access="isAuthenticated()">
                         <ul class="usermenu" style="display: flex;">
-                            <li style="list-style:none; margin-top: 10px;margin-right: 15px;"><img class="img-circle"
-                                     src="../download?image=<%=SecurityUtils.getPrincipal().getAvatar()%>"
+                            <li style="list-style:none; margin-top: 10px;margin-right: 15px;">
+                                <img class="img-circle" src="../download?image=<%=SecurityUtils.getPrincipal().getAvatar()%>"
                                      style="width: 26px;height:26px; margin-top: -4px;">
                                 <span
                                         style="margin-left:10px;margin-right:15px;color: #001c4a; font-size: 14px;font-weight: bold; "><%=SecurityUtils.getPrincipal().getFullname()%></span>
                             </li>
-                            <li style="list-style: none;margin-top: 6px;"><a href="../logout"> <i class="material-icons"
+                            <li style="list-style: none;margin-top: 6px;"><a href="<c:url value="/logout"/>"> <i class="material-icons"
                                                         style="color: red;">&#xe8ac;</i></a>
                         </ul>
                     </sec:authorize>

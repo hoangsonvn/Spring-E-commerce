@@ -33,7 +33,7 @@ public class ExcelController {
         String currentDateTime = dateFormatter.format(new Date());
 
         String headerKey = "Content-Disposition";
-        String headerValue = "attachment; filename=Stats_" + currentDateTime + ".xlsx";
+        String headerValue = "attachment; filename=Stats_" + currentDateTime +"------"+month+" / "+year+ ".xlsx";
         response.setHeader(headerKey, headerValue);
 
         List<StatsDTO> listStats = productService.listStats(month, year, pageIndex, null);

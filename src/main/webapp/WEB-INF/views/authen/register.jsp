@@ -11,7 +11,7 @@
 <body style="background-image: url(resource/client/images/bg.jpg);">
 	<!-- Authen form -->
 	<div class="auth-form" style="background-color: white;">
-		<form action="register" method="post">
+		<form action="<c:url value="/register"/>" method="post">
 			<div class="auth-form-container">
 				<div class="auth-form-header">
 					<h3 class="auth-form-title">Register</h3>
@@ -35,7 +35,7 @@
 				</div>
 
 				<div class="auth-form-controls">
-					<a href="client/home" class="btn">Back</a> <button type="submit" style="cursor: pointer;"
+					<a href="<c:url value="/client/home"/>" class="btn">Back</a> <button type="submit" style="cursor: pointer;"
 						class="btn">Register</button>
 				</div>
 			</div>
