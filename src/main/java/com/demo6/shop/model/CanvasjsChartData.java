@@ -20,7 +20,7 @@ public class CanvasjsChartData {
         List<List<Map<Object, Object>>> list = new ArrayList<List<Map<Object, Object>>>();
         List<Map<Object, Object>> dataPoints1 = new ArrayList<Map<Object, Object>>();
         List<StatsByYearDTO> statsByYearDTOS = productDao.totalEachYear();
-
+// lấy ra year và tổng giá mỗi năm
         statsByYearDTOS.forEach(s -> {
             HashMap<Object, Object> hashMap = new HashMap<>();
             hashMap.put("x", s.getYear());

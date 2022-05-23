@@ -1,8 +1,6 @@
 package com.demo6.shop.controller.client;
 
 import com.demo6.shop.common.ICommon;
-import com.demo6.shop.factory.Operator;
-import com.demo6.shop.factory.OperatorFactory;
 import com.demo6.shop.service.CategoryService;
 import com.demo6.shop.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -7,7 +7,16 @@ public class RoleDTO {
 	private long roleId;
 	private String roleName;
 	private List<UserDTO> userDTOs;
-	
+	private List<PermissionDTO> permissionDTOS;
+
+	public List<PermissionDTO> getPermissionDTOS() {
+		return permissionDTOS;
+	}
+
+	public void setPermissionDTOS(List<PermissionDTO> permissionDTOS) {
+		this.permissionDTOS = permissionDTOS;
+	}
+
 	public RoleDTO() {
 	}
 

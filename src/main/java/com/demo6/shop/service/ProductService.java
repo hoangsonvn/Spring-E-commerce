@@ -7,7 +7,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 public interface ProductService {
-    void merge(Float newPrice,MultipartFile imageFile,Long productId,Long categoryId,Float oldPrice,String productName,String description,Integer quantity,String image,String saleId);
+    void merge(Float newPrice, MultipartFile imageFile, Long productId, Long categoryId, Float oldPrice, String productName, String description, Integer quantity, String image, String saleId);
+
     void persist(long categoryId, String productName, String description, float price, int quantity, String saleId, MultipartFile multipartFile);
 
     List<Integer> listYears();
@@ -16,9 +17,9 @@ public interface ProductService {
 
     List<StatsDTO> listStats(Integer month, Integer year, Integer pageIndex, Integer pageSize);
 
- /*   void insert(ProductDTO productDTO);
+//   void insert(ProductDTO productDTO);
 
-    void update(ProductDTO productDTO);*/
+    void update(ProductDTO productDTO);
 
     void delete(long productId);
 

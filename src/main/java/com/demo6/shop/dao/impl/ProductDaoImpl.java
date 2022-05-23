@@ -25,6 +25,7 @@ public class ProductDaoImpl implements ProductDao {
     private SessionFactory sessionFactory;
     private static Logger logger = LoggerFactory.getLogger(ProductDaoImpl.class);
 
+    @org.springframework.transaction.annotation.Transactional(readOnly = true)
     @Override
     public List<Integer> listYears() {
         String sql = " select year(o.buyDate) from Order o order by o.buyDate asc";
@@ -36,11 +37,12 @@ public class ProductDaoImpl implements ProductDao {
     public Double totalOrderPricebyMonthAndYear(Integer month, Integer year) {// tính tổng order theo tháng theo năm hoặc cả 2
         logger.info("tính tổng giá Order theo tháng hoặc năm hoặc cả 2");
         String sql = "select sum(o.priceTotal) from Order  o WHERE (:month is null or month(o.buyDate)= :month)" +
-                "and (:year is null or year(o.buyDate)=:year)";
+                "and (:year is null or year(o.buyDate)=:year) and o.status='SUCCESS'";
         TypedQuery typedQuery = sessionFactory.getCurrentSession().createQuery(sql)
                 .setParameter("month", month)
                 .setParameter("year", year);
         Double sum = (Double) typedQuery.getSingleResult();
+        logger.debug("{},{},{}", sum, month, year);
         return sum;
     }
 
@@ -62,7 +64,7 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public List<StatsByYearDTO> totalEachYear() {
         logger.info("tính tổng giá theo mỗi năm toan bộ mặt hàng");
-        String sql = "select sum(o.priceTotal),year(o.buyDate) from Order o group by year(o.buyDate)";
+        String sql = "select sum(o.priceTotal),year(o.buyDate) from Order o group by year(o.buyDate) order by o.buyDate asc ";
         TypedQuery typedQuery = sessionFactory.getCurrentSession().createQuery(sql);
         List<Object[]> list = typedQuery.getResultList();
         List<StatsByYearDTO> statsByYearDTOS = new ArrayList<>();
@@ -82,9 +84,9 @@ public class ProductDaoImpl implements ProductDao {
         logger.info("lấy ra danh sách doanh thu phân trang");
  /*       pageIndex= Optional.ofNullable(pageIndex).orElse(0);
         pageSize= Optional.ofNullable(pageSize).orElse(0);*/
-        Integer first = pageIndex == null & pageSize == null?0:pageIndex*pageIndex;
+        Integer first = pageIndex == null & pageSize == null ? 0 : pageIndex * pageSize;
 
-      pageSize=Optional.ofNullable(pageSize).orElse(coutStats(month, year));
+        pageSize = Optional.ofNullable(pageSize).orElse(coutStats(month, year));
        /* if (pageIndex == null & pageSize == null) {
             first = 0;
         }*/
@@ -94,7 +96,8 @@ public class ProductDaoImpl implements ProductDao {
                 " ,sum(i.unitPrice)/sum(i.quantity),min(i.unitPrice/i.quantity)" +
                 " ,max(i.unitPrice/i.quantity) from Item i where i.order.status='SUCCESS'" +
                 " and (:month is null or month(i.order.buyDate) = :month) and(:year is null or year(i.order.buyDate) = :year)" +
-                " group by i.product.productName  ";
+                " group by i.product.productId  ";
+        logger.info("lẽ ra nhóm theo productname nhưng mình đang test nên để toàn trùng sản phẩm nen mới như vậy");
         TypedQuery typedQuery = sessionFactory.getCurrentSession().createQuery(sql)
                 .setParameter("month", month)
                 .setParameter("year", year)
@@ -183,45 +186,54 @@ public class ProductDaoImpl implements ProductDao {
     @Override
     public List<Product> search(Long categoryId, String pricing, float priceFrom, float priceTo, String sort, String text, int pageIndex,
                                 int pageSize) {
-        StringBuilder sql = new StringBuilder("SELECT p FROM Product p WHERE 1=1");
+        String sql = "SELECT p FROM Product p WHERE 1=1";
+           /*     " and (:categoryId is null or p.category.categoryId = :categoryId)" +
+                " and (:pricing is null or :pricing='default' or :pricing='' or  (p.price-p.price*p.sale.salePercent/100) > :priceFrom and (p.price-(p.price * p.sale.salePercent/100)) < :priceTo)" +
+                " and (:text is null or :text = '' or ( p.productName  like concat(concat('%',:text),'%')) )" +
+                " and ( :sort is null or :sort = '' or :sort='default'  order by p.productName asc  ";
+*/
+        //TypedQuery typedQuery = sessionFactory.getCurrentSession().createQuery(sql);
         if (categoryId != null) {
-            sql.append(" and p.category.categoryId = '" + categoryId + "'");
+            sql += " and p.category.categoryId = '" + categoryId + "'";
         }
         if (pricing != null && !pricing.equals("default") && !pricing.equals("")) {
-            sql.append(" and ((p.price - (p.price * p.sale.salePercent / 100)) >= " + priceFrom + " and (p.price - (p.price * p.sale.salePercent / 100)) <= " + priceTo + ")");
+            sql += " and ((p.price - (p.price * p.sale.salePercent / 100)) >= " + priceFrom + " and (p.price - (p.price * p.sale.salePercent / 100)) <= " + priceTo + ")";
         }
 
         if (text != null) {
-            sql.append(" and p.productName like '%" + text + "%'");
+            sql += " and CONCAT(p.productName,' ',p.price,' ',p.category.categoryName,' ',p.price - (p.price * p.sale.salePercent / 100))  like '%" + text + "%'";
         }
 
         if (sort != null && !sort.equals("default")) {
-            sql.append(" ORDER BY (p.price - (p.price * p.sale.salePercent / 100)) " + sort);
+            sql += " ORDER BY (p.price - (p.price * p.sale.salePercent / 100)) " + sort;
         }
 
         int first = pageIndex * pageSize;
-        TypedQuery<Product> query = sessionFactory.getCurrentSession().createQuery(sql.toString()).setFirstResult(first).setMaxResults(pageSize);
+        TypedQuery<Product> query = sessionFactory.getCurrentSession().createQuery(sql.toString())
+                .setFirstResult(first).setMaxResults(pageSize);
         return query.getResultList();
+
+
     }
 
     @org.springframework.transaction.annotation.Transactional(readOnly = true)
     @Override
     public int countBySearch(Long categoryId, String pricing, float priceFrom, float priceTo, String text) {
 
-        StringBuilder sb = new StringBuilder("SELECT COUNT(p) FROM Product p where 1=1 ");
-        sb.append(" and (:categoryId is null or p.category.categoryId = :categoryId)");
-        sb.append(" and (:pricing is null or :pricing ='default' or :pricing =''  or  (p.price-p.price*p.sale.salePercent/100) > :priceFrom and (p.price-(p.price * p.sale.salePercent/100)) < :priceTo)");// chỉ ra rằng mệnh đề này là đúng
-        logger.info("tức thằng thằng is null đúng thằng sau sai thì vẫn đúng vì toán tử or, nếu thằng sau = default đúng, mấy thằng còn lại sai mệnh đề vẫn đúng vẫn đúng");
-        sb.append(" and (:text is null or ( p.productName  like concat(concat('%',:text), '%')))");
+        StringBuilder sb = new StringBuilder("SELECT COUNT(p) FROM Product p where 1=1 ")
+                .append(" and (:categoryId is null or p.category.categoryId = :categoryId)")
+                .append(" and (:pricing is null or :pricing ='default' or :pricing =''  or  (p.price-p.price*p.sale.salePercent/100) > :priceFrom and (p.price-(p.price * p.sale.salePercent/100)) < :priceTo)")// chỉ ra rằng mệnh đề này là đúng
+                .append(" and (:text is null or ( CONCAT(p.productName,' ',p.price,' ',p.category.categoryName,' ',p.price - (p.price * p.sale.salePercent / 100))  like concat(concat('%',:text), '%')))");
         TypedQuery typedQuery = sessionFactory.getCurrentSession().createQuery(sb.toString())
                 .setParameter("categoryId", categoryId)
                 .setParameter("pricing", pricing)
                 .setParameter("priceFrom", priceFrom)
                 .setParameter("priceTo", priceTo)
                 .setParameter("text", text);
-
         long count = (long) typedQuery.getSingleResult();
+        logger.info("tức thằng thằng is null đúng thằng sau sai thì vẫn đúng vì toán tử or, nếu thằng sau = default đúng, mấy thằng còn lại sai mệnh đề vẫn đúng vẫn đúng");
         return (int) count;
+
     }
 
 

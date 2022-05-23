@@ -3,16 +3,14 @@ package com.demo6.shop.service.impl;
 import com.demo6.shop.common.ICommon;
 import com.demo6.shop.convert.ProductConverter;
 import com.demo6.shop.dao.ProductDao;
-import com.demo6.shop.entity.Category;
 import com.demo6.shop.entity.Product;
-import com.demo6.shop.entity.Sale;
 import com.demo6.shop.model.CategoryDTO;
 import com.demo6.shop.model.ProductDTO;
 import com.demo6.shop.model.SaleDTO;
 import com.demo6.shop.model.StatsDTO;
 import com.demo6.shop.service.ProductService;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.acls.model.NotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -31,6 +29,9 @@ public class ProductServiceImpl implements ProductService {
     @Autowired
     private ProductConverter productConverter;
 
+
+
+
     @Override
     public void merge(Float newPrice, MultipartFile imageFile, Long productId, Long categoryId, Float oldPrice, String productName, String description, Integer quantity, String image, String saleId) {
 
@@ -39,8 +40,8 @@ public class ProductServiceImpl implements ProductService {
         saleDTO.setSaleId(saleId);
         CategoryDTO categoryDTO = new CategoryDTO();
         categoryDTO.setCategoryId(categoryId);
-       Optional<Product> product= Optional.ofNullable(productDao.findById(productId));
-        if(product.isPresent()){
+        Optional<Product> product = Optional.ofNullable(productDao.findById(productId));
+        if (product.isPresent()) {
       /*  ProductDTO productDTO = new ProductDTO();
         productDTO.setProductId(productId);
         productDTO.setSaleDTO(saleDTO);
@@ -48,30 +49,39 @@ public class ProductServiceImpl implements ProductService {
         productDTO.setProductName(productName);
         productDTO.setDescription(description);
         productDTO.setQuantity(quantity);*/
-         newPrice = Optional.of(newPrice).orElse(oldPrice);
-   //     newPrice = newPrice == null || newPrice.equals("") ? oldPrice:newPrice;
+            newPrice = Optional.ofNullable(newPrice).orElse(oldPrice);
+            //     newPrice = newPrice == null || newPrice.equals("") ? oldPrice:newPrice;
 
-      //      newPrice = StringUtils.isNotBlank(newPrice) ? oldPrice:newPrice;
+            //      newPrice = StringUtils.isNotBlank(newPrice) ? oldPrice:newPrice;
 
-        //productDTO.setPrice(newPrice);
+            //productDTO.setPrice(newPrice);
      /*   if (newPrice == null || newPrice.equals("")) {
             productDTO.setPrice(oldPrice);
         } else {
             productDTO.setPrice(Float.parseFloat(newPrice));
         }*/
-        image = imageFile != null && imageFile.getSize() > 0 ? iCommon.image(imageFile) : image;
-        //productDTO.setImage(image);
+            image = imageFile != null && imageFile.getSize() > 0 ? iCommon.image(imageFile) : image;
+            //productDTO.setImage(image);
 
-        ProductDTO   productDTO = new ProductDTO(productId,productName,newPrice,quantity,description,image,categoryDTO,saleDTO);
-        productDao.update(productConverter.toEntity(productDTO));}
-        else {
-            throw new NullPointerException("not found");
+            ProductDTO productDTO = new ProductDTO(productId, productName, newPrice, quantity, description, image, categoryDTO, saleDTO);
+            productDao.update(productConverter.toEntity(productDTO));
+        } else {
+            throw new NotFoundException("not found");
         }
 
     }
 
     @Override
     public void persist(long categoryId, String productName, String description, float price, int quantity, String saleId, MultipartFile imageFile) {
+   /*     Permission permissionCreate = new Permission();
+        permissionCreate.setPermissionName(create);
+        Permission permissionUpdate = new Permission();
+
+        Permission permissionDelete = new Permission();*/
+       /* List<Permission> permissionList = new ArrayList<>();
+
+        permissionList.stream().filter(s -> s.getPermissionKey() != null).collect(Collectors.toList());
+*/
         String image = null;
         CategoryDTO categoryDTO = new CategoryDTO();
         categoryDTO.setCategoryId(categoryId);
@@ -86,8 +96,9 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<Integer> listYears() {
+
         List<Integer> integerList = productDao.listYears();
-        int count = (int) integerList.stream().count();
+        int count = integerList.size();
         List<Integer> newList = new ArrayList<>();
         newList.add(integerList.stream().findFirst().get());
         newList.add(integerList.stream().skip(count - 1).findFirst().get());
@@ -103,6 +114,11 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<StatsDTO> listStats(Integer month, Integer year, Integer pageIndex, Integer pageSize) {
         return productDao.listStats(month, year, pageIndex, pageSize);
+    }
+
+    @Override
+    public void update(ProductDTO productDTO) {
+        productDao.update(productConverter.toEntity(productDTO));
     }
 
     /*@Override

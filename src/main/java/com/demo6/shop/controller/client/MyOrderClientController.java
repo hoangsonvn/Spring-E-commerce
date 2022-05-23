@@ -41,6 +41,7 @@ public class MyOrderClientController {
             subTotal += ((itemDTO.getProductDTO().getPrice() - itemDTO.getProductDTO().getPrice() * itemDTO.getProductDTO().getSaleDTO().getSalePercent() / 100)
                     * itemDTO.getQuantity());
         }
+
         double grandTotal = subTotal + SystemConstant.FEE;
         request.setAttribute("subTotal", subTotal);
         request.setAttribute("grandTotal", grandTotal);

@@ -2,12 +2,17 @@ package com.demo6.shop.service.impl;
 
 import com.demo6.shop.common.ICommon;
 import com.demo6.shop.convert.UserConvert;
+import com.demo6.shop.dao.CategoryDao;
 import com.demo6.shop.dao.UserDao;
 import com.demo6.shop.entity.Role;
 import com.demo6.shop.entity.User;
+import com.demo6.shop.model.PermissionDTO;
 import com.demo6.shop.model.RoleDTO;
 import com.demo6.shop.model.UserDTO;
 import com.demo6.shop.model.UserPrincipal;
+import com.demo6.shop.service.CategoryService;
+import com.demo6.shop.service.PermissionService;
+import com.demo6.shop.service.RoleService;
 import com.demo6.shop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -19,10 +24,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -38,12 +39,16 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private UserConvert userConvert;
     @Autowired
     private ICommon iCommon;
+    @Autowired
+    private PermissionService permissionService;
+    @Autowired
+    private RoleService roleService;
 
     @Override
-    public void userUpdate(long userId,String fullName, boolean gender, String phone, String address, long roleId, String password, String repassword, MultipartFile avatarFile, String avatar) {
-        String avatarFilename = iCommon.image(avatarFile);
+    public void userUpdate(String email, long userId, String fullName, boolean gender, String phone, String address, long roleId, String password, String repassword, MultipartFile avatarFile, String avatar) {
+        //String avatarFilename = iCommon.image(avatarFile);
         Optional<UserDTO> userDTO = Optional.ofNullable(findById(userId));
-       if(userDTO.isPresent()){
+        if (!userDTO.isPresent()) {
             throw new UsernameNotFoundException("not found");
         }
 
@@ -55,9 +60,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         userDTO.setPhone(phone);
         userDTO.setAddress(address);
         userDTO.setRoleDTO(roleDTO);*/
-       // avatarFilename = iCommon.image(avatarFile);
+        // avatarFilename = iCommon.image(avatarFile);
 
-        avatarFilename = avatarFile != null && avatarFile.getSize() > 0 ? avatarFilename : avatar;
+        String avatarFilename = avatarFile != null && avatarFile.getSize() > 0 ? iCommon.image(avatarFile) : avatar;
+        //thoả mãn điều kiện thì bằng iCommon.image(avatarFile) không thì bằng avatar
+        //  avatarFilename = iCommon.image(avatarFile);
+
       /*  if (avatarFile != null && avatarFile.getSize() > 0) {
            avatarFilename=  iCommon.image(avatarFile);
             userDTO.setAvatar(avatarFilename);
@@ -65,18 +73,23 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             userDTO.setAvatar(avatar);
         }
 */
-       // userDTO.setPassword(new BCryptPasswordEncoder().encode(repassword));
-        UserDTO userUpdate = new UserDTO(userId,  new BCryptPasswordEncoder().encode(repassword), fullName, phone, address, gender, roleDTO, avatarFilename);
+        // userDTO.setPassword(new BCryptPasswordEncoder().encode(repassword));
+        UserDTO userUpdate = new UserDTO(email, userId, new BCryptPasswordEncoder().encode(repassword), fullName, phone, address, gender, roleDTO, avatarFilename);
         this.update(userUpdate);
     }
 
     @Override
     public void userCreate(String email, String fullName, boolean gender, String phone, String address, long roleId, String password, String repassword, MultipartFile avatarFile) {
         String image = null;
+      /*  List<PermissionDTO> permissionDTOS = new ArrayList<>();
+        permissionIds.forEach(s -> {
+            PermissionDTO permissionDTO = permissionService.findOneById(Long.valueOf(s));
+            permissionDTOS.add(permissionDTO);
+        });
 
-/*
-        UserDTO userDTO = new UserDTO();
-*/
+
+        RoleDTO roleDTO = roleService.findOne(roleId);
+        roleDTO.setPermissionDTOS(permissionDTOS);*/
         RoleDTO roleDTO = new RoleDTO();
         roleDTO.setRoleId(roleId);
 
@@ -225,10 +238,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
         List<SimpleGrantedAuthority> roleList = new ArrayList<>();
 
-         user.getRole().getPermissions().forEach(s->{
-roleList.add(new SimpleGrantedAuthority(s.getPermissionKey()));
+        user.getRole().getPermissions().forEach(s -> {
+            roleList.add(new SimpleGrantedAuthority(s.getPermissionKey()));
         });
-         roleList.add(new SimpleGrantedAuthority(user.getRole().getRoleName()));
+        roleList.add(new SimpleGrantedAuthority(user.getRole().getRoleName()));
 
         UserPrincipal userPrincipal = new UserPrincipal(user.getEmail(), user.getPassword(), roleList, user.getUserId(),
                 user.getEmail(), user.getFullname(), user.getPhone(), user.getAddress(), user.isGender(), user.isVerify(), user.getRole(), user.getAvatar());

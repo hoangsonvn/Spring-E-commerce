@@ -15,9 +15,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.client.InMemoryOAuth2AuthorizedClientService;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
-import org.springframework.security.oauth2.client.endpoint.NimbusAuthorizationCodeTokenResponseClient;
-import org.springframework.security.oauth2.client.endpoint.OAuth2AccessTokenResponseClient;
-import org.springframework.security.oauth2.client.endpoint.OAuth2AuthorizationCodeGrantRequest;
 import org.springframework.security.oauth2.client.registration.ClientRegistration;
 import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
@@ -29,7 +26,7 @@ import java.util.stream.Collectors;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 @Configuration
 @EnableWebSecurity
-@PropertySource(value = "classpath:database.properties")
+@PropertySource(value = "classpath:application.properties")
 
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private static List<String> clients = Arrays.asList("google", "facebook");
@@ -83,14 +80,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.anyRequest().permitAll().and().exceptionHandling().accessDeniedPage("/logout");*/
         http.csrf().disable().cors().disable()
                 .authorizeRequests()
-                .antMatchers("/admin/**").hasRole("ADMIN")
+             //   .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/client/profile/**").hasAnyRole("USER", "ADMIN")
+                .antMatchers("/client/my-order/**","/client/pay/**","/client/order-details/**").hasAnyRole("USER","ADMIN")
                 .anyRequest().permitAll().and().exceptionHandling().accessDeniedPage("/403");
-        http.rememberMe().key("uniqueAndSecret").tokenValiditySeconds(1296000);
+        http.rememberMe().key("uniqueAndSecret").tokenValiditySeconds(129600);
 
         http.formLogin().loginPage("/login").loginProcessingUrl("/j_spring_security_check").usernameParameter("account")
                 .passwordParameter("password").defaultSuccessUrl("/home")
-                .failureUrl("/login?err=Invalid. Wanna try again?");
+                .failureUrl("/login?err=Invalid. Please try again?");
         http.logout().logoutUrl("/logout").logoutSuccessUrl("/client/home");
         http.authorizeRequests()
 //                .anyRequest().permitAll()

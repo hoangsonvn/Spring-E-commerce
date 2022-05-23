@@ -50,8 +50,8 @@ public class RegisterController {
 				} else {
 					userDTO.setPassword(new BCryptPasswordEncoder().encode(password));
 					userService.update(userDTO);
-					sendEmail("myanhm02@gmail.com", email, "Welcome to FlatShop!",
-							"Hello, " + email.split("@")[0] + "! Please confirm that you can login in FlatShop!" + " Your confirmation code is: " + code);
+					sendEmail("myanhm55@gmail.com", email, "Welcome to PiFood!",
+							"Hello, " + email.split("@")[0] + "! Please confirm that you can login in PiFood!" + " Your confirmation code is: " + code);
 				}
 			}
 		} else {
@@ -68,8 +68,8 @@ public class RegisterController {
 				roleDTO.setRoleId(2);
 				userDTO.setRoleDTO(roleDTO);
 				userService.insert(userDTO);
-				sendEmail("myanhm02@gmail.com", email, "Welcome to FlatShop!",
-						"Hello, " + email.split("@")[0] + "! Please confirm that you can login in FlatShop!" + " Your confirmation code is: " + code);
+				sendEmail("myanhm55@gmail.com", email, "Welcome to PiFood!",
+						"Hello, " + email.split("@")[0] + "! Please confirm that you can login in PiFood!" + " Your confirmation code is: " + code);
 			}
 		}
 		HttpSession session = request.getSession();
@@ -82,8 +82,8 @@ public class RegisterController {
 	public String resendCode(HttpSession session, HttpServletRequest request) {
 		String code = randomString(8);
 		String email = (String) session.getAttribute("emailRegister");
-		sendEmail("myanhm02@gmail.com", email, "Welcome to FlatShop!",
-				"Hello, " + email.split("@")[0] + "! Please confirm that you can login in FlatShop!" + " Your confirmation code is: " + code);
+		sendEmail("myanhm55@gmail.com", email, "Welcome to PiFood!",
+				"Hello, " + email.split("@")[0] + "! Please confirm that you can login in PiFood!" + " Your confirmation code is: " + code);
 		request.setAttribute("resend", "resend");
 		session.setAttribute("codeVerify", code);
 		return "authen/verify";
@@ -109,7 +109,7 @@ public class RegisterController {
 	
 	@PostMapping(value = "get-news")
 	public String getNews(@RequestParam(name = "email") String email) {
-		sendEmail("myanhm02@gmail.com", email, "Welcome to FlatShop!",
+		sendEmail("myanhm55@gmail.com", email, "Welcome to PiFood!",
 				"Thank you for your interest, we will send you the latest notice if any. Please pay attention to your mail.");
 		return "client/get_news";
 	}
@@ -120,7 +120,6 @@ public class RegisterController {
 		mailMessage.setTo(to);
 		mailMessage.setSubject(subject);
 		mailMessage.setText(content);
-
 		mailSender.send(mailMessage);
 	}
 	

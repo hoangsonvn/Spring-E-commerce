@@ -5,7 +5,8 @@ import com.demo6.shop.entity.Role;
 import java.util.List;
 
 public interface RoleDao {
-
-	List<Role> findAll();
-	
+    void save(Role role);
+    Role findOne(Long id);
+    List<Role> findAll();
+    void delete(Long id);
 }

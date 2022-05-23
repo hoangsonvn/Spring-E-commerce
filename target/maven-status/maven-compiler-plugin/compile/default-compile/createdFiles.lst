@@ -8,6 +8,7 @@ com\demo6\shop\controller\client\ExceptionHandlingController.class
 com\demo6\shop\common\ICommon.class
 com\demo6\shop\model\StatsByYearDTO.class
 com\demo6\shop\convert\RoleConverter.class
+com\demo6\shop\dao\impl\PermissionDaoImpl.class
 com\demo6\shop\service\impl\ItemServiceImpl.class
 com\demo6\shop\model\UserPrincipal.class
 com\demo6\shop\dao\impl\CanvasjsChartDaoImpl.class
@@ -24,14 +25,13 @@ com\demo6\shop\controller\client\ProductGridClientController.class
 com\demo6\shop\common\Common.class
 com\demo6\shop\service\impl\CartService.class
 com\demo6\shop\configuration\SpringConfiguration.class
-com\demo6\shop\factory\To70.class
 com\demo6\shop\controller\admin\OrderManagementAdminController.class
 com\demo6\shop\entity\Role.class
 com\demo6\shop\service\impl\CategoryServiceImpl.class
 com\demo6\shop\dao\CanvasjsChartDao.class
 com\demo6\shop\dao\CategoryDao.class
-com\demo6\shop\factory\Under50.class
 com\demo6\shop\service\ItemService.class
+com\demo6\shop\service\impl\PermissionServiceImpl.class
 com\demo6\shop\service\impl\SaleServiceImpl.class
 com\demo6\shop\dao\impl\ProductDaoImpl.class
 com\demo6\shop\service\CategoryService.class
@@ -48,10 +48,10 @@ com\demo6\shop\controller\admin\CategoryManagementAdminController.class
 com\demo6\shop\configuration\SecurityInitalizer.class
 com\demo6\shop\configuration\SecurityConfiguration.class
 com\demo6\shop\service\impl\CanvasjsChartServiceImpl.class
+com\demo6\shop\model\PermissionDTO.class
 com\demo6\shop\controller\admin\ProductManagementAdminController.class
 com\demo6\shop\dao\RoleDao.class
 com\demo6\shop\controller\authen\LoginController.class
-com\demo6\shop\factory\Default.class
 com\demo6\shop\convert\ProductConverter.class
 com\demo6\shop\service\SaleService.class
 com\demo6\shop\dao\ICartDao.class
@@ -60,10 +60,10 @@ com\demo6\shop\dao\impl\CategoryDaoImpl.class
 com\demo6\shop\service\impl\CanvasjsChartServiceProductImpl.class
 com\demo6\shop\service\Oauth2Service.class
 com\demo6\shop\model\CartDTO.class
-com\demo6\shop\factory\OperatorFactory.class
 com\demo6\shop\convert\CategoryConverter.class
 com\demo6\shop\service\impl\PaypalService.class
 com\demo6\shop\service\impl\ProductServiceImpl.class
+com\demo6\shop\dao\PermissionDao.class
 com\demo6\shop\dao\impl\RoleDaoImpl.class
 com\demo6\shop\dao\impl\CartDao.class
 com\demo6\shop\dao\SaleDao.class
@@ -82,7 +82,6 @@ com\demo6\shop\service\impl\RoleServiceImpl.class
 com\demo6\shop\model\CategoryDTO.class
 com\demo6\shop\controller\client\LikeController.class
 com\demo6\shop\excel\ExcelController.class
-com\demo6\shop\factory\Operator.class
 com\demo6\shop\controller\client\ProductDetailsClientController.class
 com\demo6\shop\excel\UserExcelExporter.class
 com\demo6\shop\service\ICartService.class
@@ -97,13 +96,14 @@ com\demo6\shop\model\SaleDTO.class
 com\demo6\shop\service\LikeService.class
 com\demo6\shop\model\CanvasjsChartDataProduct.class
 com\demo6\shop\dao\OrderDao.class
-com\demo6\shop\factory\Under50To70.class
 com\demo6\shop\service\ProductService.class
 com\demo6\shop\controller\client\ProfileClientController.class
+com\demo6\shop\convert\PermissionConverter.class
 com\demo6\shop\dao\ProductDao.class
 com\demo6\shop\dao\CanvasjsChartProductDao.class
 com\demo6\shop\controller\admin\StatsController.class
 com\demo6\shop\controller\client\CommentController.class
+com\demo6\shop\service\PermissionService.class
 com\demo6\shop\constant\SystemConstant.class
 com\demo6\shop\entity\Sale.class
 com\demo6\shop\controller\admin\CanvasjsChartController.class
@@ -114,3 +114,4 @@ com\demo6\shop\service\RoleService.class
 com\demo6\shop\entity\Item.class
 com\demo6\shop\model\ItemDTO.class
 com\demo6\shop\model\CommentDTO.class
+com\demo6\shop\controller\admin\PermissionController.class

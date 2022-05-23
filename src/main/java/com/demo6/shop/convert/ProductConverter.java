@@ -57,7 +57,6 @@ public class ProductConverter {
         result.setProductId(dto.getProductId());
         result.setProductName(dto.getProductName());
         result.setDescription(dto.getDescription());
-
         return result;
     }
 }

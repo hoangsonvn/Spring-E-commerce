@@ -9,7 +9,7 @@ public class CartDTO {
     private double totalPrice;
     private double totalPriceSale;
     private OrderDTO orderDTO;
-
+/*
     public CartDTO(long cartId, UserDTO userDTO, ProductDTO productDTO, int quantity, double totalPrice, double totalPriceSale, OrderDTO orderDTO) {
         this.cartId = cartId;
         this.userDTO = userDTO;
@@ -18,7 +18,7 @@ public class CartDTO {
         this.totalPrice = totalPrice;
         this.totalPriceSale = totalPriceSale;
         this.orderDTO = orderDTO;
-    }
+    }*/
 
     public OrderDTO getOrderDTO() {
         return orderDTO;

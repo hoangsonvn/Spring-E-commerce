@@ -10,5 +10,8 @@
         <module name="demo6" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Spring-E-commerce" target="1.8" />
+    </bytecodeTargetLevel>
   </component>
 </project>

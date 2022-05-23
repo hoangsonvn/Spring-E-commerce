@@ -11,7 +11,7 @@ public class CategoryDTO {
 	public CategoryDTO() {
 	}
 
-	public CategoryDTO(long categoryId, String categoryName) {
+	/*public CategoryDTO(long categoryId, String categoryName) {
 		this.categoryId = categoryId;
 		this.categoryName = categoryName;
 	}
@@ -21,7 +21,7 @@ public class CategoryDTO {
 		this.categoryId = categoryId;
 		this.categoryName = categoryName;
 		this.productDTOs = productDTOs;
-	}
+	}*/
 
 	public long getCategoryId() {
 		return categoryId;

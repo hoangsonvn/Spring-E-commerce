@@ -11,6 +11,7 @@ public class ItemDTO {
 	public ItemDTO() {
 	}
 
+/*
 	public ItemDTO(long itemId, ProductDTO productDTO, float unitPrice, int quantity, OrderDTO orderDTO) {
 		super();
 		this.itemId = itemId;
@@ -19,6 +20,7 @@ public class ItemDTO {
 		this.quantity = quantity;
 		this.orderDTO = orderDTO;
 	}
+*/
 
 	public long getItemId() {
 		return itemId;

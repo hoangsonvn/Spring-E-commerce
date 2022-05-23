@@ -34,7 +34,7 @@ public class ForgotController {
         Optional<UserDTO> userDTO = Optional.ofNullable(userService.findByEmail(email));
         if (userDTO.isPresent()) {
             SimpleMailMessage mail = new SimpleMailMessage();
-            mail.setFrom("myanhm02@gmail.com");
+            mail.setFrom("myanhm55@gmail.com");
             mail.setTo(email);
             mail.setSubject("reset password");
             mail.setText("Hello, " + email.split("@")[0] + " code cua ban la: " + code);
@@ -73,7 +73,7 @@ public class ForgotController {
     public String resendCode(HttpSession session, HttpServletRequest request) {
         String code = registerController.randomString(8);
         String email = (String) session.getAttribute("email");
-        sendEmail("myanhm02@gmail.com", email, "PiFood!",
+        sendEmail("myanhm55@gmail.com", email, "PiFood!",
                 "Hello, " + email.split("@")[0] + "! Please confirm that you can login in PiFood!" + " Your confirmation code is: " + code);
         session.setAttribute("code", code);
         return "redirect:/code";

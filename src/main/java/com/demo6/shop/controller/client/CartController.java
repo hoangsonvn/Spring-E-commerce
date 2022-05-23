@@ -1,15 +1,15 @@
 package com.demo6.shop.controller.client;
 
+import com.demo6.shop.controller.admin.PermissionController;
 import com.demo6.shop.model.CartDTO;
 import com.demo6.shop.model.UserPrincipal;
 import com.demo6.shop.service.ICartService;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpRequest;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -18,11 +18,12 @@ import java.util.Optional;
 
 @Controller
 public class CartController {
+    private static Logger logger = LoggerFactory.getLogger(CartController.class);
 
     @Autowired
     private ICartService cartService;
 
-    @PostMapping(value = "addcart")
+    @PostMapping(value = "client/addcart")
     public String addCart1(HttpServletRequest request, HttpSession session,
                            @RequestParam(value = "productId") Long id,
                            @RequestParam(value = "quantity", required = false) Integer quantity) {
@@ -35,7 +36,7 @@ public class CartController {
         return "redirect:" + request.getHeader("Referer");
     }
 
-    @PostMapping(value = "editcart")
+    @PostMapping(value = "/client/editcart")
     public String editCart(
             HttpServletRequest request, HttpSession session, @RequestParam(name = "productId") long id,
             @RequestParam(name = "quantity") int quanty) {
@@ -47,7 +48,7 @@ public class CartController {
         return "redirect:" + request.getHeader("Referer");
     }
 
-    @RequestMapping(value = "deletecart/{id}")
+    @RequestMapping(value = "client/deletecart/{id}")
     public String deleteCart(HttpServletRequest request, HttpSession session, @PathVariable long id) {
         HashMap<Long, CartDTO> cart = Optional.ofNullable((HashMap<Long, CartDTO>) session.getAttribute("cart")).orElseGet(() -> new HashMap<>());
         cart = cartService.Delete(id, cart);
@@ -57,14 +58,17 @@ public class CartController {
         return "redirect:" + request.getHeader("Referer");
     }
 
-    @GetMapping("/listcart")
-    public String cart1(HttpSession session) {
+    @GetMapping("client/listcart")
+    public String cart1(HttpServletRequest request,HttpSession session) {
         try {
             UserPrincipal userPrincipal = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             session.setAttribute("user", userPrincipal);
         } catch (Exception e) {
+            logger.error("invalid details user");
         }
-
+        String mess = (String) session.getAttribute("limits");
+        request.setAttribute("limit",mess);
+        session.removeAttribute("limits");
         return "client/listcart";
     }
 }

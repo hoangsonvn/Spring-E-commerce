@@ -1,5 +1,6 @@
 package com.demo6.shop.controller.client;
 
+import com.demo6.shop.common.ICommon;
 import com.demo6.shop.model.RoleDTO;
 import com.demo6.shop.model.UserDTO;
 import com.demo6.shop.model.UserPrincipal;
@@ -26,6 +27,8 @@ public class ProfileClientController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private ICommon iCommon;
 
     @GetMapping(value = "/profile")
     public String profile() {
@@ -65,7 +68,8 @@ public class ProfileClientController {
         userDTO.setPassword(userPrincipal.getPassword());
         userDTO.setRoleDTO(roleDTO);
         if (avatarFile != null && avatarFile.getSize() > 0) {
-            String originalFilename = avatarFile.getOriginalFilename();
+            String avatarFilename=iCommon.image(avatarFile);
+          /*  String originalFilename = avatarFile.getOriginalFilename();
             int lastIndex = originalFilename.lastIndexOf(".");
             String ext = originalFilename.substring(lastIndex);
             String avatarFilename = System.currentTimeMillis() + ext;
@@ -79,7 +83,7 @@ public class ProfileClientController {
                 e.printStackTrace();
             } catch (IOException e) {
                 e.printStackTrace();
-            }
+            }*/
             userDTO.setAvatar(avatarFilename);
             userPrincipal.setAvatar(avatarFilename);
 

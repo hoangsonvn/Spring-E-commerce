@@ -31,7 +31,6 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public void delete(long userId) {
-		// TODO Auto-generated method stub
 		User user = findById(userId);
 		sessionFactory.getCurrentSession().delete(user);
 	}
