@@ -23,7 +23,7 @@ public class Role {
     @Column(name = "role_name")
     private String roleName;
     @Column
-    private String leverName;
+    private String title;
     @OneToMany(mappedBy = "role")
     private List<User> users;
     @Column

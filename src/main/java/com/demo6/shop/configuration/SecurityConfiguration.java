@@ -70,26 +70,32 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     UserDetailsService userDetailsService;
+
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
     }
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
 		/*http.csrf().disable().cors().disable().authorizeRequests().antMatchers("/admin/**").hasRole("ADMIN")
 				.anyRequest().permitAll().and().exceptionHandling().accessDeniedPage("/logout");*/
         http.csrf().disable().cors().disable()
                 .authorizeRequests()
-             //   .antMatchers("/admin/**").hasRole("ADMIN")
+                //   .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/client/profile/**").hasAnyRole("USER", "ADMIN")
-                .antMatchers("/client/my-order/**","/client/pay/**","/client/order-details/**").hasAnyRole("USER","ADMIN")
+                .antMatchers("/client/my-order/**", "/client/pay/**", "/client/order-details/**").hasAnyRole("USER", "ADMIN")
                 .anyRequest().permitAll().and().exceptionHandling().accessDeniedPage("/403");
-        http.rememberMe().key("uniqueAndSecret").tokenValiditySeconds(129600);
+        http.rememberMe().key("uniqueAndSecret").tokenValiditySeconds(1500);
 
         http.formLogin().loginPage("/login").loginProcessingUrl("/j_spring_security_check").usernameParameter("account")
                 .passwordParameter("password").defaultSuccessUrl("/home")
                 .failureUrl("/login?err=Invalid. Please try again?");
-        http.logout().logoutUrl("/logout").logoutSuccessUrl("/client/home");
+        http.logout().logoutUrl("/logout").logoutSuccessUrl("/client/home")
+                .deleteCookies("JSESSIONID", "remember-me")
+                .deleteCookies("JSESSIONID");
+
+
         http.authorizeRequests()
 //                .anyRequest().permitAll()
                 .and()
@@ -102,6 +108,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 
     }
+
     @Bean
     public OAuth2AuthorizedClientService authorizedClientService() {
 

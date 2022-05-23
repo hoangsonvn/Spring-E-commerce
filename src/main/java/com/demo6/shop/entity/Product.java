@@ -5,6 +5,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
 
 @Data
 @Entity
@@ -27,11 +29,16 @@ public class Product {
 	private String description;
 	@Column(name = "image")
 	private String image;
+	@Column(name = "create_date")
+	private Date createDate;
+	@Column(name = "expired_date")
+	private Date expiredDate;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "category_id")
 	private Category category;
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "sale_id")
 	private Sale sale;
-
+	@OneToMany(mappedBy = "product",cascade = CascadeType.REMOVE)
+	private List<Comment> comments;
 }

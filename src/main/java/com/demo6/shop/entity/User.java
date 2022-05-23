@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -12,36 +13,39 @@ import javax.persistence.*;
 @Entity
 public class User {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "user_id")
-	private long userId;
-	
-	@Column(name = "email")
-	private String email;
-	
-	@Column(name = "password")
-	private String password;
-	
-	@Column(name = "full_name")
-	private String fullname;
-	
-	@Column(name = "phone")
-	private String phone;
-	
-	@Column(name = "address")
-	private String address;
-	
-	@Column(name = "gender")
-	private boolean gender;
-	
-	@Column(name = "verify")
-	private boolean verify;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "user_id")
+    private long userId;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "role_id")
-	private Role role;
-	
-	@Column(name = "avatar")
-	private String avatar;
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "password")
+    private String password;
+
+    @Column(name = "full_name")
+    private String fullname;
+
+    @Column(name = "phone")
+    private String phone;
+
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "gender")
+    private boolean gender;
+
+    @Column(name = "verify")
+    private boolean verify;
+
+    @Column(name = "avatar")
+    private String avatar;
+    @ManyToOne(fetch = FetchType.LAZY)
+
+    @JoinColumn(name = "role_id")
+    private Role role;
+
+    @OneToMany(mappedBy = "user",cascade = CascadeType.REMOVE)
+    private List<Comment> comments;
 }

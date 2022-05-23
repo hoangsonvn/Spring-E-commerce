@@ -8,6 +8,7 @@ public class CommentDTO {
     private String comment;
     LocalDateTime timecomment;
     private Long id;
+    private Long commentId;
 
     @Override
     public boolean equals(Object o) {
@@ -24,6 +25,14 @@ public class CommentDTO {
 
     public Long getId() {
         return id;
+    }
+
+    public Long getCommentId() {
+        return commentId;
+    }
+
+    public void setCommentId(Long commentId) {
+        this.commentId = commentId;
     }
 
     public void setId(Long id) {

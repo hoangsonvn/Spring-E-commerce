@@ -55,7 +55,7 @@
 										<div class="col-md-12">
 											<div class="panel">
 												<div class="panel-heading">
-													<h3 class="panel-title">PRODUCT LIST</h3>
+													<h3 class="panel-title">CATEGORY LIST</h3>
 													<div class="right">
 														<button type="submit">
 															<span class="label label-danger"
@@ -63,7 +63,7 @@
 														</button>
 														<a href="<c:url value="/admin/createCategory"/>"><span
 															class="label label-success" style="font-size: 15px;">Create
-																new product</span></a>
+																new category</span></a>
 													</div>
 												</div>
 												<div class="panel-body no-padding">

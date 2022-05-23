@@ -107,21 +107,15 @@
 								</form>
 							</li>
 
-							<%--<li class="option-cart"><a href="<c:url value="/client/cart"/> "
-														><i class="bi bi-heart"></i>cart <span>${TotalQuantyCart}</span>
-							</a></li>--%>
+
 							<li class="option-cart"><a href="<c:url value="/client/listcart"/>"
 													   class="cart-icon">cart <span class="cart_no">${TotalQuantyCart}</span>
 							</a></li>
 
-							<li class="option-cart"><a href="<c:url value="/client/listlike"/> "
-							> <span style="size: 20px;" class="bi bi-heart-fill red-color">${size}</span>
+							<li class="option-cart"><a href="<c:url value="/client/listlike"/> " class="btn btn-danger btn-sm"
+							> <span class="glyphicon glyphicon-heart">${size}</span>
 							</a></li>
 
-							<!--                            <li class="option-cart" sec:authorize="isAuthenticated()">
-                              <a th:href="@{/client/cart-load}" class="cart-icon">cart <span class="cart_no">02</span></a>
-                           </li>
-                            -->
 						</ul>
 						<div class="navbar-header">
 							<button type="button" class="navbar-toggle"
