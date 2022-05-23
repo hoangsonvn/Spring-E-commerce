@@ -1,8 +1,11 @@
 package com.demo6.shop.controller.client;
 
+import com.demo6.shop.controller.admin.PermissionController;
 import com.demo6.shop.model.CartDTO;
 import com.demo6.shop.model.UserPrincipal;
 import com.demo6.shop.service.ICartService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -15,6 +18,7 @@ import java.util.Optional;
 
 @Controller
 public class CartController {
+    private static Logger logger = LoggerFactory.getLogger(CartController.class);
 
     @Autowired
     private ICartService cartService;
@@ -32,7 +36,7 @@ public class CartController {
         return "redirect:" + request.getHeader("Referer");
     }
 
-    @PostMapping(value = "client/editcart")
+    @PostMapping(value = "/client/editcart")
     public String editCart(
             HttpServletRequest request, HttpSession session, @RequestParam(name = "productId") long id,
             @RequestParam(name = "quantity") int quanty) {
@@ -55,13 +59,16 @@ public class CartController {
     }
 
     @GetMapping("client/listcart")
-    public String cart1(HttpSession session) {
+    public String cart1(HttpServletRequest request,HttpSession session) {
         try {
             UserPrincipal userPrincipal = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             session.setAttribute("user", userPrincipal);
         } catch (Exception e) {
+            logger.error("invalid details user");
         }
-
+        String mess = (String) session.getAttribute("limits");
+        request.setAttribute("limit",mess);
+        session.removeAttribute("limits");
         return "client/listcart";
     }
 }

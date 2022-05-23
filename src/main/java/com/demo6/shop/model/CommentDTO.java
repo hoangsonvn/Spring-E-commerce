@@ -4,10 +4,10 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 public class CommentDTO {
-  private  String fullname;
-  private String comment;
-LocalDateTime timecomment;
-private Long id;
+    private String fullname;
+    private String comment;
+    LocalDateTime timecomment;
+    private Long id;
 
     @Override
     public boolean equals(Object o) {

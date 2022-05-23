@@ -29,10 +29,10 @@ public class Oauth2Serviceimpl implements Oauth2Service {
         Role role = roleConverter.toEntity(roleDTO);
         UserDTO userDTO = userService.findByEmail(nameEmail);
         if (userDTO==null) {
-            UserDTO newUserDTO = new UserDTO(name,nameEmail,true,roleDTO);
-            logger.info("nếu không có gender sẽ là false");
+            UserDTO newUserDTO = new UserDTO(nameEmail,name,true,roleDTO);
+            logger.trace("nếu không có gender sẽ là false");
             UserDTO insertDto = userService.insert(newUserDTO);
-            userPrincipal = new UserPrincipal(insertDto.getEmail(),"", SecurityContextHolder.getContext().getAuthentication().getAuthorities(),insertDto.getUserId(),insertDto.getFullname(),insertDto.getEmail(), insertDto.isVerify(),role);
+            userPrincipal = new UserPrincipal(insertDto.getFullname(),"", SecurityContextHolder.getContext().getAuthentication().getAuthorities(),insertDto.getUserId(),insertDto.getEmail(),insertDto.getFullname(), insertDto.isVerify(),role);
         } else {
              userPrincipal = new UserPrincipal(userDTO.getFullname(), "", SecurityContextHolder.getContext().getAuthentication().getAuthorities());
             userPrincipal.setFullname(userDTO.getFullname());
@@ -42,6 +42,7 @@ public class Oauth2Serviceimpl implements Oauth2Service {
             userPrincipal.setUserId(userDTO.getUserId());
             userPrincipal.setAddress(userDTO.getAddress());
             userPrincipal.setPhone(userDTO.getPhone());
+            userPrincipal.setVerify(userDTO.isVerify());
 
         }
         return userPrincipal;

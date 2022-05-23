@@ -1,5 +1,6 @@
 package com.demo6.shop.service.impl;
 
+import com.demo6.shop.convert.RoleConverter;
 import com.demo6.shop.dao.RoleDao;
 import com.demo6.shop.entity.Role;
 import com.demo6.shop.model.RoleDTO;
@@ -15,22 +16,38 @@ import java.util.List;
 @Transactional
 public class RoleServiceImpl implements RoleService {
 
-	@Autowired
-	private RoleDao roleDao;
-	
-	@Override
-	public List<RoleDTO> findAll() {
-		List<Role> roles = roleDao.findAll();
-		List<RoleDTO> roleDTOs = new ArrayList<RoleDTO>();
-		for (Role role : roles) {
-			RoleDTO roleDTO = new RoleDTO();
-			roleDTO.setRoleId(role.getRoleId());
-			roleDTO.setRoleName(role.getRoleName());
-			roleDTOs.add(roleDTO);
-		}
-		return roleDTOs;
-	}
-	
-	
-	
+    @Autowired
+    private RoleDao roleDao;
+    @Autowired
+    private RoleConverter roleConvert;
+
+    @Override
+    public RoleDTO findOne(Long id) {
+        return roleConvert.toDto(roleDao.findOne(id));
+    }
+
+    @Override
+    public List<RoleDTO> findAll() {
+        List<Role> roles = roleDao.findAll();
+        List<RoleDTO> roleDTOs = new ArrayList<RoleDTO>();
+        for (Role role : roles) {
+            RoleDTO roleDTO = new RoleDTO();
+            roleDTO.setRoleId(role.getRoleId());
+            roleDTO.setRoleName(role.getRoleName());
+            roleDTOs.add(roleDTO);
+        }
+        return roleDTOs;
+    }
+
+    @Override
+    public void save(RoleDTO roleDTO) {
+        roleDao.save(roleConvert.toEntity(roleDTO));
+    }
+
+    @Override
+    public void delete(Long id) {
+        roleDao.delete(id);
+    }
+
+
 }

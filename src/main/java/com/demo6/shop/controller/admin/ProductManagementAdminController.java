@@ -1,16 +1,11 @@
 package com.demo6.shop.controller.admin;
 
-import com.demo6.shop.common.Common;
 import com.demo6.shop.common.ICommon;
 import com.demo6.shop.constant.SystemConstant;
-import com.demo6.shop.model.CategoryDTO;
-import com.demo6.shop.model.ProductDTO;
-import com.demo6.shop.model.SaleDTO;
 import com.demo6.shop.service.CategoryService;
 import com.demo6.shop.service.ProductService;
 import com.demo6.shop.service.SaleService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,10 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 import java.util.Optional;
 
 // Product Manager
@@ -41,6 +32,7 @@ public class ProductManagementAdminController {
 
     @Autowired
     private CategoryService categoryService;
+
 
     @GetMapping(value = "/product-list")
     public String findAll(HttpServletRequest request, @RequestParam(value = "pageIndex", required = false) Integer pageIndex) {
@@ -111,7 +103,6 @@ public class ProductManagementAdminController {
         String[] productIds = request.getParameterValues("productId");
         for (String productId : productIds) {
             productService.delete(Long.parseLong(productId));
-        }
-        return "redirect:/admin/product-list";
+        }  return "redirect:/admin/product-list";
     }
 }

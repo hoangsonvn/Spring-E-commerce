@@ -34,7 +34,7 @@ public class CategoryServiceImpl implements CategoryService{
 		for (Category category : categories) {
 			CategoryDTO categoryDTO = new CategoryDTO();
 			List<Product> products =	category.getProducts();
-			products.forEach(s-> System.out.println(s.getPrice()));
+		//	products.forEach(s-> System.out.println(s.getPrice()));
 			categoryDTO.setCategoryId(category.getCategoryId());
 			categoryDTO.setCategoryName(category.getCategoryName());
 			categoryDTOs.add(categoryDTO);

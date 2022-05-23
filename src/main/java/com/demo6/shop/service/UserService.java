@@ -7,7 +7,7 @@ import java.util.List;
 
 
 public interface UserService {
-	void userUpdate(long userId, String fullName, boolean gender, String phone, String address, long roleId, String password, String repassword, MultipartFile avatarFile,String avatar);
+	void userUpdate(String email,long userId, String fullName, boolean gender, String phone, String address, long roleId, String password, String repassword, MultipartFile avatarFile,String avatar);
 
 	void userCreate(String email, String fullName, boolean gender, String phone, String address, long roleId, String password, String repassword, MultipartFile avatarFile);
 

@@ -23,9 +23,9 @@ public class UserDTO {
 		this.roleDTO = roleDTO;
 	}
 
-	public UserDTO(long userId, String password, String fullname, String phone, String address, boolean gender, RoleDTO roleDTO, String avatar) {
+	public UserDTO(String email,long userId, String password, String fullname, String phone, String address, boolean gender, RoleDTO roleDTO, String avatar) {
 		this.userId = userId;
-
+		this.email=email;
 		this.password = password;
 		this.fullname = fullname;
 		this.phone = phone;

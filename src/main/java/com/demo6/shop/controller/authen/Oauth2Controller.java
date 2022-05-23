@@ -1,7 +1,6 @@
 package com.demo6.shop.controller.authen;
 
 import com.demo6.shop.service.Oauth2Service;
-import com.demo6.shop.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

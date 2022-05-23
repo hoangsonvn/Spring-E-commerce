@@ -9,7 +9,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.env.Environment;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
@@ -28,7 +27,7 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 @Configuration
-@PropertySource(value = "classpath:database.properties")
+@PropertySource(value = "classpath:application.properties")
 @EnableTransactionManagement
 public class SpringConfiguration {
 
@@ -54,10 +53,10 @@ public class SpringConfiguration {
     @Bean
     public DataSource dataSource() {
         HikariConfig dataSourceConfig = new HikariConfig();
-        dataSourceConfig.setDriverClassName("com.mysql.cj.jdbc.Driver");
-        dataSourceConfig.setJdbcUrl("jdbc:mysql://localhost:3306/demotest");
-        dataSourceConfig.setUsername("root");
-        dataSourceConfig.setPassword("1234");
+        dataSourceConfig.setDriverClassName(environment.getProperty("driver"));
+        dataSourceConfig.setJdbcUrl(environment.getProperty("url"));
+        dataSourceConfig.setUsername(environment.getProperty("datasource.username"));
+        dataSourceConfig.setPassword(environment.getProperty("datasource.password"));
         return new HikariDataSource(dataSourceConfig);
     }
 
@@ -69,8 +68,8 @@ public class SpringConfiguration {
         Properties hibernateProperties = new Properties();
         hibernateProperties.put("hibernate.dialect", environment.getProperty("hibernate.dialect"));
         hibernateProperties.put("hibernate.show_sql", environment.getProperty("hibernate.show_sql"));
-        hibernateProperties.setProperty("hibernate.hbm2ddl.auto", "none");
-        hibernateProperties.put("hibernate.format_sql", "true");
+        hibernateProperties.setProperty("hibernate.hbm2ddl.auto", environment.getProperty("hibernate.hbm2ddl.auto"));
+        hibernateProperties.put("hibernate.format_sql", environment.getProperty("hibernate.format_sql"));
         hibernateProperties.put("hibernate.current_session_context_class",environment.getProperty("hibernate.current_session_context_class"));
 
 

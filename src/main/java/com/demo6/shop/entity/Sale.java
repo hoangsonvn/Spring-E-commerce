@@ -22,6 +22,8 @@ public class Sale {
 	private String saleId;
 	@Column(name = "sale_percent")
 	private int salePercent;
+	@Column(name="shortDescription")
+	private String shortDescription;
 	@OneToMany(mappedBy = "sale")
 	private List<Product> products;
 

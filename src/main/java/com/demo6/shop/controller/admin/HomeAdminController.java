@@ -22,12 +22,14 @@ public class HomeAdminController {
 	private UserService userService;
 	@GetMapping(value = "/home")
 	public String home(HttpServletRequest request) {
+		Double totalPrice = orderService.totalPrice()==null?0:orderService.totalPrice();
+		Double totalPriceByCurrentMonth = orderService.totalPriceByCurrentMonth()==null?0:orderService.totalPriceByCurrentMonth();
 		request.setAttribute("orders", orderService.findAll(0, 5));
 		request.setAttribute("countorder",orderService.count());
 		request.setAttribute("coutproduct",productService.count());
 		request.setAttribute("count",userService.count());
-		request.setAttribute("totalprice",orderService.totalPrice());
-		request.setAttribute("totalpricebycurrentmonth",orderService.totalPriceByCurrentMonth());
+		request.setAttribute("totalprice",totalPrice);
+		request.setAttribute("totalpricebycurrentmonth",totalPriceByCurrentMonth);
 		return "admin/home";
 	}
 	

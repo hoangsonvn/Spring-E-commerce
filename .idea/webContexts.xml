@@ -5,6 +5,7 @@
       <map>
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/chart/statistical.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/chart" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/product/listProductByCategory.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/product" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/user/createUser.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/admin/user" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/authen/login.jsp" value="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/views/authen" />
       </map>
     </option>

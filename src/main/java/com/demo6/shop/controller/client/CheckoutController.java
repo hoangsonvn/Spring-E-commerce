@@ -8,6 +8,7 @@ import com.demo6.shop.model.CartDTO;
 import com.demo6.shop.model.OrderDTO;
 import com.demo6.shop.model.UserPrincipal;
 import com.demo6.shop.service.OrderService;
+import com.demo6.shop.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
@@ -22,7 +23,8 @@ import java.util.Map;
 @Controller
 @RequestMapping(value = "/client")
 public class CheckoutController {
-
+    @Autowired
+    private ProductService productService;
     @Autowired
     private OrderService orderService;
     @Autowired
@@ -33,12 +35,25 @@ public class CheckoutController {
     @GetMapping(value = "/checkout")
     public String checkout(HttpSession session, HttpServletRequest request) {
         UserPrincipal userPrincipal = (UserPrincipal) session.getAttribute("user");
-        Map<Long, CartDTO> mapItem = (Map<Long, CartDTO>) session.getAttribute("cart");
+        Map<Long, CartDTO> cart = (Map<Long, CartDTO>) session.getAttribute("cart");
         String home = request.getParameter("home");
+
+
+        for (Map.Entry<Long, CartDTO> entry : cart.entrySet()) {
+            if (entry.getValue().getProductDTO().getQuantity() - entry.getValue().getQuantity() < 0) {
+                String mess = "so luong " + entry.getValue().getProductDTO().getProductName() + " khong du";
+                session.setAttribute("limits", mess);
+                return "redirect:/client/listcart";
+            }
+            Integer quanityInStock = entry.getValue().getProductDTO().getQuantity() - entry.getValue().getQuantity();
+            entry.getValue().getProductDTO().setQuantity(quanityInStock);
+            productService.update(entry.getValue().getProductDTO());
+        }
+
         OrderDTO order1 = new OrderDTO();
         Order order = orderService.insert(session, order1);
 
-        for (Map.Entry<Long, CartDTO> entry : mapItem.entrySet()) {
+        for (Map.Entry<Long, CartDTO> entry : cart.entrySet()) {
 
             Product product = new Product();
             product.setProductId(entry.getValue().getProductDTO().getProductId());
@@ -52,18 +67,19 @@ public class CheckoutController {
             itemDao.insert(item);
         }
         mailSender.send();
-        sendEmail("myanhm02@gmail.com", userPrincipal.getEmail(), "PiFood!",
+        sendEmail("myanhm55@gmail.com", userPrincipal.getEmail(), "PiFood!",
                 "Hello, " + userPrincipal.getFullname() + "! We will deliver it to you soon" +
                         "  Order:  " +
-                        "  \n  #OrderId: " + order.getOrderId()  +
+                        "  \n  #OrderId: " + order.getOrderId() +
                         "  \n----PriceTotal:  " + order.getPriceTotal() +
                         "  \n----BuyDate: " + order.getBuyDate() +
                         "  \n----Customer: " + order.getBuyer().getFullname() +
-                        "  \n----Adress: "+ order.getBuyer().getAddress() +
-                        "  \n----Phone: " + order.getBuyer().getPhone()+
-         " \n ===== Have a nice day <3! =====");
+                        "  \n----Adress: " + order.getBuyer().getAddress() +
+                        "  \n----Phone: " + order.getBuyer().getPhone() +
+                        " \n ===== Have a nice day <3! =====");
 
-        mapItem.clear();
+        cart.clear();
+        session.removeAttribute("limit");
         session.removeAttribute("TotalQuantyCart");
         session.removeAttribute("TotalPriceCartSale");
         if (home != null) {

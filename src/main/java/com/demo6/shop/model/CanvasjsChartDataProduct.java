@@ -1,4 +1,5 @@
 package com.demo6.shop.model;
+import com.demo6.shop.constant.SystemConstant;
 import com.demo6.shop.dao.ProductDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.parameters.P;
@@ -29,7 +30,7 @@ public class CanvasjsChartDataProduct {
         statsDTOList.forEach(s->{
             Map<Object,Object> map = new HashMap<>();
             map.put("name",s.getName());
-            map.put("y",(s.getTotalprice()/(this.totalOrderPriceByMonthAndYear(month,year)-5))*100);
+            map.put("y",(s.getTotalprice()/(this.totalOrderPriceByMonthAndYear(month,year)- SystemConstant.FEE))*100);
             dataPoints1.add(map);
         });
         list.add(dataPoints1);
