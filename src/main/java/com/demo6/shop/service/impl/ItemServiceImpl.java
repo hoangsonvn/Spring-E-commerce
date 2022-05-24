@@ -1,13 +1,11 @@
 package com.demo6.shop.service.impl;
 
 import com.demo6.shop.dao.ItemDao;
+import com.demo6.shop.dto.ItemDTO;
+import com.demo6.shop.dto.OrderDTO;
+import com.demo6.shop.dto.ProductDTO;
+import com.demo6.shop.dto.SaleDTO;
 import com.demo6.shop.entity.Item;
-import com.demo6.shop.entity.Order;
-import com.demo6.shop.entity.Product;
-import com.demo6.shop.model.ItemDTO;
-import com.demo6.shop.model.OrderDTO;
-import com.demo6.shop.model.ProductDTO;
-import com.demo6.shop.model.SaleDTO;
 import com.demo6.shop.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,42 +20,6 @@ public class ItemServiceImpl implements ItemService {
 
 	@Autowired
 	private ItemDao itemDao;
-	
-	@Override
-	public void insert(ItemDTO itemDTO) {
-		
-		Product product = new Product();
-		product.setProductId(itemDTO.getProductDTO().getProductId());
-		Order order = new Order();
-		order.setOrderId(itemDTO.getOrderDTO().getOrderId());
-		
-		Item item = new Item();
-		item.setItemId(itemDTO.getItemId());
-		item.setProduct(product);
-		item.setUnitPrice(itemDTO.getUnitPrice());
-		item.setQuantity(itemDTO.getQuantity());
-		item.setOrder(order);
-		
-		itemDao.insert(item);
-	}
-
-	@Override
-	public void update(ItemDTO itemDTO) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void delete(long itemId) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public List<ItemDTO> findAll(int pageIndex, int pageSize) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public List<ItemDTO> findByOrderId(long orderId) {

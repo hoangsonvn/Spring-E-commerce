@@ -1,7 +1,7 @@
 package com.demo6.shop.controller.authen;
 
-import com.demo6.shop.model.RoleDTO;
-import com.demo6.shop.model.UserDTO;
+import com.demo6.shop.dto.RoleDTO;
+import com.demo6.shop.dto.UserDTO;
 import com.demo6.shop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSender;
@@ -36,7 +36,7 @@ public class RegisterController {
 		String code = randomString(8);
 		if (userService.findByEmail(email) != null) {
 			UserDTO userDTO = userService.findByEmail(email);
-			if (userDTO.isVerify() == true) {
+			if (userDTO.isVerify()) {
 				request.setAttribute("error", "The email address is already exist!");
 				return "authen/register";
 			} else {
@@ -101,11 +101,11 @@ public class RegisterController {
 			userDTO.setVerify(true);
 			request.setAttribute("verifySuccess", "Verification successfull!");
 			request.setAttribute("active", "active");
+			request.setAttribute("flagsuccess","verification success");
 			userService.update(userDTO);
-
 		}
 		return "authen/verify";
-	} 
+	}
 	
 	@PostMapping(value = "get-news")
 	public String getNews(@RequestParam(name = "email") String email) {

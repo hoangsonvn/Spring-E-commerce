@@ -4,7 +4,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <title>Dashboard </title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport"
@@ -64,12 +63,10 @@
                                         <div class="col-md-12">
                                             <div class="panel">
                                                 <div class="panel-heading">
-                                                    <a class="btn btn-warning"
-                                                       href="<c:url value="/admin/statistical"/>"
-                                                       style="background-color: #D9534F; padding: 2px 10px; text-decoration: none; border: none; margin-right: 10px; height: 25px;">Back</a>
+
                                                     <form action="<c:url value="/admin/statistical"/> " method="get>">
                                                         <div class="right">
-                                                            <span style="color: #d5641c">MONTH</span>
+                                                            <span style="color: #00c300">MONTH</span>
                                                             <select name="month">
                                                                 <option
                                                                         <c:if test="${month == null}">
@@ -83,12 +80,12 @@
                                                                     </c:if>
                                                                             value="${i}">${i}</option>
                                                                 </c:forEach>
-<%--
-                                                                <option selected="selected"></option>
---%>
+                                                                <%--
+                                                                                                                                <option selected="selected"></option>
+                                                                --%>
 
                                                             </select>
-                                                            <span style="color: #d5641c"> YEAR</span>
+                                                            <span style="margin-left:10px;color: #fd434b"> YEAR</span>
                                                             <select name="year">
                                                                 <option
                                                                         <c:if test="${year == null}">
@@ -102,17 +99,13 @@
                                                                             </c:if>
                                                                             value="${i}">${i}</option>
                                                                 </c:forEach>
-<%--
-                                                                <option selected="selected"></option>
---%>
-
                                                             </select>
-
-                                                            <button style="color: #2bb24c;background: #abdbe3" type="submit" class="btn btn-secondary">Submit
+                                                            <button style="width:50px;margin-left:15px;color: #EFEFEF;background: #002663"
+                                                                    type="submit" class="btn btn-secondary"> Submit
                                                             </button>
-                                                             <a style="color: #e7357a" href="<c:url value="/admin/export?month=${month}&year=${year}"/> " class="btn btn-info">Export
-                                                        </a>
-
+                                                            <a style=" size: 15px; margin-left:20px;color: #008855;font-weight: bolder"
+                                                               href="<c:url value="/admin/export?month=${month}&year=${year}"/> "
+                                                               class="btn btn-secondary btn-sm">Export</a>
                                                         </div>
                                                     </form>
                                                 </div>
@@ -123,14 +116,14 @@
                                                     <tr>
                                                         <th><input type="checkbox" name="all" id="checkAll"
                                                                    style="cursor: pointer;"/></th>
-                                                        <th style=" color: #abdbe3; font-weight: bold;">Name</th>
-                                                        <th style=" color: #abdbe3; font-weight: bold;">TotalQuantity
+                                                        <th style=" color: #36007a; font-weight: bold;">Name</th>
+                                                        <th style=" color: #36007a; font-weight: bold;">TotalQuantity
                                                         </th>
-                                                        <th style=" color: #abdbe3; font-weight: bold;">TotalPrice</th>
-                                                        <th style=" color: #abdbe3; font-weight: bold;">Average Price
+                                                        <th style=" color: #36007a; font-weight: bold;">TotalPrice</th>
+                                                        <th style=" color: #36007a; font-weight: bold;">Average Price
                                                         </th>
-                                                        <th style=" color: #abdbe3; font-weight: bold;">Min Price</th>
-                                                        <th style=" color: #abdbe3; font-weight: bold;">Max Price</th>
+                                                        <th style=" color: #36007a; font-weight: bold;">Min Price</th>
+                                                        <th style=" color: #36007a; font-weight: bold;">Max Price</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>

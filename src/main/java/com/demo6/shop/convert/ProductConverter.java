@@ -3,10 +3,12 @@ package com.demo6.shop.convert;
 import com.demo6.shop.entity.Category;
 import com.demo6.shop.entity.Product;
 import com.demo6.shop.entity.Sale;
-import com.demo6.shop.model.CategoryDTO;
-import com.demo6.shop.model.ProductDTO;
-import com.demo6.shop.model.SaleDTO;
+import com.demo6.shop.dto.CategoryDTO;
+import com.demo6.shop.dto.ProductDTO;
+import com.demo6.shop.dto.SaleDTO;
 import org.springframework.stereotype.Component;
+
+import java.sql.Date;
 
 @Component
 public class ProductConverter {
@@ -19,6 +21,7 @@ public class ProductConverter {
         productDTO.setImage(productEntity.getImage());
         productDTO.setDescription(productEntity.getDescription());
         productDTO.setQuantity(productEntity.getQuantity());
+        productDTO.setExpirationDate(productEntity.getExpiredDate());
 
         SaleDTO sale = new SaleDTO();
         sale.setSaleId(productEntity.getSale().getSaleId());
@@ -40,6 +43,8 @@ public class ProductConverter {
         result.setImage(dto.getImage());
         result.setPrice(dto.getPrice());
         result.setQuantity(dto.getQuantity());
+        result.setExpiredDate(dto.getExpirationDate());
+        result.setCreateDate(new Date(new java.util.Date().getTime()));
         Sale sale = new Sale();
         sale.setSaleId(dto.getSaleDTO().getSaleId());
         sale.setSalePercent(dto.getSaleDTO().getSalePercent());

@@ -1,12 +1,14 @@
 package com.demo6.shop.dao;
 
 import com.demo6.shop.entity.Product;
-import com.demo6.shop.model.StatsByYearDTO;
-import com.demo6.shop.model.StatsDTO;
+import com.demo6.shop.dto.StatsByYearDTO;
+import com.demo6.shop.dto.StatsDTO;
 
 import java.util.List;
 
 public interface ProductDao {
+    List<Product> search(String text,Integer index,Integer pageSize);
+    Long countSearch(String text);
     List<Integer> listYears();
 
     Double totalOrderPricebyMonthAndYear(Integer month, Integer year);

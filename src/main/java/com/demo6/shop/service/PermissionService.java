@@ -1,6 +1,6 @@
 package com.demo6.shop.service;
 
-import com.demo6.shop.model.PermissionDTO;
+import com.demo6.shop.dto.PermissionDTO;
 
 import java.util.List;
 

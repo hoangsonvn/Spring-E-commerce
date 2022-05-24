@@ -3,10 +3,8 @@ package com.demo6.shop.controller.client;
 import com.demo6.shop.entity.Comment;
 import com.demo6.shop.entity.Product;
 import com.demo6.shop.entity.User;
-import com.demo6.shop.model.CommentDTO;
-import com.demo6.shop.model.UserPrincipal;
+import com.demo6.shop.dto.UserPrincipal;
 import com.demo6.shop.service.CommentService;
-import com.demo6.shop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,9 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.time.LocalDateTime;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 @Controller
 public class CommentController {

@@ -1,23 +1,28 @@
 package com.demo6.shop.service;
 
-import com.demo6.shop.model.ProductDTO;
-import com.demo6.shop.model.StatsDTO;
+import com.demo6.shop.constant.SystemConstant;
+import com.demo6.shop.dto.ProductDTO;
+import com.demo6.shop.dto.StatsDTO;
+import com.demo6.shop.entity.Product;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Date;
 import java.util.List;
 
-public interface ProductService {
-    void merge(Float newPrice, MultipartFile imageFile, Long productId, Long categoryId, Float oldPrice, String productName, String description, Integer quantity, String image, String saleId);
+import static com.demo6.shop.constant.SystemConstant.PAGESIZE;
 
-    void persist(long categoryId, String productName, String description, float price, int quantity, String saleId, MultipartFile multipartFile);
+public interface ProductService {
+    List<ProductDTO> search(String text, Integer index,Integer pageSIze);
+    Long countSearch(String text);
+    void merge(Float newPrice, MultipartFile imageFile, Long productId, Long categoryId, Float oldPrice, String productName, String description, Integer quantity, String image, String saleId, Date expirationDate);
+
+    void persist(long categoryId, String productName, String description, float price, int quantity, String saleId, MultipartFile multipartFile, Date expirationDate);
 
     List<Integer> listYears();
 
     int countStats(Integer month, Integer year);
 
     List<StatsDTO> listStats(Integer month, Integer year, Integer pageIndex, Integer pageSize);
-
-//   void insert(ProductDTO productDTO);
 
     void update(ProductDTO productDTO);
 
@@ -32,7 +37,6 @@ public interface ProductService {
     int count();
 
     int countByCategoryId(long categoryId);
-
 
     List<ProductDTO> search(Long categoryId, String pricing, float priceFrom, float priceTo, String sort, String text, int pageIndex, int pageSize);
 

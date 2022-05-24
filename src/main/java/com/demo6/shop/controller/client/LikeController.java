@@ -1,8 +1,7 @@
 package com.demo6.shop.controller.client;
 
-import com.demo6.shop.model.ProductDTO;
+import com.demo6.shop.dto.ProductDTO;
 import com.demo6.shop.service.LikeService;
-import com.demo6.shop.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,8 +15,7 @@ import java.util.HashMap;
 public class LikeController {
     @Autowired
     private LikeService likeService;
-    @Autowired
-    private ProductService productService;
+
 
     @GetMapping("client/like/{productId}")
     public String insert(@PathVariable(value = "productId") Long id, HttpSession session, HttpServletRequest request) {
@@ -35,16 +33,12 @@ public class LikeController {
     public String deleteLike(HttpSession session, @PathVariable(value = "id") Long id, HttpServletRequest request) {
         HashMap<Long, ProductDTO> likeMap = (HashMap<Long, ProductDTO>) session.getAttribute("likeMap");
         likeService.delete(id, likeMap);
-        Integer sl = (Integer) session.getAttribute("size");
-
         session.setAttribute("size",likeMap.size());
         return "redirect:" + request.getHeader("Referer");
-
     }
 
     @GetMapping("client/listlike")
-    public String listLike(HttpSession session) {
-        HashMap<Long, ProductDTO> likeMap = (HashMap<Long, ProductDTO>) session.getAttribute("likeMap");
+    public String listLike() {
         return "client/like";
     }
 }

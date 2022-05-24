@@ -1,19 +1,11 @@
 package com.demo6.shop.service;
 
-import com.demo6.shop.model.ItemDTO;
+import com.demo6.shop.dto.ItemDTO;
 
 import java.util.List;
 
 public interface ItemService {
-
-	void insert(ItemDTO itemDTO);
-	
-	void update(ItemDTO itemDTO);
-	
-	void delete(long itemId);
-	
-	List<ItemDTO> findAll(int pageIndex, int pageSize);
-	
+	//void insert(ItemDTO itemDTO);
 	List<ItemDTO> findByOrderId(long orderId);
-	
+
 }

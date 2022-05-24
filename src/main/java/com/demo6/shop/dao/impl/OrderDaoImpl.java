@@ -2,7 +2,6 @@ package com.demo6.shop.dao.impl;
 
 import com.demo6.shop.dao.OrderDao;
 import com.demo6.shop.entity.Order;
-import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -60,8 +59,8 @@ public class OrderDaoImpl implements OrderDao {
 
     @Override
     public List<Order> findByBuyer(long userId) {
-        String sql = "SELECT o FROM Order o WHERE o.buyer.id =: id ORDER BY o.id DESC";
-        TypedQuery query = sessionFactory.getCurrentSession().createQuery(sql)
+        String sql = "SELECT o FROM Order o WHERE o.buyer.userId = :id ORDER BY o.orderId DESC";
+        TypedQuery<Order> query = sessionFactory.getCurrentSession().createQuery(sql,Order.class)
                 .setParameter("id", userId);
         return query.getResultList();
     }
@@ -69,14 +68,13 @@ public class OrderDaoImpl implements OrderDao {
     @Override
     public int count() {
         String sql = "SELECT COUNT(o) FROM Order o";
-        TypedQuery query = sessionFactory.getCurrentSession().createQuery(sql);
-        long count = (long) query.getSingleResult();
+        TypedQuery typedQuery = sessionFactory.getCurrentSession().createQuery(sql);
+        long count= (long) typedQuery.getSingleResult();
         return (int) count;
     }
-
     @Override
     public Order findById(long orderId) {
-        return (Order) sessionFactory.getCurrentSession().get(Order.class, orderId);
+        return sessionFactory.getCurrentSession().get(Order.class, orderId);
     }
 
 }

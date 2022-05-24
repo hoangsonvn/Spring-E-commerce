@@ -8,7 +8,7 @@
     <meta charset="ISO-8859-1">
 </head>
 <body>
-<!-- LEFT SIDEBAR -->
+
 <div th:fragment="category">
     <div id="sidebar-nav" class="sidebar">
         <div class="sidebar-scroll" style="padding-top: 20px;">
@@ -21,7 +21,7 @@
                     <li><a href="<c:url value="/admin/listCategory"/>" class=""><i class="lnr lnr lnr-dice"></i><span>Category</span></a></li>
                     <li><a href="<c:url value="/admin/canvasjschart"/> " class=""><i class="lnr lnr lnr-dice"></i><span>Canvasjschart</span></a></li>
                     <li><a href="<c:url value="/admin/statistical"/> " class=""><i class="lnr lnr lnr-dice"></i><span>Statistical</span></a></li>
-                    <li><a href="<c:url value="/admin/listpermission"/>" class=""><i class="lnr lnr-home"></i> <span>Role Permission</span></a></li>
+                    <li><a href="<c:url value="/admin/listpermission"/>" class=""><i class="lnr lnr lnr-dice"></i> <span>Role Permission</span></a></li>
                     <li><a href="<c:url value="/client/home"/> " class=""><i class="lnr lnr lnr-dice"></i><span>Go to Shop</span></a></li>
 
 
@@ -30,6 +30,6 @@
         </div>
     </div>
 </div>
-<!-- END LEFT SIDEBAR -->
+
 </body>
 </html>

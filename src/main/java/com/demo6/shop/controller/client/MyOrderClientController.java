@@ -2,8 +2,8 @@ package com.demo6.shop.controller.client;
 
 
 import com.demo6.shop.constant.SystemConstant;
-import com.demo6.shop.model.ItemDTO;
-import com.demo6.shop.model.UserPrincipal;
+import com.demo6.shop.dto.ItemDTO;
+import com.demo6.shop.dto.UserPrincipal;
 import com.demo6.shop.service.ItemService;
 import com.demo6.shop.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;

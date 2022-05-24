@@ -98,9 +98,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- 			<div th:replace="client/common/ourbands :: ourbands"></div> -->
-
         </div>
     </div>
 

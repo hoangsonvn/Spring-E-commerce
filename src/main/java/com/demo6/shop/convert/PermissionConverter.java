@@ -1,7 +1,7 @@
 package com.demo6.shop.convert;
 
 import com.demo6.shop.entity.Permission;
-import com.demo6.shop.model.PermissionDTO;
+import com.demo6.shop.dto.PermissionDTO;
 import org.springframework.stereotype.Component;
 
 @Component

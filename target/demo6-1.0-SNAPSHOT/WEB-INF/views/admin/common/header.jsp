@@ -15,7 +15,7 @@
     <!-- NAVBAR -->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="brand">
-            <img src="../resource/admin/assets/img/logo-dark.png" alt="Klorofil Logo"
+            <img src="<c:url value="/resource/admin/assets/img/logo-dark.png"/>" alt="Klorofil Logo"
                  class="img-responsive logo">
         </div>
         <div class="container-fluid">

@@ -2,7 +2,6 @@ package com.demo6.shop.dao.impl;
 
 import com.demo6.shop.dao.RoleDao;
 import com.demo6.shop.entity.Role;
-import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

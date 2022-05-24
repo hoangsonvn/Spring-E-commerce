@@ -1,6 +1,6 @@
 package com.demo6.shop.controller.admin;
 
-import com.demo6.shop.model.CategoryDTO;
+import com.demo6.shop.dto.CategoryDTO;
 import com.demo6.shop.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

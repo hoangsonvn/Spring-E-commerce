@@ -55,7 +55,7 @@
 										<div class="col-md-12">
 											<div class="panel">
 												<div class="panel-heading">
-													<h3 class="panel-title">PRODUCT LIST</h3>
+													<h3 class="panel-title">CATEGORY LIST</h3>
 													<div class="right">
 														<button type="submit">
 															<span class="label label-danger"
@@ -63,7 +63,7 @@
 														</button>
 														<a href="<c:url value="/admin/createCategory"/>"><span
 															class="label label-success" style="font-size: 15px;">Create
-																new product</span></a>
+																new category</span></a>
 													</div>
 												</div>
 												<div class="panel-body no-padding">
@@ -73,7 +73,7 @@
 																<th><input type="checkbox" name="all" id="checkAll" style="cursor: pointer;"/></th>
 																<th>ID</th>
 																<th>Category Name</th>
-
+																<th>Title</th>
 																<th>Edit</th>
 															</tr>
 														</thead>
@@ -86,6 +86,8 @@
 																		value="${item.categoryId}" id="${loop.count}" style="cursor: pointer;"/></td>
 																	<td style="vertical-align: middle;">${item.categoryId}</td>
 																	<td style="vertical-align: middle;">${item.categoryName}</td>
+																	<td style="vertical-align: middle;">${item.title}</td>
+
 
 
 																	<td style="vertical-align: middle;">
@@ -129,7 +131,7 @@
 		</footer>
 	</div>
 	<!-- END WRAPPER -->
-	<!-- Javascript -->
+
 	<script>
             let userSelection = document.getElementsByClassName('checkbox');
             let checkAll = document.getElementById('checkAll')

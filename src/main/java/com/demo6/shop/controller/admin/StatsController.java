@@ -2,7 +2,7 @@ package com.demo6.shop.controller.admin;
 
 import com.demo6.shop.common.ICommon;
 import com.demo6.shop.constant.SystemConstant;
-import com.demo6.shop.model.StatsDTO;
+import com.demo6.shop.dto.StatsDTO;
 import com.demo6.shop.service.CanvasjsChartProductService;
 import com.demo6.shop.service.ProductService;
 import org.slf4j.Logger;
@@ -20,7 +20,7 @@ import java.util.Optional;
 
 @Controller
 public class StatsController {
-    private static Logger logger = LoggerFactory.getLogger(StatsController.class);
+    private static final Logger logger = LoggerFactory.getLogger(StatsController.class);
     @Autowired
     private ICommon iCommon;
     @Autowired

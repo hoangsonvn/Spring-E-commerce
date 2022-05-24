@@ -15,14 +15,14 @@
     <!-- NAVBAR -->
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="brand">
-            <img src="../resource/admin/assets/img/logo-dark.png" alt="Klorofil Logo"
+            <img src="<c:url value="/resource/admin/assets/img/logo-dark.png"/>" alt="Klorofil Logo"
                  class="img-responsive logo">
         </div>
         <div class="container-fluid">
             <div id="navbar-menu">
-                <form class="navbar-form navbar-left">
+                <form action="<c:url value="/admin/search"/>" method="post" class="navbar-form navbar-left">
                     <div class="input-group">
-                        <input type="text" value="" class="form-control"
+                        <input type="text"  name="text" class="form-control"
                                placeholder="Search dashboard..."> <span
                             class="input-group-btn"><button type="button"
                                                             class="btn btn-primary">Go</button></span>

@@ -156,28 +156,16 @@
                                                     <i class="fa fa-heart-o"> </i>
                                                 </a>
                                             </form>
-
-
-
                                         </div>
                                     </div>
                                 </div>
                             </c:forEach>
                             <div class="clearfix"></div>
 
-                            <!-- Tool Bar -->
-<%--
-                            <jsp:include page="common/toolbar.jsp"/>
---%>
-
-
                             <div class="clearfix"></div>
                         </div>
                     </div>
                 </div>
-
-                <!-- 			<div th:replace="client/common/ourbands :: ourbands"></div> -->
-
             </div>
         </div>
     </div>

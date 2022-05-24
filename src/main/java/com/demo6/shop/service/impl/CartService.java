@@ -1,7 +1,7 @@
 package com.demo6.shop.service.impl;
 
 import com.demo6.shop.dao.ICartDao;
-import com.demo6.shop.model.CartDTO;
+import com.demo6.shop.dto.CartDTO;
 import com.demo6.shop.service.ICartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

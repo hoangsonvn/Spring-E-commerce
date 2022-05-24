@@ -4,9 +4,9 @@ import com.demo6.shop.dao.ItemDao;
 import com.demo6.shop.entity.Item;
 import com.demo6.shop.entity.Order;
 import com.demo6.shop.entity.Product;
-import com.demo6.shop.model.CartDTO;
-import com.demo6.shop.model.OrderDTO;
-import com.demo6.shop.model.UserPrincipal;
+import com.demo6.shop.dto.CartDTO;
+import com.demo6.shop.dto.OrderDTO;
+import com.demo6.shop.dto.UserPrincipal;
 import com.demo6.shop.service.OrderService;
 import com.demo6.shop.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,7 +38,6 @@ public class CheckoutController {
         Map<Long, CartDTO> cart = (Map<Long, CartDTO>) session.getAttribute("cart");
         String home = request.getParameter("home");
 
-
         for (Map.Entry<Long, CartDTO> entry : cart.entrySet()) {
             if (entry.getValue().getProductDTO().getQuantity() - entry.getValue().getQuantity() < 0) {
                 String mess = "so luong " + entry.getValue().getProductDTO().getProductName() + " khong du";
@@ -48,13 +47,12 @@ public class CheckoutController {
             Integer quanityInStock = entry.getValue().getProductDTO().getQuantity() - entry.getValue().getQuantity();
             entry.getValue().getProductDTO().setQuantity(quanityInStock);
             productService.update(entry.getValue().getProductDTO());
+            // compare quantity in stock
         }
 
         OrderDTO order1 = new OrderDTO();
         Order order = orderService.insert(session, order1);
-
         for (Map.Entry<Long, CartDTO> entry : cart.entrySet()) {
-
             Product product = new Product();
             product.setProductId(entry.getValue().getProductDTO().getProductId());
 

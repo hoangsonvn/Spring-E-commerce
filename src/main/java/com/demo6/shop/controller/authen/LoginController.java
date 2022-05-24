@@ -1,6 +1,6 @@
 package com.demo6.shop.controller.authen;
 
-import com.demo6.shop.model.UserPrincipal;
+import com.demo6.shop.dto.UserPrincipal;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -28,6 +28,7 @@ public class LoginController {
             return "redirect:/client/home";
         }
         return "authen/login";
+        // xu lis da dang nhap nhung truy cap login
     }
 
     @GetMapping(value = "/403")
@@ -45,7 +46,7 @@ public class LoginController {
         if (request.isUserInRole("ADMIN")) { // neu role la admin thi chuyen den trang admin
             return "redirect:/admin/home";
         } else if (session.getAttribute("TotalQuantyCart") != null) {
-            return "redirect:/listcart";
+            return "redirect:/client/listcart";
         } else {
             return "redirect:/client/home"; // khong phai admin chuyen den trang client
         }

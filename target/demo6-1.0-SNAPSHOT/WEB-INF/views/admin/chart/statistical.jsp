@@ -4,7 +4,6 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-    <title>Dashboard </title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport"
@@ -64,9 +63,7 @@
                                         <div class="col-md-12">
                                             <div class="panel">
                                                 <div class="panel-heading">
-                                                    <a class="btn btn-warning"
-                                                       href="<c:url value="/admin/statistical"/>"
-                                                       style="background-color: #D9534F; padding: 2px 10px; text-decoration: none; border: none; margin-right: 10px; height: 25px;">Back</a>
+
                                                     <form action="<c:url value="/admin/statistical"/> " method="get>">
                                                         <div class="right">
                                                             <span style="color: #d5641c">MONTH</span>

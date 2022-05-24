@@ -73,7 +73,9 @@
 
             </form>
         </div>
-    </div><c:if test="${totalPage != null}">
+    </div>
+
+    <c:if test="${totalPage != 0}">
     <div class="pager">
         <a href="#" class="prev-page"> <i class="fa fa-angle-left"> </i>
         </a>

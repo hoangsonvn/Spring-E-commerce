@@ -39,10 +39,7 @@
                            placeholder="Enter email" required="required" />
                 </div>
             </div>
-            <%--<div style="font-size: 17px; text-align: center;">
-					<span>Did'nt work? <a href="<c:url value="/resend-code"/>" >Send me another code.</a>
-					</span>
-            </div>--%>
+
             <div class="auth-form-controls"
                  style="margin-left: 80px; margin-top: 15px;">
                 <button type="submit" class="btn" style="cursor: pointer;">Confirm</button>

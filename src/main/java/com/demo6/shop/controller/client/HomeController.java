@@ -50,15 +50,6 @@ private ICommon iCommon;
         } else {
             pricing = "default";
         }
-
-     /*   if (categoryId != null) {
-            categoryId = Long.parseLong(request.getParameter("categoryId"));
-        }*/
-
-      /*  if (request.getParameter("pageSize") != null && !request.getParameter("pageSize") .equals("") ) {
-            pageSize = Integer.parseInt(request.getParameter("pageSize"));
-        }
-*/
        pageSize=Optional.ofNullable(pageSizeCurrent).orElse(pageSize);
         pageIndex= Optional.ofNullable(pageIndex).orElse(0);
         int count = productService.countBySearch(categoryId, pricing, priceFrom, priceTo, text);

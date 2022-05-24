@@ -35,10 +35,6 @@ public class SearchProductClientController {
         Integer priceFrom = 0;
         Integer priceTo = 0;
 
-        /*Operator targetOperation = OperatorFactory
-                .getOperation(pricing)
-                .orElseThrow(() -> new IllegalArgumentException("Invalid Operator"));
-        targetOperation.apply(priceFrom,priceTo);*/
         if (pricing != null) {
             switch (pricing) {
                 case "under50":

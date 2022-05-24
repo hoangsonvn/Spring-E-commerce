@@ -1,7 +1,7 @@
 package com.demo6.shop.dao.impl;
 
 
-import com.demo6.shop.model.CanvasjsChartData;
+import com.demo6.shop.dto.CanvasjsChartData;
 import com.demo6.shop.dao.CanvasjsChartDao;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

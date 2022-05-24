@@ -30,7 +30,7 @@
 					</div>
 					<div class="auth-form-group" style="display: flex; justify-content: space-between; margin-top: -10px; margin-bottom: 15px;">
 						<div><input type="checkbox" name="remember-me" style="cursor: pointer;"/> Remember me</div>
-						<div><a href="<c:url value="/forgotpassword"/>">Forgot password?</a></div>
+						<div><a style="color: #2c3e50;" href="<c:url value="/forgotpassword"/>">Forgot password?</a></div>
 					</div>
 				</div>
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />

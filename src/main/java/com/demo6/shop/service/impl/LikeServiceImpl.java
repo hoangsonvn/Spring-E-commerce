@@ -1,6 +1,6 @@
 package com.demo6.shop.service.impl;
 
-import com.demo6.shop.model.ProductDTO;
+import com.demo6.shop.dto.ProductDTO;
 import com.demo6.shop.service.LikeService;
 import com.demo6.shop.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,187 +1,120 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-         pageEncoding="ISO-8859-1" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+         pageEncoding="ISO-8859-1"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
-
 <html>
 <head>
-    <link href='https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css'
-          rel='stylesheet' type='text/css'>
-    <link href='https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css' rel='stylesheet'
-          type='text/css'>
-    <link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+    <title>Dashboard </title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+    <!-- VENDOR CSS -->
+    <link rel="stylesheet"
+          href="<c:url value="/resource/admin/assets/vendor/bootstrap/css/bootstrap.min.css"/>">
+    <link rel="stylesheet"
+          href="<c:url value="/resource/admin/assets/vendor/font-awesome/css/font-awesome.min.css"/>">
+    <link rel="stylesheet"
+          href="<c:url value="/resource/admin/assets/vendor/linearicons/style.css"/>">
+    <link rel="stylesheet"
+          href="<c:url value="resource/admin/assets/vendor/chartist/css/chartist-custom.css"/>">
+    <!-- MAIN CSS -->
+    <link rel="stylesheet"
+          href="<c:url value="/resource/admin/assets/css/main.css"/>">
+    <link rel="stylesheet"
+          href="<c:url value="/resource/admin/assets/css/demo.css"/>">
+    <!-- GOOGLE FONTS -->
+    <link
+            href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700"
+            rel="stylesheet">
+
+    <!-- ICONS -->
+    <link rel="apple-touch-icon" sizes="76x76"
+          href="<c:url value="/resource/admin/assets/img/apple-icon.png"/>">
+    <link rel="icon" type="image/png" sizes="96x96"
+          href="<c:url value="/resource/admin/assets/img/favicon.png"/>">
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css"
+          href="<c:url value="/resource/css/style.css"/>">
+    <script src="<c:url value="/resource/ckeditor/ckeditor.js"/>"></script>
+
 </head>
 <body>
-<style>
-    body {
-        background: #222D32;
-        font-family: 'Roboto', sans-serif;
-    }
-
-    .login-box {
-        margin-top: 75px;
-        height: auto;
-        background: #1A2226;
-        text-align: center;
-        box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-    }
-
-    .login-key {
-        height: 100px;
-        font-size: 80px;
-        line-height: 100px;
-        background: -webkit-linear-gradient(#27EF9F, #0DB8DE);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-    }
-
-    .login-title {
-        margin-top: 15px;
-        text-align: center;
-        font-size: 30px;
-        letter-spacing: 2px;
-        margin-top: 15px;
-        font-weight: bold;
-        color: #ECF0F5;
-    }
-
-    .login-form {
-        margin-top: 25px;
-        text-align: left;
-    }
-
-    input[type=text] {
-        background-color: #1A2226;
-        border: none;
-        border-bottom: 2px solid #0DB8DE;
-        border-top: 0px;
-        border-radius: 0px;
-        font-weight: bold;
-        outline: 0;
-        margin-bottom: 20px;
-        padding-left: 0px;
-        color: #ECF0F5;
-    }
-
-    input[type=password] {
-        background-color: #1A2226;
-        border: none;
-        border-bottom: 2px solid #0DB8DE;
-        border-top: 0px;
-        border-radius: 0px;
-        font-weight: bold;
-        outline: 0;
-        padding-left: 0px;
-        margin-bottom: 20px;
-        color: #ECF0F5;
-    }
-
-    .form-group {
-        margin-bottom: 40px;
-        outline: 0px;
-    }
-
-    .form-control:focus {
-        border-color: inherit;
-        -webkit-box-shadow: none;
-        box-shadow: none;
-        border-bottom: 2px solid #0DB8DE;
-        outline: 0;
-        background-color: #1A2226;
-        color: #ECF0F5;
-    }
-
-    input:focus {
-        outline: none;
-        box-shadow: 0 0 0;
-    }
-
-    label {
-        margin-bottom: 0px;
-    }
-
-    .form-control-label {
-        font-size: 10px;
-        color: #6C6C6C;
-        font-weight: bold;
-        letter-spacing: 1px;
-    }
-
-    .btn-outline-primary {
-        border-color: #0DB8DE;
-        color: #0DB8DE;
-        border-radius: 0px;
-        font-weight: bold;
-        letter-spacing: 1px;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-    }
-
-    .btn-outline-primary:hover {
-        background-color: #0DB8DE;
-        right: 0px;
-    }
-
-    .login-btm {
-        float: left;
-    }
-
-    .login-button {
-        padding-right: 0px;
-        text-align: right;
-        margin-bottom: 25px;
-    }
-
-    .login-text {
-        text-align: left;
-        padding-left: 0px;
-        color: #A2A4A4;
-    }
-
-    .loginbttm {
-        padding: 0px;
-    }
-</style>
-<form action="<c:url value="/admin/updateCategory"/> " method="post">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-3 col-md-2"></div>
-            <div class="col-lg-6 col-md-8 login-box">
-                <div class="col-lg-12 login-key">
-                    <i class="fa fa-key" aria-hidden="true"></i>
-                </div>
-                <div class="col-lg-12 login-title">
-
-                </div>
-
-                <div class="col-lg-12 login-form">
-                    <div class="col-lg-12 login-form">
-                        <form action="<c:url value="/admin/updateCategory"/> " method="post">
-                            <input type="hidden" value="${category.categoryId}" name="categoryId" id="categoryId">
-                            <div class="form-group">
-                                <label class="form-control-label">CategoryName</label>
-                                <input type="text" class="form-control" id="categoryName" name="categoryName"
-                                       value="${category.categoryName}">
-                            </div>
-
-                            <div class="col-lg-12 loginbttm">
-                                <div class="col-lg-6 login-btm login-text">
-                                    <a href="<c:url value="/admin/listCategory"/> "
-                                       class="btn btn-outline-primary">BACK</a>
-                                </div>
-                                <div class="col-lg-6 login-btm login-button">
-                                    <button type="submit" class="btn btn-outline-primary">UPDATE</button>
-                                </div>
-                            </div>
-                        </form>
+<div id="wrapper" style="max-width: 1250px; margin: auto;">
+    <%@include file="../common/header.jsp"%>
+    <jsp:include page="../common/category.jsp" />
+    <!-- MAIN -->
+    <!-- MAIN CONTENT -->
+    <div class="main">
+        <div class="main-content">
+            <div class="container-fluid">
+                <!-- OVERVIEW -->
+                <div class="panel panel-headline">
+                    <div class="panel-heading"
+                         style="display: flex; justify-content: space-between;">
+                        <h3 class="panel-title">UPDATE </h3>
+                        <a class="btn btn-warning" href="<c:url value="/admin/listCategory"/>"
+                           style="background-color: #D9534F; padding: 2px 10px; text-decoration: none; border: none; margin-right: 10px; height: 25px;">Back</a>
                     </div>
-                </div>
-                <div class="col-lg-3 col-md-2"></div>
-            </div>
+                    <form action="<c:url value="/admin/updateCategory"/>" method="post" >
+                        <div class="row"
+                             style="display: flex; justify-content: space-between;">
+                            <table style="margin: auto; margin-left: 60px;" class="col-md-6">
 
+                                <tr>
+                                    <th>Id:</th>
+                                    <td> ${category.categoryId}</td>
+                                </tr>
+                                <input type="hidden" name="categoryId" value="${category.categoryId}">
+                                <tr>
+                                    <th>Product name:</th>
+                                    <td><input type="text" class="form-control"
+                                               required="required" style="height: 30px;"
+                                              value="${category.categoryName}" placeholder="Enter category name..." name="categoryName" />${category.categoryName}</td>
+                                </tr>
+                                <tr>
+                                    <th>Content:</th>
+                                    <td><input type="text" class="form-control"
+                                               required="required" style="height: 30px;"
+                                               value="${category.content}" placeholder="Enter content ..." name="content" />${category.content}</td>
+                                </tr>
+                                <tr>
+                                    <th>Title:</th>
+                                    <td><input type="text" class="form-control"
+                                               required="required" style="height: 30px;"
+                                               value="${category.title}" placeholder="Enter title ..." name="title" />${category.title}</td>
+                                </tr>
+
+
+
+                                <tr>
+                                    <th></th>
+                                    <td>
+                                        <button type="submit" class="btn btn-primary"
+                                                style="font-weight: bold;">UPDATE</button>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th></th>
+                                    <td></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+            <div id="headline-chart" class="ct-chart"></div>
         </div>
+
+        <!-- END OVERVIEW -->
     </div>
-</form>
+    <!-- END MAIN CONTENT -->
 </div>
 
 </body>
+
 </html>

@@ -1,6 +1,6 @@
 package com.demo6.shop.controller.admin;
 
-import com.demo6.shop.model.PermissionDTO;
+import com.demo6.shop.dto.PermissionDTO;
 import com.demo6.shop.service.PermissionService;
 import com.demo6.shop.service.RoleService;
 import org.slf4j.Logger;
@@ -15,7 +15,7 @@ import java.util.List;
 
 @Controller
 public class PermissionController {
-    private static Logger logger = LoggerFactory.getLogger(PermissionController.class);
+    private static final Logger logger = LoggerFactory.getLogger(PermissionController.class);
 
     @Autowired
     private RoleService roleService;

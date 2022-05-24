@@ -106,6 +106,10 @@
 									style="margin: auto; margin-left: 50px; margin-right: -40px;"
 									class="col-md-6">
 									<tr>
+										<th>Expiration Date</th>
+										<td><input required="required" type="date" id="expirationDate" name="expirationDate" ></td>
+									</tr>
+									<tr>
 										<th>Price:</th>
 										<td><input type="number" class="form-control"
 												   min="1" max="1000"

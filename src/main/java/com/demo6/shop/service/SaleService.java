@@ -1,6 +1,6 @@
 package com.demo6.shop.service;
 
-import com.demo6.shop.model.SaleDTO;
+import com.demo6.shop.dto.SaleDTO;
 
 import java.util.List;
 

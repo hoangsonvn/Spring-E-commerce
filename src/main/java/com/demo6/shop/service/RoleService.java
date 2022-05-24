@@ -1,6 +1,6 @@
 package com.demo6.shop.service;
 
-import com.demo6.shop.model.RoleDTO;
+import com.demo6.shop.dto.RoleDTO;
 
 import java.util.List;
 

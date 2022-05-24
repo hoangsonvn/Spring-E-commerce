@@ -1,6 +1,6 @@
 package com.demo6.shop.service;
 
-import com.demo6.shop.model.UserDTO;
+import com.demo6.shop.dto.UserDTO;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;

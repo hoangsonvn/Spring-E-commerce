@@ -35,7 +35,7 @@
 								Get <strong> newsletter </strong>
 							</h3>
 							<p>Casio G Shock Digital Dial Black.</p>
-							<form action="<c:url value="/get-news"/>"> method="post">
+							<form action="<c:url value="/get-news"/>" method="post">
 								<input class="email" type="text" name="email"
 									placeholder="Your Email..." required="required"> <input class="submit"
 									type="submit" value="Submit">

@@ -74,7 +74,7 @@
 															<span class="label label-danger"
 																style="font-size: 15px; margin-right: 15px;">Delete</span>
 														</button>
-														<a href="<c:url value="/admin/product-create"/>"<span
+														<a href="<c:url value="/admin/product-create"/>"><span
 															class="label label-success" style="font-size: 15px;">Create
 																new product</span></a>
 													</div>

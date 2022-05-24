@@ -1,6 +1,6 @@
 package com.demo6.shop.service;
 
-import com.demo6.shop.model.ProductDTO;
+import com.demo6.shop.dto.ProductDTO;
 
 import java.util.HashMap;
 

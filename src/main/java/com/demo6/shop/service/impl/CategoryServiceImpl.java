@@ -2,15 +2,11 @@ package com.demo6.shop.service.impl;
 
 import com.demo6.shop.convert.CategoryConverter;
 import com.demo6.shop.dao.CategoryDao;
+import com.demo6.shop.dto.CategoryDTO;
 import com.demo6.shop.entity.Category;
-import com.demo6.shop.entity.Product;
-import com.demo6.shop.model.CategoryDTO;
-import com.demo6.shop.model.ProductDTO;
-import com.demo6.shop.model.SaleDTO;
 import com.demo6.shop.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.transaction.Transactional;
 import java.util.ArrayList;
@@ -28,15 +24,20 @@ public class CategoryServiceImpl implements CategoryService{
 
 
 	@Override
+	public Long count() {
+		return categoryDao.count();
+	}
+
+	@Override
 	public List<CategoryDTO> findAll() {
 		List<Category> categories = categoryDao.findAll();
-		List<CategoryDTO> categoryDTOs = new ArrayList<CategoryDTO>();
+		List<CategoryDTO> categoryDTOs = new ArrayList<>();
 		for (Category category : categories) {
 			CategoryDTO categoryDTO = new CategoryDTO();
-			List<Product> products =	category.getProducts();
-		//	products.forEach(s-> System.out.println(s.getPrice()));
 			categoryDTO.setCategoryId(category.getCategoryId());
 			categoryDTO.setCategoryName(category.getCategoryName());
+			categoryDTO.setTitle(category.getTitle());
+			categoryDTO.setContent(category.getContent());
 			categoryDTOs.add(categoryDTO);
 		}
 		return categoryDTOs;

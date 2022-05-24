@@ -6,6 +6,7 @@ import com.demo6.shop.service.CategoryService;
 import com.demo6.shop.service.ProductService;
 import com.demo6.shop.service.SaleService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,9 +15,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.Date;
 import java.util.Optional;
-
-// Product Manager
 
 @Controller
 @RequestMapping(value = "/admin")
@@ -40,7 +40,6 @@ public class ProductManagementAdminController {
         int count = productService.count();
         Integer totalPage = iCommon.totalPage(count, SystemConstant.PAGESIZE);
         request.setAttribute("categories", categoryService.findAll());
-        request.setAttribute("default", "default");
         request.setAttribute("pageIndex", pageIndex);
         request.setAttribute("totalPage", totalPage);
         request.setAttribute("products", productService.findAll(pageIndex, SystemConstant.PAGESIZE));
@@ -73,8 +72,9 @@ public class ProductManagementAdminController {
     @PostMapping(value = "/product-create")
     public String insertPost(@RequestParam(name = "categoryId") long categoryId, @RequestParam(name = "productName") String productName, @RequestParam(name = "description") String description,
                              @RequestParam(name = "price") float price, @RequestParam(name = "quantity") int quantity,
-                             @RequestParam(name = "saleId") String saleId, @RequestParam(name = "imageFile") MultipartFile imageFile) {
-        productService.persist(categoryId, productName, description, price, quantity, saleId, imageFile);
+                             @RequestParam(name = "saleId" ) String saleId, @RequestParam(name = "imageFile") MultipartFile imageFile, @RequestParam(name = "expirationDate",required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date expirationDate) {
+
+        productService.persist(categoryId, productName, description, price, quantity, saleId, imageFile,expirationDate);
         return "redirect:/admin/product-list";
     }
   //  @PreAuthorize("hasAnyAuthority('ADMIN_UPDATE')")
@@ -92,9 +92,8 @@ public class ProductManagementAdminController {
                          @RequestParam(value = "productId", required = false) Long productId, @RequestParam(value = "categoryId", required = false) Long categoryId, @RequestParam(value = "oldPrice", required = false) Float oldPrice,
                          @RequestParam(value = "productName", required = false) String productName, @RequestParam(value = "description", required = false) String description,
                          @RequestParam(value = "quantity", required = false) Integer quantity, @RequestParam(value = "image", required = false) String image,
-                         @RequestParam(value = "saleId", required = false) String saleId
-    ) {
-        productService.merge(newPrice, imageFile, productId, categoryId, oldPrice, productName, description, quantity, image, saleId);
+                         @RequestParam(value = "saleId", required = false) String saleId,@RequestParam(name = "expirationDate",required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date expirationDate) {
+        productService.merge(newPrice, imageFile, productId, categoryId, oldPrice, productName, description, quantity, image, saleId,expirationDate);
         return "redirect:/admin/product-list";
     }
    // @PreAuthorize("hasAnyAuthority('ADMIN_DELETE')")

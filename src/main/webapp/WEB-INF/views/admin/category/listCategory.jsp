@@ -73,7 +73,7 @@
 																<th><input type="checkbox" name="all" id="checkAll" style="cursor: pointer;"/></th>
 																<th>ID</th>
 																<th>Category Name</th>
-
+																<th>Title</th>
 																<th>Edit</th>
 															</tr>
 														</thead>
@@ -86,6 +86,8 @@
 																		value="${item.categoryId}" id="${loop.count}" style="cursor: pointer;"/></td>
 																	<td style="vertical-align: middle;">${item.categoryId}</td>
 																	<td style="vertical-align: middle;">${item.categoryName}</td>
+																	<td style="vertical-align: middle;">${item.title}</td>
+
 
 
 																	<td style="vertical-align: middle;">
@@ -129,7 +131,7 @@
 		</footer>
 	</div>
 	<!-- END WRAPPER -->
-	<!-- Javascript -->
+
 	<script>
             let userSelection = document.getElementsByClassName('checkbox');
             let checkAll = document.getElementById('checkAll')

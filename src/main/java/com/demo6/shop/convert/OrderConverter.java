@@ -2,7 +2,7 @@ package com.demo6.shop.convert;
 
 import com.demo6.shop.entity.Order;
 import com.demo6.shop.entity.User;
-import com.demo6.shop.model.OrderDTO;
+import com.demo6.shop.dto.OrderDTO;
 import org.springframework.stereotype.Component;
 
 @Component

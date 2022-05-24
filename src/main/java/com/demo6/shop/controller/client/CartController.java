@@ -1,8 +1,7 @@
 package com.demo6.shop.controller.client;
 
-import com.demo6.shop.controller.admin.PermissionController;
-import com.demo6.shop.model.CartDTO;
-import com.demo6.shop.model.UserPrincipal;
+import com.demo6.shop.dto.CartDTO;
+import com.demo6.shop.dto.UserPrincipal;
 import com.demo6.shop.service.ICartService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +17,7 @@ import java.util.Optional;
 
 @Controller
 public class CartController {
-    private static Logger logger = LoggerFactory.getLogger(CartController.class);
+    private static final Logger logger = LoggerFactory.getLogger(CartController.class);
 
     @Autowired
     private ICartService cartService;

@@ -1,12 +1,11 @@
 package com.demo6.shop.service;
 
-import com.demo6.shop.model.CategoryDTO;
-import com.demo6.shop.model.ProductDTO;
-import org.springframework.web.multipart.MultipartFile;
+import com.demo6.shop.dto.CategoryDTO;
 
 import java.util.List;
 
 public interface CategoryService {
+    Long count();
 
     List<CategoryDTO> findAll();
 

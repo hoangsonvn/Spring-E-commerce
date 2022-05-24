@@ -2,8 +2,8 @@ package com.demo6.shop.convert;
 
 import com.demo6.shop.entity.Role;
 import com.demo6.shop.entity.User;
-import com.demo6.shop.model.RoleDTO;
-import com.demo6.shop.model.UserDTO;
+import com.demo6.shop.dto.RoleDTO;
+import com.demo6.shop.dto.UserDTO;
 import org.springframework.stereotype.Component;
 
 @Component

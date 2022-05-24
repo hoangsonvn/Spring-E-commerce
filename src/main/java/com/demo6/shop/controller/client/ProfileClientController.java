@@ -1,9 +1,9 @@
 package com.demo6.shop.controller.client;
 
 import com.demo6.shop.common.ICommon;
-import com.demo6.shop.model.RoleDTO;
-import com.demo6.shop.model.UserDTO;
-import com.demo6.shop.model.UserPrincipal;
+import com.demo6.shop.dto.RoleDTO;
+import com.demo6.shop.dto.UserDTO;
+import com.demo6.shop.dto.UserPrincipal;
 import com.demo6.shop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -15,11 +15,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
 
 @Controller
 @RequestMapping(value = "/client")
@@ -42,7 +37,7 @@ public class ProfileClientController {
     }
 
     @PostMapping(value = "/profile-update")
-    public String profileUpdate(HttpServletRequest request, HttpSession session,
+    public String profileUpdate(HttpServletRequest request,
                                 @RequestParam(name = "fullname", required = false) String fullname,
                                 @RequestParam(name = "phone") String phone,
                                 @RequestParam(name = "address") String address,
@@ -69,21 +64,7 @@ public class ProfileClientController {
         userDTO.setRoleDTO(roleDTO);
         if (avatarFile != null && avatarFile.getSize() > 0) {
             String avatarFilename=iCommon.image(avatarFile);
-          /*  String originalFilename = avatarFile.getOriginalFilename();
-            int lastIndex = originalFilename.lastIndexOf(".");
-            String ext = originalFilename.substring(lastIndex);
-            String avatarFilename = System.currentTimeMillis() + ext;
-            File newfile = new File("C:\\image_spring_boot\\" + avatarFilename);
-            FileOutputStream fileOutputStream;
-            try {
-                fileOutputStream = new FileOutputStream(newfile);
-                fileOutputStream.write(avatarFile.getBytes());
-                fileOutputStream.close();
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }*/
+
             userDTO.setAvatar(avatarFilename);
             userPrincipal.setAvatar(avatarFilename);
 

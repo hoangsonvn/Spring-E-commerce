@@ -2,8 +2,6 @@ package com.demo6.shop.controller.admin;
 
 import com.demo6.shop.common.ICommon;
 import com.demo6.shop.constant.SystemConstant;
-import com.demo6.shop.model.CategoryDTO;
-import com.demo6.shop.model.OrderDTO;
 import com.demo6.shop.service.ItemService;
 import com.demo6.shop.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,12 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping(value = "/admin")
@@ -44,11 +37,8 @@ public class OrderManagementAdminController {
     }
 
     @GetMapping(value = "order-updateHome")
-    public String orderUpdateHome(HttpServletRequest request,@RequestParam(value = "orderId") long orderId) {
+    public String orderUpdateHome(@RequestParam(value = "orderId") long orderId) {
         orderService.updateHome(orderId);
-      /*  OrderDTO orderDTO = orderService.findById(orderId);
-        orderDTO.setStatus("SUCCESS");
-        orderService.update(orderDTO);*/
         return "redirect:/admin/home";
     }
 
@@ -56,9 +46,6 @@ public class OrderManagementAdminController {
     @GetMapping(value = "order-update")
     public String orderUpdate(HttpServletRequest request,@RequestParam(value = "orderId") long orderId) {
        orderService.updateHome(orderId);
-        /* OrderDTO orderDTO = orderService.findById(orderId);
-        orderDTO.setStatus("SUCCESS");
-        orderService.update(orderDTO);*/
         return "redirect:" + request.getHeader("Referer");
     }
 

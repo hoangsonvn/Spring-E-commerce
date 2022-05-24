@@ -1,6 +1,6 @@
 package com.demo6.shop.excel;
 
-import com.demo6.shop.model.StatsDTO;
+import com.demo6.shop.dto.StatsDTO;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.Row;
@@ -12,7 +12,6 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class UserExcelExporter {
     private XSSFWorkbook workbook;
@@ -78,34 +77,21 @@ public class UserExcelExporter {
             int columnCount = 0;
 
             createCell(row, columnCount++, user.getName(), style);
-            createCell(row, columnCount++, user.getQuantity(), style);
-            createCell(row, columnCount++, user.getTotalprice(), style);
-            createCell(row, columnCount++, user.getAvgprice(), style);
-            createCell(row, columnCount++, user.getMinprice(), style);
-            createCell(row, columnCount++, user.getMaxprice(), style);
+            createCell(row, columnCount++, Math.round((float) user.getQuantity()), style);
+            createCell(row, columnCount++, Math.ceil(user.getTotalprice()), style);
+            createCell(row, columnCount++, Math.ceil(user.getAvgprice()), style);
+            createCell(row, columnCount++, Math.round(user.getMinprice()), style);
+            createCell(row, columnCount++, Math.round(user.getMaxprice()), style);
         }
-//        statsDTOList.forEach(s->{
-//            Row row = sheet.createRow(rowCount.getAndIncrement());
-//            int columnCount = 0;
-//
-//            createCell(row, columnCount++, s.getName(), style);
-//            createCell(row, columnCount++, s.getQuantity(), style);
-//            createCell(row, columnCount++, s.getTotalprice(), style);
-//            createCell(row, columnCount++, s.getAvgprice(), style);
-//            createCell(row, columnCount++, s.getMinprice(), style);
-//            createCell(row, columnCount++, s.getMaxprice(), style);
-//        });
+
     }
 
     public void export(HttpServletResponse response) throws IOException {
         writeHeaderLine();
         writeDataLines();
-
         ServletOutputStream outputStream = response.getOutputStream();
         workbook.write(outputStream);
         workbook.close();
-
         outputStream.close();
-
     }
 }

@@ -26,6 +26,8 @@ public class Sale {
 	private String shortDescription;
 	@OneToMany(mappedBy = "sale")
 	private List<Product> products;
+	@Column(name = "title")
+	private String title;
 
 
 }

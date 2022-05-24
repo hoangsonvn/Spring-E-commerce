@@ -70,6 +70,19 @@
 											required="required" style="height: 30px;"
 											placeholder="Enter category name..." name="categoryName" /></td>
 									</tr>
+									<tr>
+										<th>Content:</th>
+										<td><input type="text" class="form-control"
+												   required="required" style="height: 30px;"
+												   placeholder="Enter content ..." name="content" /></td>
+									</tr>
+									<tr>
+										<th>Title:</th>
+										<td><input type="text" class="form-control"
+												   required="required" style="height: 30px;"
+												   placeholder="Enter title ..." name="title" /></td>
+									</tr>
+
 
 
 									<tr>

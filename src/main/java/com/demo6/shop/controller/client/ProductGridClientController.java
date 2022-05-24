@@ -26,21 +26,9 @@ public class ProductGridClientController {
     @GetMapping(value = "/product-grid")
     public String productGrid(HttpServletRequest request, @RequestParam(name = "categoryId") long categoryId,
                               @RequestParam(value = "pageIndex", required = false) Integer pageIndex) {
-        //  int pageIndex = 0;
-        //   int pagesize = 6;
-        // int totalPage = 0;
         pageIndex = pageIndex == null ? 0 : pageIndex;
         int count = productService.countByCategoryId(categoryId);
-       /* if (request.getParameter("pageIndex") != null) {
-            pageIndex = Integer.parseInt(request.getParameter("pageIndex"));
-        }*/
         Integer totalPage = iCommon.totalPage(count, SystemConstant.FEE);
-      /*
-        if (count % pagesize == 0) {
-            totalPage = count / pagesize;
-        } else {
-            totalPage = count / pagesize + 1;
-        }*/
         request.setAttribute("categories", categoryService.findAll());
         request.setAttribute("pageIndex", pageIndex);
         request.setAttribute("totalPage", totalPage);

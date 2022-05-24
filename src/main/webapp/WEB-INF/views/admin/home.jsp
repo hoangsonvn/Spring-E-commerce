@@ -59,7 +59,7 @@
 										<div class="metric" style="box-shadow: 0 0 3px;">
 											<span class="icon"><i class="fa fa-shopping-cart"></i></span>
 											<p>
-												<span class="number">${countorder}</span> <span class="title">Order</span>
+												<span class="number">${countorder}</span> <span class="title">Orders</span>
 											</p>
 										</div>
 									</a>
@@ -71,7 +71,7 @@
 											<span class="icon"><i class="fab fa-product-hunt"
 												style="font-size: 26px; margin-top: 12px;"></i></span>
 											<p>
-												<span class="number">${coutproduct}</span> <span class="title">Product</span>
+												<span class="number">${coutproduct}</span> <span class="title">Products</span>
 											</p>
 										</div>
 									</a>
@@ -82,7 +82,7 @@
 											<span class="icon"><i
 												style='font-size: 24px; margin-top: 2px;' class='fas'>&#xf0c0;</i></span>
 											<p>
-												<span class="number">${count}</span><span class="title">User</span>
+												<span class="number">${count}</span><span class="title">Users</span>
 											</p>
 										</div>
 									</a>
@@ -91,7 +91,7 @@
 									<div class="metric" style="box-shadow: 0 0 3px;">
 										<span class="icon"><i class="fa fa-bar-chart"></i></span>
 										<p>
-											<span class="number">35%</span> <span class="title">Restore</span>
+											<span class="number">${countcategory}</span> <span class="title">Categories</span>
 										</p>
 									</div>
 								</div>
@@ -126,7 +126,7 @@
 													<c:forEach items="${orders}" var="order">
 														<tr>
 															<td><a href="#">No. ${order.orderId}</a></td>
-															<td>${order.userDTO.email.split("@")[0]}</td>
+															<td>${order.userDTO.fullname}</td>
 															<td>$${order.priceTotal}0</td>
 															<td>${order.buyDate}</td>
 															<c:if test="${order.status eq 'PENDING'}">
@@ -156,11 +156,7 @@
 								</div>
 								<div id="headline-chart" class="ct-chart"></div>
 								<div class="col-md-3">
-									<div class="weekly-summary text-right">
-										<span class="number">2,315</span> <span class="percentage"><i
-											class="fa fa-caret-up text-success"></i> 12%</span> <span
-											class="info-label">Total Sales</span>
-									</div>
+
 									<div class="weekly-summary text-right">
 										<span class="number">$${Math.round(totalpricebycurrentmonth)}</span> <span class="percentage"><i
 											class="fa fa-caret-up text-success"></i> 23%</span> <span

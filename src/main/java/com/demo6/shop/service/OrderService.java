@@ -1,7 +1,7 @@
 package com.demo6.shop.service;
 
 import com.demo6.shop.entity.Order;
-import com.demo6.shop.model.OrderDTO;
+import com.demo6.shop.dto.OrderDTO;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;

@@ -1,11 +1,10 @@
 package com.demo6.shop.convert;
 
 import com.demo6.shop.entity.Role;
-import com.demo6.shop.model.RoleDTO;
+import com.demo6.shop.dto.RoleDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Component

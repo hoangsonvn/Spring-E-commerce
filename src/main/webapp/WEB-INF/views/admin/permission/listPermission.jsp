@@ -73,23 +73,22 @@
 														<tr>
 															<th><input type="checkbox" name="all" id="checkAll"
 																style="cursor: pointer;" /></th>
-															<th>NO.</th>
-															<th>Name</th>
-															<th>Status</th>
+															<th style=" font-weight: bolder;color: #c0a16b;">NO</th>
+															<th style=" font-weight: bolder;color: #c0a16b;">Name</th>
+															<th style=" font-weight: bolder;color: #c0a16b;">Edit</th>
 														</tr>
 													</thead>
 													<tbody>
 														<c:forEach items="${roles}" var="role" varStatus="loop">
 															<tr>
 																<td style="vertical-align: middle;">
-																	<input
-																	class="checkbox" type="checkbox" name="roleIds"
+																	<input class="checkbox" type="checkbox" name="roleIds"
 																	value="${role.roleId}" id="${loop.count}"
 																	style="cursor: pointer;" /></td>
 																<td style="vertical-align: middle;">
 																	No.${role.roleId}</td>
 																<td>${role.roleName}</td>
-																<td><a href="<c:url value="/admin/editpermission?roleId=${role.roleId}"/>" style="text-decoration: underline;">Edit</a></td>
+																<td><a style="color: #5c2c5d;size: 15px;font-weight: bold;" class="btn btn-secondary btn-sm" href="<c:url value="/admin/editpermission?roleId=${role.roleId}"/>" >Edit</a></td>
 															</tr>
 														</c:forEach>
 													</tbody>

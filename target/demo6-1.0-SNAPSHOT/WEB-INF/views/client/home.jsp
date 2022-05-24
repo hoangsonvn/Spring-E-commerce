@@ -27,11 +27,6 @@
 
 		<div class="container_fullwidth">
 			<div class="container">
-
-
-
-				<!-- 			<div th:replace="client/common/ourbands :: ourbands"></div> -->
-
 			</div>
 		</div>
 

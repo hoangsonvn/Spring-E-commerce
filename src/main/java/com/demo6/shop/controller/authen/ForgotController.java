@@ -1,6 +1,6 @@
 package com.demo6.shop.controller.authen;
 
-import com.demo6.shop.model.UserDTO;
+import com.demo6.shop.dto.UserDTO;
 import com.demo6.shop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSender;
@@ -70,7 +70,7 @@ public class ForgotController {
 
 
     @GetMapping(value = "/forgotpassword/resend-code")
-    public String resendCode(HttpSession session, HttpServletRequest request) {
+    public String resendCode(HttpSession session) {
         String code = registerController.randomString(8);
         String email = (String) session.getAttribute("email");
         sendEmail("myanhm55@gmail.com", email, "PiFood!",

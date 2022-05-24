@@ -2,7 +2,7 @@ package com.demo6.shop.dao.impl;
 
 import com.demo6.shop.dao.UserDao;
 import com.demo6.shop.entity.User;
-import org.hibernate.Criteria;
+import com.graphbuilder.org.apache.harmony.awt.gl.Crossing;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,26 +34,26 @@ public class UserDaoImpl implements UserDao {
 		User user = findById(userId);
 		sessionFactory.getCurrentSession().delete(user);
 	}
-
 	@Override
 	public User findById(long userId) {
-		return (User) sessionFactory.getCurrentSession().get(User.class, userId);
+		return sessionFactory.getCurrentSession().find(User.class, userId);
 	}
-
 	@Override
 	public List<User> findAll(int pageIndex, int pageSize) {
 		int first = pageIndex * pageSize;
-		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(User.class).setFirstResult(first).setMaxResults(pageSize);
-		return criteria.list();
+		String sql = "SELECT u FROM User u";
+		TypedQuery<User> typedQuery = sessionFactory.getCurrentSession().createQuery(sql,User.class).setFirstResult(first).setMaxResults(pageSize);
+		return typedQuery.getResultList();
 	}
 
 	@Override
 	public User findByEmailOrPhoneAndPassword(String account, String password, boolean verity) {
-		String sql = "SELECT u FROM User u WHERE (u.email = '" + account + "' or u.phone = '" + account + "') and u.password = '" + password + "'";
-		Query query = sessionFactory.getCurrentSession().createQuery(sql);
-		return (User) query.uniqueResult();
+		String sql = "SELECT u FROM User u WHERE (u.email = :account or u.phone = :account) and u.password = :password";
+		TypedQuery<User> query = sessionFactory.getCurrentSession().createQuery(sql,User.class)
+				.setParameter("account",account)
+				.setParameter("password",password);
+		return  query.getSingleResult();
 	}
-
 
 	@Override
 	public User loadUserByUsername(String account) {
@@ -65,15 +65,16 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public int count() {
 		String sql = "SELECT count(u) FROM User u";
-		Query query = sessionFactory.getCurrentSession().createQuery(sql);
-		long count = (long) query.uniqueResult();
+		TypedQuery typedQuery = sessionFactory.getCurrentSession().createQuery(sql);
+		long count = (long) typedQuery.getSingleResult();
 		return (int) count;
 	}
 
 	@Override
 	public User findByEmail(String email) {
-		String sql = "SELECT u FROM User u WHERE u.email = '" + email + "'";
-		Query query = sessionFactory.getCurrentSession().createQuery(sql);
+		String sql = "SELECT u FROM User u WHERE u.email = :email";
+		Query query = sessionFactory.getCurrentSession().createQuery(sql)
+				.setParameter("email",email);
 		return (User) query.uniqueResult();
 	}
 

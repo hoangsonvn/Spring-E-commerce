@@ -1,11 +1,10 @@
 package com.demo6.shop.service.impl;
 
-import com.demo6.shop.controller.authen.Oauth2Controller;
 import com.demo6.shop.convert.RoleConverter;
 import com.demo6.shop.entity.Role;
-import com.demo6.shop.model.RoleDTO;
-import com.demo6.shop.model.UserDTO;
-import com.demo6.shop.model.UserPrincipal;
+import com.demo6.shop.dto.RoleDTO;
+import com.demo6.shop.dto.UserDTO;
+import com.demo6.shop.dto.UserPrincipal;
 import com.demo6.shop.service.Oauth2Service;
 import com.demo6.shop.service.UserService;
 import org.slf4j.Logger;
@@ -16,7 +15,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class Oauth2Serviceimpl implements Oauth2Service {
-    private static Logger logger = LoggerFactory.getLogger(Oauth2Serviceimpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(Oauth2Serviceimpl.class);
 
     @Autowired
     private RoleConverter roleConverter;

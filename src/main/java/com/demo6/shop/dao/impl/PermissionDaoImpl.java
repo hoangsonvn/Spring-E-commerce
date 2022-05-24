@@ -13,10 +13,9 @@ import java.util.List;
 @Repository
 @Transactional
 public class PermissionDaoImpl implements PermissionDao {
+
     @Autowired
     private SessionFactory sessionFactory;
-
-
 
     public Permission findOneById(Long id) {
         String sql = "SELECT p FROM Permission p WHERE p.id= :id";

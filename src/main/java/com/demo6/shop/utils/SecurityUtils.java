@@ -1,6 +1,6 @@
 package com.demo6.shop.utils;
 
-import com.demo6.shop.model.UserPrincipal;
+import com.demo6.shop.dto.UserPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 public class SecurityUtils {

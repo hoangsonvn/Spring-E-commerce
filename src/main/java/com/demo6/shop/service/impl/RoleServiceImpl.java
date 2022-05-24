@@ -3,7 +3,7 @@ package com.demo6.shop.service.impl;
 import com.demo6.shop.convert.RoleConverter;
 import com.demo6.shop.dao.RoleDao;
 import com.demo6.shop.entity.Role;
-import com.demo6.shop.model.RoleDTO;
+import com.demo6.shop.dto.RoleDTO;
 import com.demo6.shop.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

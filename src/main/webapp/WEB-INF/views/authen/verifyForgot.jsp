@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-         pageEncoding="ISO-8859-1"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+         pageEncoding="ISO-8859-1" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,7 +19,7 @@
     <div class="auth-form" style="background-color: white;">
         <div class="auth-form-container">
             <a href="<c:url value="/client/home"/>"><h5 class="auth-form-title"
-                                      style="text-align: center; padding-top: 20px;">Welcome to
+                                                        style=" color: #5c2c5d; text-align: center; padding-top: 20px;">Welcome to
                 PiFood</h5></a>
             <c:if test="${mess != null}">
                 <div style="display: flex; margin-bottom: 2px; color: #7d964b;">
@@ -27,6 +27,7 @@
                     <span style="margin-left: 2px;">${mess}</span>
                 </div>
             </c:if>
+            <br><br>
             <c:if test="${invalid != null}">
                 <div style="display: flex; margin-bottom: 2px; color: red;">
                     <i style="font-size:18px" class="fa">&#xf071;</i>
@@ -34,18 +35,18 @@
                 </div>
             </c:if>
 
-            <hr style="margin-top: -35px;" />
-           <br><br><br>
+            <hr style="margin-top: -35px;"/>
+            <br><br><br>
             <div class="auth-form-form"
                  style="margin-top: 15px; margin-bottom: -13px;">
                 <div class="auth-form-group">
 
                     <input class="auth-form-input" type="text" name="code"
-                            required="required" />
+                           required="required"/>
                 </div>
             </div>
             <div style="font-size: 17px; text-align: center;">
-					<span>Did'nt work? <a href="<c:url value="/forgotpassword/resend-code"/>" >Send me another code.</a>
+					<span>Did'nt work? <a style="color: #8f8f8f" href="<c:url value="/forgotpassword/resend-code"/>">Send me another code.</a>
 					</span>
             </div>
             <div class="auth-form-controls"
@@ -56,6 +57,5 @@
         </div>
     </div>
 </form>
-
 </body>
 </html>
