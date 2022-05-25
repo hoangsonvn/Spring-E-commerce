@@ -54,6 +54,10 @@
                     <div class="alert alert-danger">
                             ${message}
                     </div></c:if>
+                <c:if test="${expireddate != null}">
+                    <div class="alert alert-danger">
+                            ${expireddate}
+                    </div></c:if>
                 <!-- OVERVIEW -->
                 <div class="panel panel-headline">
                     <div class="panel-heading"

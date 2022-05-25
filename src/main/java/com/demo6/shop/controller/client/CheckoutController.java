@@ -54,9 +54,7 @@ public class CheckoutController {
         for (Map.Entry<Long, CartDTO> entry : cart.entrySet()) {
             Product product = new Product();
             product.setProductId(entry.getValue().getProductDTO().getProductId());
-
             Item item = new Item();
-         //   item.setItemId(entry.getValue().getCartId());
             item.setProduct(product);
             item.setQuantity(entry.getValue().getQuantity());
             item.setUnitPrice((float) entry.getValue().getTotalPriceSale());

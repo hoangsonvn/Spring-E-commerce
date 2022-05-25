@@ -68,8 +68,12 @@ public class ProductManagementAdminController {
     @GetMapping(value = "/product-create")
     public String insert(HttpServletRequest request) {
         String message = request.getParameter("message");
+        String messsagedate = request.getParameter("expireddate");
         if (message != null) {
             request.setAttribute("message", resourceBundle.getString(message));
+        }
+        if (messsagedate != null) {
+            request.setAttribute("expireddate", resourceBundle.getString(messsagedate));
         }
         request.setAttribute("categories", categoryService.findAll());
         request.setAttribute("sales", saleService.findAll());
@@ -83,7 +87,10 @@ public class ProductManagementAdminController {
     public String insertPost(HttpServletRequest request, @RequestParam(name = "categoryId") long categoryId, @RequestParam(name = "productName") String productName, @RequestParam(name = "description") String description,
                              @RequestParam(name = "price") float price, @RequestParam(name = "quantity") int quantity,
                              @RequestParam(name = "saleId") String saleId, @RequestParam(name = "imageFile") MultipartFile imageFile, @RequestParam(name = "expirationDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date expirationDate) {
-
+        if (new Date(new Date().getTime()).compareTo(expirationDate) > 0) {
+            return "redirect:/admin/product-create?expireddate=dateExpiration";
+        }
+        ;
         Optional<String> optionalS = Optional.ofNullable(productService.findOneByProductName(productName));
         if (optionalS.isPresent()) {
             return "redirect:/admin/product-create?message=duplicate";
@@ -97,8 +104,12 @@ public class ProductManagementAdminController {
     @GetMapping(value = "/product-update")
     public String update(HttpServletRequest request, @RequestParam(name = "productId") long productId) {
         String message = request.getParameter("message");
+        String messsagedate = request.getParameter("expireddate");
         if (message != null) {
             request.setAttribute("message", resourceBundle.getString(message));
+        }
+        if (messsagedate != null) {
+            request.setAttribute("expireddate", resourceBundle.getString(messsagedate));
         }
         request.setAttribute("product", productService.findById(productId));
         request.setAttribute("sales", saleService.findAll());
@@ -114,10 +125,14 @@ public class ProductManagementAdminController {
                          @RequestParam(value = "productName", required = false) String productName, @RequestParam(value = "description", required = false) String description,
                          @RequestParam(value = "quantity", required = false) Integer quantity, @RequestParam(value = "image", required = false) String image,
                          @RequestParam(value = "saleId", required = false) String saleId, @RequestParam(name = "expirationDate", required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) Date expirationDate) {
+        if (new Date(new Date().getTime()).compareTo(expirationDate) > 0) {
+            return "redirect:/admin/product-update?productId="+productId+"&expireddate=dateExpiration";
+        }
+        ;
         Optional<String> optionalS = Optional.ofNullable(productService.findOneByProductName(productName));
         String name = productService.findById(productId).getProductName();
         if (optionalS.isPresent() && !optionalS.get().equals(name)) {
-            return "redirect:/admin/product-update?productId="+productId+"&message=duplicate";
+            return "redirect:/admin/product-update?productId=" + productId + "&message=duplicate";
         }
         productService.merge(newPrice, imageFile, productId, categoryId, oldPrice, productName, description, quantity, image, saleId, expirationDate);
         return "redirect:/admin/product-list?messageupdate=updateProduct";
