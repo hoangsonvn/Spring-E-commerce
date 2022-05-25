@@ -1,4 +1,4 @@
-package com.demo6.shop.controller.client;
+package com.demo6.shop.controller.admin;
 
 import com.demo6.shop.controller.admin.PermissionController;
 import com.demo6.shop.dto.ErrorMessage;
