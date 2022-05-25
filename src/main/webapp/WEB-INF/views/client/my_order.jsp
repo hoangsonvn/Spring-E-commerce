@@ -56,7 +56,7 @@
 									<div class="alert alert-warning">${message}
 									</div>
 								</c:if>
-								<li class="steps active"><a href="<c:url value="client/my-order"/>"><div
+								<li class="steps active"><a href="<c:url value="/client/my-order"/>"><div
 											class="step-title">01. MY ORDER</div></a>
 									<table class="table table-striped" style="font-size: 15px;">
 										<thead>
