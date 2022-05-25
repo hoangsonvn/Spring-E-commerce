@@ -50,6 +50,10 @@
     <div class="main">
         <div class="main-content">
             <div class="container-fluid">
+                <c:if test="${tick != null }">
+                    <div class="alert alert-warning">
+                            ${tick}
+                    </div></c:if>
                 <!-- OVERVIEW -->
                 <div class="panel panel-headline">
                     <div class="panel-body">
@@ -59,7 +63,6 @@
                                     <div class="panel">
                                         <div class="panel-heading">
                                             <h3 class="panel-title">ROLE PERMISSION</h3>
-
                                         </div>
                                         <div class="panel-body no-padding">
                                             <table class="table table-striped" style="margin: auto;">

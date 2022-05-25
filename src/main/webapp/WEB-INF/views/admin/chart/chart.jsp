@@ -1,15 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-         pageEncoding="ISO-8859-1"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+         pageEncoding="ISO-8859-1" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
     <a class="btn btn-warning"
-       href="<c:url value="/admin/home"/>"
-       style="background-color: #D9534F;color: floralwhite; padding: 2px 10px; text-decoration: none; border: none; margin-right: 10px; height: 25px;">Back</a>
+         href="<c:url value="/admin/home"/>"
+         style="background-color: #D9534F;color: floralwhite; padding: 2px 10px; text-decoration: none; border: none; margin-right: 10px; height: 25px;">Back</a>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <script type="text/javascript">
-        window.onload = function() {
+        window.onload = function () {
 
             var dps = [[]];
             var chart = new CanvasJS.Chart("chartContainer", {
@@ -43,8 +43,8 @@
             xValue = parseInt("${dataPoint.x}");
             yValue = parseFloat("${dataPoint.y}");
             dps[parseInt("${loop.index}")].push({
-                x : xValue,
-                y : yValue
+                x: xValue,
+                y: yValue
             });
             </c:forEach>
             </c:forEach>

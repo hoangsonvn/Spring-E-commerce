@@ -24,6 +24,22 @@ public class ProductDaoImpl implements ProductDao {
     private SessionFactory sessionFactory;
     private static final Logger logger = LoggerFactory.getLogger(ProductDaoImpl.class);
 
+    @org.springframework.transaction.annotation.Transactional(readOnly = true)
+    @Override
+    public List<Product> findAll() {
+        String sql = "SELECT p FROM Product p";
+        TypedQuery<Product> typedQuery = sessionFactory.getCurrentSession().createQuery(sql,Product.class);
+        return typedQuery.getResultList();
+    }
+    @org.springframework.transaction.annotation.Transactional(readOnly = true)
+    @Override
+    public String findOneByProductName(String productName) {
+        String sql = "SELECT p.productName  From Product p WHERE p.productName=: name";
+        Query<String> query= sessionFactory.getCurrentSession().createQuery(sql,String.class)
+                 .setParameter("name",productName);
+         return query.uniqueResult();
+    }
+
     @Override
     public List<Product> search(String text, Integer index, Integer pageSize) {
         index = index == null ? 0 : index;
@@ -54,11 +70,10 @@ public class ProductDaoImpl implements ProductDao {
         TypedQuery<Integer> typedQuery = sessionFactory.getCurrentSession().createQuery(sql);
         return typedQuery.getResultList();
     }
-
-    @Override
+@Override
     public Double totalOrderPricebyMonthAndYear(Integer month, Integer year) {// tính tổng order theo tháng theo năm hoặc cả 2
         logger.info("tính tổng giá Order theo tháng hoặc năm hoặc cả 2");
-        String sql = "select sum(o.priceTotal) from Order  o WHERE (:month is null or month(o.buyDate)= :month)" +
+        String sql = "select sum(o.priceTotal-5) from Order  o WHERE (:month is null or month(o.buyDate)= :month)" +
                 "and (:year is null or year(o.buyDate)=:year) and o.status='SUCCESS'";
         TypedQuery typedQuery = sessionFactory.getCurrentSession().createQuery(sql)
                 .setParameter("month", month)
@@ -71,8 +86,8 @@ public class ProductDaoImpl implements ProductDao {
     @org.springframework.transaction.annotation.Transactional(readOnly = true)
     @Override
     public int coutStats(Integer month, Integer year) {
-        logger.info("tính số lượng sản phẩm đã bán ");
-        String sql = "select count(distinct i.product.productId) from Item i where i.order.status='SUCCESS'" +
+        logger.info("tính số lượng sản phẩm đã bán theo month,year ");
+        String sql = "select count(distinct i.productName) from Item i where i.order.status='SUCCESS'" +
                 " and (:month is null or month(i.order.buyDate)= :month)" +
                 " and (:year is null or year(i.order.buyDate)= :year)";
         TypedQuery typedQuery = sessionFactory.getCurrentSession().createQuery(sql)
@@ -106,11 +121,11 @@ public class ProductDaoImpl implements ProductDao {
         logger.info("lấy ra danh sách doanh thu phân trang");
         Integer first = pageIndex == null & pageSize == null ? 0 : pageIndex * pageSize;
         pageSize = Optional.ofNullable(pageSize).orElse(coutStats(month, year));
-        String sql = " select i.product.productName,sum(i.quantity),sum(i.unitPrice)" +
+        String sql = " select i.productName,sum(i.quantity),sum(i.unitPrice)" +
                 " ,sum(i.unitPrice)/sum(i.quantity),min(i.unitPrice/i.quantity)" +
                 " ,max(i.unitPrice/i.quantity) from Item i where i.order.status='SUCCESS'" +
                 " and (:month is null or month(i.order.buyDate) = :month) and(:year is null or year(i.order.buyDate) = :year)" +
-                " group by i.product.productId  ";
+                " group by i.productName";
         logger.info("lẽ ra nhóm theo productname nhưng mình đang test nên để toàn trùng sản phẩm nen mới như vậy");
         TypedQuery typedQuery = sessionFactory.getCurrentSession().createQuery(sql)
                 .setParameter("month", month)

@@ -10,6 +10,15 @@ public class ScheduleDTO {
     private Double price;
     private Date expirationDate;
     private Double totaPrice;
+    private Boolean status;
+
+    public Boolean getStatus() {
+        return status;
+    }
+
+    public void setStatus(Boolean status) {
+        this.status = status;
+    }
 
     public String getName() {
         return name;

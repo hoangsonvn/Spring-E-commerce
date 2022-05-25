@@ -1,5 +1,6 @@
 package com.demo6.shop.entity;
 
+import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,9 +20,10 @@ public class Product {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "product_id")
 	private long productId;
-	@Column(name = "product_name")
+	@Column(name = "product_name",unique = true)
 	private String productName;
 	@Column(name = "price")
+	@NotNull
 	private float price;
 	@Column(name = "quantity")
 	private int quantity;
@@ -33,6 +35,7 @@ public class Product {
 	private Date createDate;
 	@Column(name = "expired_date")
 	private Date expiredDate;
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "category_id")
 	private Category category;

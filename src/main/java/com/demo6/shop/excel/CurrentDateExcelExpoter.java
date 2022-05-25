@@ -30,7 +30,7 @@ public class CurrentDateExcelExpoter {
         CellStyle style = workbook.createCellStyle();
         XSSFFont font = workbook.createFont();
         font.setBold(true);
-        font.setFontHeight(16);
+        font.setFontHeight(15);
         style.setFont(font);
 
         createCell(row, 0, "Name", style);
@@ -39,6 +39,7 @@ public class CurrentDateExcelExpoter {
         createCell(row, 3, "Price", style);
         createCell(row, 4, "ExpirationDate", style);
         createCell(row, 5, "TotaPriceInDay", style);
+        createCell(row,6,"Exist",style);
 
 
     }
@@ -80,9 +81,10 @@ public class CurrentDateExcelExpoter {
             createCell(row, columnCount++, scheduleDTO.getName(), style);
             createCell(row, columnCount++, scheduleDTO.getQuantity(), style);
             createCell(row, columnCount++, remainingAmount, style);
-            createCell(row, columnCount++, Math.ceil(scheduleDTO.getPrice()), style);
+            createCell(row, columnCount++, scheduleDTO.getPrice(), style);
             createCell(row, columnCount++, scheduleDTO.getExpirationDate(), style);
             createCell(row, columnCount++, Math.ceil(scheduleDTO.getTotaPrice()), style);
+            createCell(row, columnCount++, scheduleDTO.getStatus(), style);
         }
 
     }

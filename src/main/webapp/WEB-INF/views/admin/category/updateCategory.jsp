@@ -4,7 +4,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Dashboard </title>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport"
@@ -51,11 +50,16 @@
     <div class="main">
         <div class="main-content">
             <div class="container-fluid">
+                <c:if test="${duplicate != null}">
+                    <div class="alert alert-danger">
+                            ${duplicate}
+                    </div>
+                </c:if>
                 <!-- OVERVIEW -->
                 <div class="panel panel-headline">
                     <div class="panel-heading"
                          style="display: flex; justify-content: space-between;">
-                        <h3 class="panel-title">UPDATE </h3>
+                        <h3 class="panel-title">UPDATE</h3>
                         <a class="btn btn-warning" href="<c:url value="/admin/listCategory"/>"
                            style="background-color: #D9534F; padding: 2px 10px; text-decoration: none; border: none; margin-right: 10px; height: 25px;">Back</a>
                     </div>
@@ -70,22 +74,22 @@
                                 </tr>
                                 <input type="hidden" name="categoryId" value="${category.categoryId}">
                                 <tr>
-                                    <th>Product name:</th>
+                                    <th>Category name:</th>
                                     <td><input type="text" class="form-control"
                                                required="required" style="height: 30px;"
-                                              value="${category.categoryName}" placeholder="Enter category name..." name="categoryName" />${category.categoryName}</td>
+                                              value="${category.categoryName}" name="categoryName" /></td>
                                 </tr>
                                 <tr>
                                     <th>Content:</th>
                                     <td><input type="text" class="form-control"
                                                required="required" style="height: 30px;"
-                                               value="${category.content}" placeholder="Enter content ..." name="content" />${category.content}</td>
+                                               value="${category.content}"  name="content" /></td>
                                 </tr>
                                 <tr>
                                     <th>Title:</th>
                                     <td><input type="text" class="form-control"
                                                required="required" style="height: 30px;"
-                                               value="${category.title}" placeholder="Enter title ..." name="title" />${category.title}</td>
+                                               value="${category.title}" name="title" /></td>
                                 </tr>
 
 

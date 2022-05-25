@@ -45,7 +45,6 @@
 		<jsp:include page="../common/header.jsp" />
 
 		<jsp:include page="../common/category.jsp" />
-
 		<!-- MAIN -->
 		<!-- MAIN CONTENT -->
 		<div class="main">

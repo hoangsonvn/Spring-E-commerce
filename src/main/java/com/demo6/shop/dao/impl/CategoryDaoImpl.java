@@ -19,6 +19,14 @@ public class CategoryDaoImpl implements CategoryDao {
 	private SessionFactory sessionFactory;
 
 	@Override
+	public String findOneByCategoryName(String categoryName) {
+		String sql = "SELECT c.categoryName FROM Category c WHERE c.categoryName= :categoryName";
+		Query<String> query = sessionFactory.getCurrentSession().createQuery(sql,String.class)
+				.setParameter("categoryName",categoryName);
+		return query.uniqueResult();
+	}
+
+	@Override
 	public Long count() {
 		String sql = "SELECT COUNT(c) FROM Category c";
 		Query query = sessionFactory.getCurrentSession().createQuery(sql);

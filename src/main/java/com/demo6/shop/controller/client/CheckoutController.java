@@ -40,9 +40,8 @@ public class CheckoutController {
 
         for (Map.Entry<Long, CartDTO> entry : cart.entrySet()) {
             if (entry.getValue().getProductDTO().getQuantity() - entry.getValue().getQuantity() < 0) {
-                String mess = "so luong " + entry.getValue().getProductDTO().getProductName() + " khong du";
-                session.setAttribute("limits", mess);
-                return "redirect:/client/listcart";
+                String mess = "   Product name named   " + entry.getValue().getProductDTO().getProductName() + " is not enough #! ";
+                return "redirect:/client/listcart?limit="+mess;
             }
             Integer quanityInStock = entry.getValue().getProductDTO().getQuantity() - entry.getValue().getQuantity();
             entry.getValue().getProductDTO().setQuantity(quanityInStock);
@@ -57,11 +56,12 @@ public class CheckoutController {
             product.setProductId(entry.getValue().getProductDTO().getProductId());
 
             Item item = new Item();
-            item.setItemId(entry.getValue().getCartId());
+         //   item.setItemId(entry.getValue().getCartId());
             item.setProduct(product);
             item.setQuantity(entry.getValue().getQuantity());
             item.setUnitPrice((float) entry.getValue().getTotalPriceSale());
             item.setOrder(order);
+            item.setProductName(entry.getValue().getProductDTO().getProductName());
             itemDao.insert(item);
         }
         mailSender.send();
@@ -77,7 +77,6 @@ public class CheckoutController {
                         " \n ===== Have a nice day <3! =====");
 
         cart.clear();
-        session.removeAttribute("limit");
         session.removeAttribute("TotalQuantyCart");
         session.removeAttribute("TotalPriceCartSale");
         if (home != null) {

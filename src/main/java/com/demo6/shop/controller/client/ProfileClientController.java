@@ -1,11 +1,15 @@
 package com.demo6.shop.controller.client;
 
 import com.demo6.shop.common.ICommon;
+import com.demo6.shop.controller.admin.StatsController;
 import com.demo6.shop.dto.RoleDTO;
 import com.demo6.shop.dto.UserDTO;
 import com.demo6.shop.dto.UserPrincipal;
 import com.demo6.shop.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping(value = "/client")
@@ -24,9 +29,16 @@ public class ProfileClientController {
     private UserService userService;
     @Autowired
     private ICommon iCommon;
+    private static final Logger logger = LoggerFactory.getLogger(StatsController.class);
 
     @GetMapping(value = "/profile")
-    public String profile() {
+    public String profile(HttpServletRequest request, HttpSession session) {
+        try {
+            UserPrincipal userPrincipal = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            session.setAttribute("user", userPrincipal);
+        } catch (Exception e) {
+            logger.error("khong co thong tin");
+        }
         return "client/profile";
     }
 
@@ -63,7 +75,7 @@ public class ProfileClientController {
         userDTO.setPassword(userPrincipal.getPassword());
         userDTO.setRoleDTO(roleDTO);
         if (avatarFile != null && avatarFile.getSize() > 0) {
-            String avatarFilename=iCommon.image(avatarFile);
+            String avatarFilename = iCommon.image(avatarFile);
 
             userDTO.setAvatar(avatarFilename);
             userPrincipal.setAvatar(avatarFilename);

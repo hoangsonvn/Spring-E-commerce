@@ -143,7 +143,7 @@
 
                                         <c:if test="${product.saleDTO.salePercent != 0}">
 												<span class="price"
-                                                      style="font-size: 15px; color: black; text-decoration: line-through; margin-bottom: 0px; margin-top: -5px;">$${product.price}.0</span>
+                                                      style="font-size: 15px; color: black; text-decoration: line-through; margin-bottom: 0px; margin-top: -5px;">$${product.price}</span>
                                             <span class="price">$${Math.round(product.price - (product.price
                                                     * product.saleDTO.salePercent / 100))}.0</span>
                                         </c:if>

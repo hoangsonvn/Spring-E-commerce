@@ -50,7 +50,23 @@
 		<div class="main">
 			<div class="main-content">
 				<div class="container-fluid">
-					<!-- OVERVIEW -->
+					<c:if test="${messagecreate != null}">
+						<div class="alert alert-success">
+								${messagecreate}
+						</div></c:if>
+					<c:if test="${messagedelete != null}">
+						<div class="alert alert-success">
+								${messagedelete}
+						</div></c:if>
+					<c:if test="${messageupdate != null}">
+						<div class="alert alert-success">
+								${messageupdate}
+						</div></c:if>
+                    <c:if test="${tick != null }">
+                        <div class="alert alert-warning">${tick}
+                        </div>
+                    </c:if>
+                    <!-- OVERVIEW -->
 					<div class="panel panel-headline">
 						<div class="panel-body">
 							<form action="<c:url value="/admin/user-delete"/>" method="get">
@@ -90,7 +106,7 @@
 														<c:forEach items="${users}" var="user" varStatus="loop">
 															<tr>
 																<td style="vertical-align: middle;"><input
-																	class="checkbox" type="checkbox" name="userId" 
+																	class="checkbox" type="checkbox" name="userId"
 																	value="${user.userId}" id="${loop.count}"
 																	style="cursor: pointer;" /></td>
 																<td style="vertical-align: middle;">${user.userId}</td>
@@ -131,7 +147,7 @@
 														href="<c:url value="/admin/user-list?pageIndex=${i}"/>">${i + 1}</a>
 													</li>
 												</c:forEach>
-												
+
 											</ul>
 										</nav></c:if>
 									</div>

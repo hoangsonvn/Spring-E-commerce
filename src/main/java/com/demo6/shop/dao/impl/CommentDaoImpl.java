@@ -22,7 +22,7 @@ public class CommentDaoImpl implements CommentDao {
 
     @Override
     public List<Comment> findAllByProductId(Long id) {
-        String sql = "SELECT c FROM Comment c WHERE c.product.productId=:id";
+        String sql = "SELECT c FROM Comment c WHERE c.product.productId=:id order by c.createBy desc ";
         TypedQuery<Comment> typedQuery = sessionFactory.getCurrentSession().createQuery(sql,Comment.class)
                 .setParameter("id",id);
         return typedQuery.getResultList();

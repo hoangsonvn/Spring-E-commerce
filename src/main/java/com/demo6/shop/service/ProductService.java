@@ -1,6 +1,5 @@
 package com.demo6.shop.service;
 
-import com.demo6.shop.constant.SystemConstant;
 import com.demo6.shop.dto.ProductDTO;
 import com.demo6.shop.dto.StatsDTO;
 import com.demo6.shop.entity.Product;
@@ -9,9 +8,9 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.Date;
 import java.util.List;
 
-import static com.demo6.shop.constant.SystemConstant.PAGESIZE;
-
 public interface ProductService {
+    List<ProductDTO> findAll();
+    String findOneByProductName(String productName);
     List<ProductDTO> search(String text, Integer index,Integer pageSIze);
     Long countSearch(String text);
     void merge(Float newPrice, MultipartFile imageFile, Long productId, Long categoryId, Float oldPrice, String productName, String description, Integer quantity, String image, String saleId, Date expirationDate);

@@ -52,6 +52,10 @@
 					<div class="col-md-9">
 						<div class="checkout-page">
 							<ol class="checkout-steps">
+								<c:if test="${message != null }">
+									<div class="alert alert-warning">${message}
+									</div>
+								</c:if>
 								<li class="steps active"><a href="<c:url value="client/my-order"/>"><div
 											class="step-title">01. MY ORDER</div></a>
 									<table class="table table-striped" style="font-size: 15px;">

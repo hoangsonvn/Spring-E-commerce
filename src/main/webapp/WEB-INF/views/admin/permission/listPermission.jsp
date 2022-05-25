@@ -59,20 +59,11 @@
 										<div class="panel">
 											<div class="panel-heading">
 												<h3 class="panel-title">ROLE PERMISSION</h3>
-												<div class="right">
-													<button type="submit">
-														<span class="label label-danger"
-															style="font-size: 15px; margin-right: 15px;">Delete</span>
-													</button>
-
-												</div>
 											</div>
 											<div class="panel-body no-padding">
 												<table class="table table-striped" style="margin: auto;">
 													<thead>
 														<tr>
-															<th><input type="checkbox" name="all" id="checkAll"
-																style="cursor: pointer;" /></th>
 															<th style=" font-weight: bolder;color: #c0a16b;">NO</th>
 															<th style=" font-weight: bolder;color: #c0a16b;">Name</th>
 															<th style=" font-weight: bolder;color: #c0a16b;">Edit</th>
@@ -81,10 +72,6 @@
 													<tbody>
 														<c:forEach items="${roles}" var="role" varStatus="loop">
 															<tr>
-																<td style="vertical-align: middle;">
-																	<input class="checkbox" type="checkbox" name="roleIds"
-																	value="${role.roleId}" id="${loop.count}"
-																	style="cursor: pointer;" /></td>
 																<td style="vertical-align: middle;">
 																	No.${role.roleId}</td>
 																<td>${role.roleName}</td>

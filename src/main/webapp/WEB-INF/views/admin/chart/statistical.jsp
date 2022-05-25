@@ -54,6 +54,11 @@
         <div class="main-content">
             <div class="container-fluid">
                 <!-- OVERVIEW -->
+                <c:if test="${message != null}">
+                    <div class="alert alert-danger">
+                            ${message}
+                    </div>
+                </c:if>
                 <div class="panel panel-headline">
                     <div class="panel-body">
                         <div class="row">
@@ -80,10 +85,6 @@
                                                                     </c:if>
                                                                             value="${i}">${i}</option>
                                                                 </c:forEach>
-                                                                <%--
-                                                                                                                                <option selected="selected"></option>
-                                                                --%>
-
                                                             </select>
                                                             <span style="margin-left:10px;color: #fd434b"> YEAR</span>
                                                             <select name="year">
@@ -114,8 +115,6 @@
                                                 <table class="table table-striped" style="margin: auto;">
                                                     <thead>
                                                     <tr>
-                                                        <th><input type="checkbox" name="all" id="checkAll"
-                                                                   style="cursor: pointer;"/></th>
                                                         <th style=" color: #36007a; font-weight: bold;">Name</th>
                                                         <th style=" color: #36007a; font-weight: bold;">TotalQuantity
                                                         </th>
@@ -128,11 +127,9 @@
                                                     </thead>
                                                     <tbody>
                                                     <c:if test="${stats != null}">
-                                                        <c:forEach items="${stats}" var="stat" varStatus="loop">
+                                                        <c:forEach items="${stats}" var="stat">
                                                             <tr>
-                                                                <td style="vertical-align: middle;"><input
-                                                                        class="checkbox" type="checkbox" name="orderId"
-                                                                        style="cursor: pointer;"/></td>
+
                                                                 <td style="vertical-align: middle; color: #41A9; font-weight: bold;">${stat.name}</td>
                                                                 <td style="color: #41A9; font-weight: bold;">${stat.quantity}</td>
                                                                 <td style="color: #41A9; font-weight: bold;">

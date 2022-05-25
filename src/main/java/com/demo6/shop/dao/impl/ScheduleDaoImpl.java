@@ -25,9 +25,12 @@ public class ScheduleDaoImpl implements ScheduleDao {
     @Transactional
     @Override
     public List<ScheduleDTO> findAll() {
-        String sql = "select product_name,product.quantity as 'luong hang con lai',product.expired_date , sum(item.quantity),sum(unit_price) , sum(unit_price)/sum(item.quantity) \n" +
-                "as 'gia' from item  right join product on product.product_id=item.product_id \n" +
-                "inner join order_user on item.order_id=order_user.order_id where day(buy_date) = day(curdate()) group by product.product_id;";
+        String sql = "select item.productName, product.quantity 'so luong con lai',product.expired_date , sum(item.quantity)'tong sp ban dc' ,sum(unit_price) as 'tong_gia', sum(unit_price)/sum(item.quantity)\n" +
+                "as 'gia tb' from item  left join product on product.product_id=item.product_id \n" +
+                "inner join order_user on item.order_id=order_user.order_id where day(buy_date) = day(curdate())  group by product.product_id\n" +
+                "UNION \n" +
+                "select p.product_name ,p.quantity,p.expired_date,null,null,p.price from product as p \n" +
+                " where p.product_name not in (select item.productName from item);";
         NativeQuery typedQuery = sessionFactory.getCurrentSession().createNativeQuery(sql);
         List<Object[]> objects = typedQuery.getResultList();
         List<ScheduleDTO> scheduleDTOS = new ArrayList<>();
@@ -39,6 +42,11 @@ public class ScheduleDaoImpl implements ScheduleDao {
             scheduleDTO.setQuantity((BigDecimal) object[3]);
             scheduleDTO.setPrice((Double) object[4]);
             scheduleDTO.setTotaPrice((Double) object[5]);
+            if (scheduleDTO.getExpirationDate()==null){
+                scheduleDTO.setStatus(false);
+            }else{
+                scheduleDTO.setStatus(true);
+            }
             scheduleDTOS.add(scheduleDTO);
             logger.debug("{}, {},{},{},{},{}", object[0], object[1], object[2], object[3], object[4], object[5]);
         }

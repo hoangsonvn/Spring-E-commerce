@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -32,13 +33,24 @@ public class ProductServiceImpl implements ProductService {
 
 
     @Override
+    public List<ProductDTO> findAll() {
+        List<Product> products = productDao.findAll();
+        return products.stream().map(s -> productConverter.toDto(s)).collect(Collectors.toList());
+    }
+
+    @Override
+    public String findOneByProductName(String productName) {
+        return productDao.findOneByProductName(productName);
+    }
+
+    @Override
     public List<ProductDTO> search(String text, Integer index, Integer pageSize) {
         List<ProductDTO> productDTOS = new ArrayList<>();
-          List<Product> products=productDao.search(text,index,pageSize);
-          for(Product product : products){
-            productDTOS.add( productConverter.toDto(product));
-          }
-          return productDTOS;
+        List<Product> products = productDao.search(text, index, pageSize);
+        for (Product product : products) {
+            productDTOS.add(productConverter.toDto(product));
+        }
+        return productDTOS;
     }
 
     @Override
@@ -47,7 +59,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void merge(Float newPrice, MultipartFile imageFile, Long productId, Long categoryId, Float oldPrice, String productName, String description, Integer quantity, String image, String saleId,Date expirationDate) {
+    public void merge(Float newPrice, MultipartFile imageFile, Long productId, Long categoryId, Float oldPrice, String productName, String description, Integer quantity, String image, String saleId, Date expirationDate) {
         SaleDTO saleDTO = new SaleDTO();
         saleDTO.setSaleId(saleId);
         CategoryDTO categoryDTO = new CategoryDTO();
@@ -56,7 +68,7 @@ public class ProductServiceImpl implements ProductService {
         if (product.isPresent()) {
             newPrice = Optional.ofNullable(newPrice).orElse(oldPrice);
             image = imageFile != null && imageFile.getSize() > 0 ? iCommon.image(imageFile) : image;
-            ProductDTO productDTO = new ProductDTO(productId, productName, newPrice, quantity, description, image, categoryDTO, saleDTO,expirationDate);
+            ProductDTO productDTO = new ProductDTO(productId, productName, newPrice, quantity, description, image, categoryDTO, saleDTO, expirationDate);
             productDao.update(productConverter.toEntity(productDTO));
         } else {
             throw new NotFoundException("not found");
@@ -75,7 +87,7 @@ public class ProductServiceImpl implements ProductService {
         if (imageFile != null && imageFile.getSize() > 0) {
             image = iCommon.image(imageFile);
         }
-        ProductDTO productDTO = new ProductDTO(productName, price, quantity, description, image, categoryDTO, saleDTO,expirationDate);
+        ProductDTO productDTO = new ProductDTO(productName, price, quantity, description, image, categoryDTO, saleDTO, expirationDate);
         productDao.insert(productConverter.toEntity(productDTO));
     }
 
@@ -116,7 +128,7 @@ public class ProductServiceImpl implements ProductService {
     public ProductDTO findById(long productId) {
         Product product = productDao.findById(productId);
         SaleDTO saleDTO = new SaleDTO();
-      //  product.getCategory().getCategoryName();
+        //  product.getCategory().getCategoryName();
         saleDTO.setSaleId(product.getSale().getSaleId());
         saleDTO.setSalePercent(product.getSale().getSalePercent());
 

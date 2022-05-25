@@ -18,9 +18,9 @@ public class CategoryConverter {
     public CategoryDTO toDto(Category category) {
         CategoryDTO categoryDTO = new CategoryDTO();
         categoryDTO.setCategoryId(category.getCategoryId());
-        category.setCategoryName(category.getCategoryName());
-        category.setContent(categoryDTO.getContent());
-        category.setTitle(categoryDTO.getTitle());
+        categoryDTO.setCategoryName(category.getCategoryName());
+        categoryDTO.setContent(category.getContent());
+        categoryDTO.setTitle(category.getTitle());
         return categoryDTO;
     }
 }

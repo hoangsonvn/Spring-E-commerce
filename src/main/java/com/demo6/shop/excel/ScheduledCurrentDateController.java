@@ -2,11 +2,15 @@ package com.demo6.shop.excel;
 
 import com.demo6.shop.dto.ScheduleDTO;
 import com.demo6.shop.service.ScheduleService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import javax.persistence.EntityNotFoundException;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -19,24 +23,10 @@ import java.util.List;
 public class ScheduledCurrentDateController {
     @Autowired
     private ScheduleService scheduleService;
-
-    @org.springframework.scheduling.annotation.Scheduled(cron = " */10 * * * * * ")
-    public void scheduleFixedDelayTask() {
-        List<ScheduleDTO> scheduleDTOS = scheduleService.findAll();
-        for (ScheduleDTO scheduleDTO : scheduleDTOS) {
-            Date expirationDate = scheduleDTO.getExpirationDate();
-            Date newDate = new java.sql.Date(new java.util.Date().getTime());
-           if(newDate.compareTo(expirationDate)>0){
-               //th neu xoa san pham do roi
-           }
-        }
-
-
-    }
-
+    private static final Logger logger = LoggerFactory.getLogger(ScheduledCurrentDateController.class);
 
     @GetMapping("/admin/currentdate")
-    public void exportToExcel(HttpServletResponse response
+    public String exportToExcel(HttpServletResponse response, HttpServletRequest request
     ) throws IOException {
         response.setContentType("application/octet-stream");
         DateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd_HH:mm:ss");
@@ -44,9 +34,16 @@ public class ScheduledCurrentDateController {
         String headerKey = "Content-Disposition";
         String headerValue = "attachment; filename=Stats" + currentDateTime + " .xlsx";
         response.setHeader(headerKey, headerValue);
-        List<ScheduleDTO> scheduleDTOS = scheduleService.findAll();
+        List<ScheduleDTO> scheduleDTOS;
+        try {
+            scheduleDTOS = scheduleService.findAll();
+        } catch (EntityNotFoundException e) {
+            logger.error("No Products");
+            return "redirect:/admin/home?message=No product found";
+        }
         CurrentDateExcelExpoter excelExporter = new CurrentDateExcelExpoter(scheduleDTOS);
         excelExporter.export(response);
+        return "redirect:" + request.getHeader("Referer");
     }
 
 }

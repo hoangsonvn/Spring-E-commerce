@@ -5,6 +5,7 @@ import com.demo6.shop.dto.CategoryDTO;
 import java.util.List;
 
 public interface CategoryService {
+    String findOneByCategoryName(String categoryName);
     Long count();
 
     List<CategoryDTO> findAll();

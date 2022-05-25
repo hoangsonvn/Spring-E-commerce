@@ -47,6 +47,22 @@
 			<div class="main">
 				<div class="main-content">
 					<div class="container-fluid">
+						<c:if test="${messagecreate != null}">
+							<div class="alert alert-success">
+									${messagecreate}
+							</div></c:if>
+						<c:if test="${messagedelete != null}">
+							<div class="alert alert-success">
+									${messagedelete}
+							</div></c:if>
+						<c:if test="${messageupdate != null}">
+							<div class="alert alert-success">
+									${messageupdate}
+							</div></c:if>
+						<c:if test="${tick != null }">
+							<div class="alert alert-warning">
+									${tick}
+							</div></c:if>
 						<!-- OVERVIEW -->
 						<div class="panel panel-headline">
 							<div class="panel-body">

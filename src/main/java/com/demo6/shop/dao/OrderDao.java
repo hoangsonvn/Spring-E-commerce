@@ -5,6 +5,8 @@ import com.demo6.shop.entity.Order;
 import java.util.List;
 
 public interface OrderDao {
+    void deleteByUserId(Long id);
+
     Double totalPriceByCurrentMonth();
 
     Double totalPrice();

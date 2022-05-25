@@ -23,7 +23,7 @@ public class UserDTO {
 		this.roleDTO = roleDTO;
 	}
 
-	public UserDTO(String email,long userId, String password, String fullname, String phone, String address, boolean gender, RoleDTO roleDTO, String avatar) {
+	public UserDTO(String email,long userId, String password, String fullname, String phone, String address, boolean gender, RoleDTO roleDTO, String avatar,boolean verify) {
 		this.userId = userId;
 		this.email=email;
 		this.password = password;
@@ -33,6 +33,7 @@ public class UserDTO {
 		this.gender = gender;
 		this.roleDTO = roleDTO;
 		this.avatar = avatar;
+		this.verify = verify;
 	}
 
 	public UserDTO(long userId, String email, String password, String fullname, String phone, String address, boolean gender, boolean verify, RoleDTO roleDTO, String avatar) {

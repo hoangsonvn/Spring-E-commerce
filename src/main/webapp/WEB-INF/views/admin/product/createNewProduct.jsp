@@ -50,6 +50,10 @@
     <div class="main">
         <div class="main-content">
             <div class="container-fluid">
+                <c:if test="${message != null}">
+                    <div class="alert alert-danger">
+                            ${message}
+                    </div></c:if>
                 <!-- OVERVIEW -->
                 <div class="panel panel-headline">
                     <div class="panel-heading"

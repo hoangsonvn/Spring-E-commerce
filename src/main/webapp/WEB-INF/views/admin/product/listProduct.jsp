@@ -43,12 +43,28 @@
 		<%@include file="../common/header.jsp"%>
 		<jsp:include page="../common/category.jsp" />
 		<!-- MAIN -->
-		<!-- MAIN CONTENT -->
+				<!-- MAIN CONTENT -->
 		<form action="<c:url value="/admin/product-delete"/>" method="post">
 			<div class="main">
 				<div class="main-content">
 					<div class="container-fluid">
 						<!-- OVERVIEW -->
+						<c:if test="${messagecreate != null}">
+							<div class="alert alert-success">
+									${messagecreate}
+							</div></c:if>
+						<c:if test="${messagedelete != null}">
+							<div class="alert alert-success">
+									${messagedelete}
+							</div></c:if>
+						<c:if test="${messageupdate != null}">
+							<div class="alert alert-success">
+									${messageupdate}
+							</div></c:if>
+						<c:if test="${tick != null }">
+							<div class="alert alert-warning">${tick}
+							</div>
+						</c:if>
 						<div class="panel panel-headline">
 							<div class="panel-body">
 								<form action="<c:url value="/admin/product-delete"/>" method="post">

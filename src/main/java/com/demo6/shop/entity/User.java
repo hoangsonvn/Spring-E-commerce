@@ -42,7 +42,6 @@ public class User {
     @Column(name = "avatar")
     private String avatar;
     @ManyToOne(fetch = FetchType.LAZY)
-
     @JoinColumn(name = "role_id")
     private Role role;
 

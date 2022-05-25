@@ -29,7 +29,7 @@ public class CanvasjsChartDataProduct {
         statsDTOList.forEach(s->{
             Map<Object,Object> map = new HashMap<>();
             map.put("name",s.getName());
-            map.put("y",(s.getTotalprice()/(this.totalOrderPriceByMonthAndYear(month,year)- SystemConstant.FEE))*100);
+            map.put("y",(s.getTotalprice()/(this.totalOrderPriceByMonthAndYear(month,year)))*100);
             dataPoints1.add(map);
         });
         list.add(dataPoints1);

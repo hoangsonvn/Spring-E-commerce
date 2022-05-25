@@ -33,7 +33,6 @@ public class StatsController {
                         @RequestParam(value = "year", required = false) Integer year,
                         @RequestParam(value = "pageIndex", required = false) Integer pageIndex,
                         HttpServletRequest request) {
-
         pageIndex = Optional.ofNullable(pageIndex).orElse(0);
         int count = productService.countStats(month, year);
         Integer totalPage = iCommon.totalPage(count, SystemConstant.PAGESIZE);
@@ -46,10 +45,6 @@ public class StatsController {
         } catch (NoSuchElementException e) {
             logger.error("" + e);
         }
-        /*Integer first, last;
-        first = integerList.get(0);
-        last = integerList.get(1);
-*/
         List<StatsDTO> statsDTOList = new ArrayList<>();
         try {
             statsDTOList = productService.listStats(month, year, pageIndex, SystemConstant.PAGESIZE);
@@ -58,6 +53,10 @@ public class StatsController {
             logger.error("" + e);
         }
         logger.info("vẽ ra biểu đồ");
+        String message = request.getParameter("message");
+        if (message != null) {
+            request.setAttribute(message, "message");
+        }
         request.setAttribute("month", month);
         request.setAttribute("year", year);
         request.setAttribute("first", first);

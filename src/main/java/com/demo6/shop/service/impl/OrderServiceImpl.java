@@ -33,6 +33,11 @@ public class OrderServiceImpl implements OrderService {
     private OrderConverter orderConverter;
 
     @Override
+    public void deleteByUserId(Long id) {
+        orderDao.deleteByUserId(id);
+    }
+
+    @Override
     public void updateHome(long orderId) {
         OrderDTO orderDTO = this.findById(orderId);
         orderDTO.setStatus("SUCCESS");

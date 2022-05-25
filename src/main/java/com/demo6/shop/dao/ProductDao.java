@@ -7,6 +7,8 @@ import com.demo6.shop.dto.StatsDTO;
 import java.util.List;
 
 public interface ProductDao {
+    List<Product> findAll();
+    String findOneByProductName(String productName);
     List<Product> search(String text,Integer index,Integer pageSize);
     Long countSearch(String text);
     List<Integer> listYears();

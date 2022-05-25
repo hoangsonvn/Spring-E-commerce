@@ -44,12 +44,17 @@
 		<jsp:include page="../common/category.jsp" />
 		<!-- MAIN -->
 		<!-- MAIN CONTENT -->
-		<form action="<c:url value="/admin/product-delete"/>" method="get">
+		<form action="<c:url value="/admin/product-delete"/>" method="post">
 			<div class="main">
 				<div class="main-content">
 					<div class="container-fluid">
+
 						<!-- OVERVIEW -->
 						<div class="panel panel-headline">
+							<c:if test="${tick != null }">
+								<div class="alert alert-warning">${tick}
+								</div>
+							</c:if>
 							<div class="panel-body">
 									<div class="row">
 										<div class="col-md-12">
@@ -98,7 +103,8 @@
 																<tr>
 																	<td style="vertical-align: middle;"><input
 																		class="checkbox" type="checkbox" name="productId"
-																		value="" id="${loop.count}" style="cursor: pointer;"/></td>
+																		value="${product.productId}" id="${loop.count}" style="cursor: pointer;"/></td>
+
 																	<td style="vertical-align: middle;">${product.productId}</td>
 																	<td style="vertical-align: middle;">${product.productName}</td>
 																	<td style="vertical-align: middle;"><span

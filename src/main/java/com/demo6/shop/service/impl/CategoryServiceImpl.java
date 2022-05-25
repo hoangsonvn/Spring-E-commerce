@@ -24,6 +24,11 @@ public class CategoryServiceImpl implements CategoryService{
 
 
 	@Override
+	public String findOneByCategoryName(String categoryName) {
+		return categoryDao.findOneByCategoryName(categoryName);
+	}
+
+	@Override
 	public Long count() {
 		return categoryDao.count();
 	}

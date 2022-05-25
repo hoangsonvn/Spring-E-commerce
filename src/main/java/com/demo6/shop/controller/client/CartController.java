@@ -7,6 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,14 +15,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Optional;
+import java.util.ResourceBundle;
 
 @Controller
 public class CartController {
     private static final Logger logger = LoggerFactory.getLogger(CartController.class);
-
     @Autowired
     private ICartService cartService;
-
     @PostMapping(value = "client/addcart")
     public String addCart1(HttpServletRequest request, HttpSession session,
                            @RequestParam(value = "productId") Long id,
@@ -58,16 +58,17 @@ public class CartController {
     }
 
     @GetMapping("client/listcart")
-    public String cart1(HttpServletRequest request,HttpSession session) {
+    public String cart1(HttpServletRequest request, HttpSession session) {
+        String message = request.getParameter("limit");
+        if(message != null){
+            request.setAttribute("limit", message);
+        }
         try {
             UserPrincipal userPrincipal = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
             session.setAttribute("user", userPrincipal);
-        } catch (Exception e) {
+        } catch (ClassCastException e) {
             logger.error("invalid details user");
         }
-        String mess = (String) session.getAttribute("limits");
-        request.setAttribute("limit",mess);
-        session.removeAttribute("limits");
         return "client/listcart";
     }
 }

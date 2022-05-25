@@ -47,7 +47,7 @@ public class ItemServiceImpl implements ItemService {
 			itemDTO.setProductDTO(productDTO);
 			itemDTO.setQuantity(item.getQuantity());
 			itemDTO.setUnitPrice(item.getUnitPrice());
-			
+			itemDTO.setProductName(item.getProductName());
 			itemDTOs.add(itemDTO);
 		}
 		return itemDTOs;

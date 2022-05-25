@@ -31,6 +31,7 @@ public class UserManagementAdminController {
         pageIndex = Optional.ofNullable(pageIndex).orElse(0);
         int count = userService.count();
         Integer totalPage = iCommon.totalPage(count, SystemConstant.PAGESIZE);
+        iCommon.notificate(request);
         request.setAttribute("totalPage", totalPage);
         request.setAttribute("pageIndex", pageIndex);
         request.setAttribute("users", userService.findAll(pageIndex, SystemConstant.PAGESIZE));
@@ -60,7 +61,7 @@ public class UserManagementAdminController {
             return "admin/user/createUser";
         }
         userService.userCreate(email, fullName, gender, phone, address, roleId, password, repassword, avatarFile);
-        return "redirect:/admin/user-list";
+        return "redirect:/admin/user-list?messagecreate=userCreate";
     }
 
     @GetMapping(value = "user-update")
@@ -83,15 +84,18 @@ public class UserManagementAdminController {
             return "admin/user/updateUser";
         }
         userService.userUpdate(email, userId, fullName, gender, phone, address, roleId, password, repassword, avatarFile, avatar);
-        return "redirect:/admin/user-list";
+        return "redirect:/admin/user-list?messageupdate=userUpdate";
     }
 
     @GetMapping(value = "/user-delete")
     public String userDelete(HttpServletRequest request) {
         String[] userIds = request.getParameterValues("userId");
+        if(userIds == null){
+            return "redirect:/admin/user-list?tick=tick";
+        }
         for (String userId : userIds) {
             userService.delete(Long.parseLong(userId));
         }
-        return "redirect:/admin/user-list";
+        return "redirect:/admin/user-list?messagedelete=userDelete";
     }
 }

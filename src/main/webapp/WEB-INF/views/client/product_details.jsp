@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
          pageEncoding="ISO-8859-1" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+<%@ page import="com.demo6.shop.utils.SecurityUtils" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -77,14 +80,14 @@
                             <div class="price">Price : <span class="new_price">
 										<sup> $${Math.round(product.price - (product.price * product.saleDTO.salePercent / 100))}.0 </sup>
 									</span> <span class="old_price"><sup>
-											$${product.price}0  </sup> </span>
+											$${product.price}  </sup> </span>
                             </div>
                             <hr class="border">
                             <form action="<c:url value="/client/addcart"/> " method="post">
 
                                 <div class="wided">
                                     <div class="qty">
-                                        Qantity &nbsp;&nbsp;: <select name="quantity">
+                                        Quantity &nbsp;&nbsp;: <select name="quantity">
                                         <option>1</option>
                                         <option>2</option>
                                         <option>3</option>
@@ -118,21 +121,27 @@
                                 <table class="table">
                                     <thead class="thead-light">
                                     </thead>
-
+                                    <br>
+                                    <br>
                                     <c:forEach items="${comments}" var="item">
-                                            <tbody>
-                                            <tr>
-                                                <th scope="row" >${item.createBy}</th>
-                                                <td style="width: 100px;">${item.shortComment}</td>
-                                                <td style="width: 10px">${item.createDate}</td>
+                                        <tbody>
+                                        <tr>
+                                            <th scope="row">${item.createBy}</th>
+                                            <td>${item.shortComment}</td>
+                                            <td >${item.createDate}</td>
+                                            <sec:authorize access="hasAnyRole('ADMIN')">
                                                 <td><a href="<c:url value="/admin/deletecomment?id=${item.id}"/> ">
-                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                         fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
                                                         <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
-                                                        <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
-                                                    </svg></a> </td>
-                                            </tr>
-                                            </tbody>
-                                        </c:forEach>
+                                                        <path fill-rule="evenodd"
+                                                              d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                                    </svg>
+                                                </a></td>
+                                            </sec:authorize>
+                                        </tr>
+                                        </tbody>
+                                    </c:forEach>
                                 </table>
                             </div>
                             <hr class="border">

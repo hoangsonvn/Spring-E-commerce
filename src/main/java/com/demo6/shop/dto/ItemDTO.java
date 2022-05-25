@@ -7,7 +7,16 @@ public class ItemDTO {
 	private float unitPrice;
 	private int quantity;
 	private OrderDTO orderDTO;
-	
+	private String productName;
+
+	public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+
 	public ItemDTO() {
 	}
 	public long getItemId() {

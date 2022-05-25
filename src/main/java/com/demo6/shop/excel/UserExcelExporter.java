@@ -75,7 +75,6 @@ public class UserExcelExporter {
         for (StatsDTO user : statsDTOList) {
             Row row = sheet.createRow(rowCount++);
             int columnCount = 0;
-
             createCell(row, columnCount++, user.getName(), style);
             createCell(row, columnCount++, Math.round((float) user.getQuantity()), style);
             createCell(row, columnCount++, Math.ceil(user.getTotalprice()), style);

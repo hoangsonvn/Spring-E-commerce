@@ -7,6 +7,7 @@ import com.demo6.shop.dto.RoleDTO;
 import com.demo6.shop.dto.UserDTO;
 import com.demo6.shop.dto.UserPrincipal;
 import com.demo6.shop.entity.User;
+import com.demo6.shop.service.OrderService;
 import com.demo6.shop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -33,6 +34,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private UserConvert userConvert;
     @Autowired
     private ICommon iCommon;
+    @Autowired
+    private OrderService orderService;
 
     @Override
     public void userUpdate(String email, long userId, String fullName, boolean gender, String phone, String address, long roleId, String password, String repassword, MultipartFile avatarFile, String avatar) {
@@ -43,7 +46,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         RoleDTO roleDTO = new RoleDTO();
         roleDTO.setRoleId(roleId);
         String avatarFilename = avatarFile != null && avatarFile.getSize() > 0 ? iCommon.image(avatarFile) : avatar;
-        UserDTO userUpdate = new UserDTO(email, userId, new BCryptPasswordEncoder().encode(repassword), fullName, phone, address, gender, roleDTO, avatarFilename);
+        UserDTO userUpdate = new UserDTO(email, userId, new BCryptPasswordEncoder().encode(repassword), fullName, phone, address, gender, roleDTO, avatarFilename,true);
         this.update(userUpdate);
     }
 
@@ -74,6 +77,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public void delete(long userId) {
+        orderService.deleteByUserId(userId);
         userDao.delete(userId);
     }
 

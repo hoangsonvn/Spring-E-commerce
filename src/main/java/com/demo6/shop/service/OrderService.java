@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 public interface OrderService {
+    void deleteByUserId(Long id);
     void updateHome(long orderId);
     Double totalPriceByCurrentMonth();
     Double totalPrice();

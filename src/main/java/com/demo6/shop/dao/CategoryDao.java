@@ -5,6 +5,7 @@ import com.demo6.shop.entity.Category;
 import java.util.List;
 
 public interface CategoryDao {
+    String findOneByCategoryName(String categoryName);
     Long count();
     Category findOne(Long id);
     List<Category> findAll();
