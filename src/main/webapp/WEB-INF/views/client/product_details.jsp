@@ -129,7 +129,7 @@
                                             <th scope="row">${item.createBy}</th>
                                             <td>${item.shortComment}</td>
                                             <td >${item.createDate}</td>
-                                            <sec:authorize access="hasAnyRole('ADMIN')">
+                                            <sec:authorize access="hasAnyRole('ADMIN','MANAGER','EDITOR','STAFF')">
                                                 <td><a href="<c:url value="/admin/deletecomment?id=${item.id}"/> ">
                                                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                          fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
@@ -164,12 +164,9 @@
                     </div>
                     <div class="clearfix"></div>
                 </div>
-
-
                 <div th:replace="client/common/new :: new"></div>
             </div>
 
-            <!-- 			<div th:replace="client/common/ourbands :: ourbands"></div> -->
 
         </div>
     </div>

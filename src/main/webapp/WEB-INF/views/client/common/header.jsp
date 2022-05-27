@@ -101,8 +101,9 @@
 						<ul class="option">
 							<li id="search" class="search">
 								<form action="<c:url value="/client/search"/>"  method="get">
-									<input class="search-submit" type="submit" value=""><input
-										class="search-input" placeholder="Enter your search term..."
+									<div style="float: right">									<input class="search-submit" type="submit" value="">
+									</div>
+									<input class="form-control" placeholder="Enter your search term..."
 										type="text" value="" name="text">
 								</form>
 							</li>
@@ -127,7 +128,7 @@
 						</div>
 						<div class="navbar-collapse">
 							<ul class="nav">
-								<li><a style="text-transform: none;" href="<c:url value="/client/home"/>">Home</a></li>
+								<li><a style="text-transform: none; size:20px;color: #FFFFFF;font-weight: bold" href="<c:url value="/client/home"/>">Home</a></li>
 								<c:forEach items="${categories}" var="category">
 									<li><a style="text-transform: none;"
 										href="<c:url value="/client/search?categoryId=${category.categoryId}"/>">${category.categoryName}</a>

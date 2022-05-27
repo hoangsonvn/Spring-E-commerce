@@ -6,6 +6,7 @@ import com.demo6.shop.entity.User;
 import com.demo6.shop.dto.UserPrincipal;
 import com.demo6.shop.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,7 +43,7 @@ public class CommentController {
         commentService.persist(comments);
         return "redirect:/client/product-details?productId=" + id;
     }
-
+    @PreAuthorize("hasAuthority('COMMENT_EDITOR')")
     @GetMapping("/admin/deletecomment")
     public String commentDelete(HttpServletRequest request, @RequestParam(value = "id") Long id) {
         commentService.delete(id);

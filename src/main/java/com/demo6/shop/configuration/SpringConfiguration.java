@@ -4,11 +4,14 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.MultipartConfigFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.env.Environment;
+import org.springframework.http.MediaType;
+import org.springframework.http.converter.ByteArrayHttpMessageConverter;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
@@ -21,10 +24,14 @@ import org.springframework.security.oauth2.client.web.AuthorizationRequestReposi
 import org.springframework.security.oauth2.client.web.HttpSessionOAuth2AuthorizationRequestRepository;
 import org.springframework.security.oauth2.core.endpoint.OAuth2AuthorizationRequest;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.util.unit.DataSize;
 import org.springframework.web.multipart.MultipartResolver;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
+import javax.servlet.MultipartConfigElement;
 import javax.sql.DataSource;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 @EnableScheduling
@@ -110,12 +117,29 @@ public class SpringConfiguration {
         return mailSenderImpl;
     }
 
-    @Bean(name = "multipartResolver")
-    public MultipartResolver commomMultipartResolver() {
-        CommonsMultipartResolver commonMultipartResolver = new CommonsMultipartResolver();
-        commonMultipartResolver.setMaxUploadSize(-1);
-        return commonMultipartResolver;
+    @Bean
+    public MultipartResolver multipartResolver() {
+        CommonsMultipartResolver multipartResolver
+                = new CommonsMultipartResolver();
+        multipartResolver.setMaxUploadSize(3542880);
+        return multipartResolver;
     }
 
+
+
+  /*  @Bean
+    public ByteArrayHttpMessageConverter byteArrayHttpMessageConverter() {
+        ByteArrayHttpMessageConverter arrayHttpMessageConverter = new ByteArrayHttpMessageConverter();
+        arrayHttpMessageConverter.setSupportedMediaTypes(getSupportedMediaTypes());
+        return arrayHttpMessageConverter;
+    }
+
+    private List<MediaType> getSupportedMediaTypes() {
+        List<MediaType> list = new ArrayList<MediaType>();
+        list.add(MediaType.IMAGE_JPEG);
+        list.add(MediaType.IMAGE_PNG);
+        list.add(MediaType.APPLICATION_OCTET_STREAM);
+        return list;
+    }*/
 
 }

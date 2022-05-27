@@ -6,6 +6,7 @@ import com.demo6.shop.dto.RoleDTO;
 import com.demo6.shop.dto.UserDTO;
 import com.demo6.shop.dto.UserPrincipal;
 import com.demo6.shop.service.UserService;
+import com.demo6.shop.utils.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -94,16 +95,17 @@ public class ProfileClientController {
         String oldpassword = request.getParameter("oldpassword");
         String newpassword = request.getParameter("newpassword");
         String repassword = request.getParameter("repassword");
+        UserPrincipal userPrincipal = SecurityUtils.getPrincipal();
+        UserDTO userDTO = userService.findByEmail(userPrincipal.getEmail());
 
-        UserPrincipal userPrincipal = (UserPrincipal) request.getSession().getAttribute("user");
+        // UserPrincipal userPrincipal = (UserPrincipal) request.getSession().getAttribute("user");
 //        String passwordEncoder = new BCryptPasswordEncoder().encode(oldpassword);
 
-        if (!new BCryptPasswordEncoder().matches(oldpassword, userPrincipal.getPassword())) {
-            request.setAttribute("messageSuccess", "invalid password");
+        if (!new BCryptPasswordEncoder().matches(oldpassword, userDTO.getPassword())) {
+            request.setAttribute("messageinvalid", "invalid password");
         } else if (!newpassword.equals(repassword)) {
-            request.setAttribute("messageSuccess", "password and repassword not match!");
+            request.setAttribute("messageinvalid", "password and repassword not match!");
         } else {
-            UserDTO userDTO = userService.findByEmail(userPrincipal.getEmail());
             userDTO.setPassword(new BCryptPasswordEncoder().encode(newpassword));
             userService.update(userDTO);
             request.setAttribute("messageSuccess", "Change Password successful: ");

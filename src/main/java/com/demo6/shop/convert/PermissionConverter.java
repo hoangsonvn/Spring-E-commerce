@@ -11,6 +11,7 @@ public class PermissionConverter {
         permissionDTO.setId(permission.getId());
         permissionDTO.setPermissionKey(permission.getPermissionKey());
         permissionDTO.setPermissionName(permission.getPermissionName());
+        permissionDTO.setDescription(permission.getDescription());
         return permissionDTO;
     }
     public Permission toEntity(PermissionDTO permissionDTO){
@@ -18,6 +19,7 @@ public class PermissionConverter {
         permission.setId(permissionDTO.getId());
         permission.setPermissionKey(permissionDTO.getPermissionKey());
         permission.setPermissionName(permissionDTO.getPermissionName());
+        permission.setDescription(permission.getDescription());
         return permission;
     }
 }

@@ -124,7 +124,7 @@
                                 <tr>
                                     <th>Image:</th>
                                     <td><input type="file" required="required"
-                                               name="imageFile"/></td>
+                                               name="imageFile" /></td>
                                 </tr>
                                 <tr>
                                     <th>Sale code:</th>

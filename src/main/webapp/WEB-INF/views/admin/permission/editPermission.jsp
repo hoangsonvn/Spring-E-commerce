@@ -62,25 +62,41 @@
                                 <div class="col-md-12">
                                     <div class="panel">
                                         <div class="panel-heading">
-                                            <h3 class="panel-title">ROLE PERMISSION</h3>
+                                            <h3 style="color: #3c3c3c;" class="panel-title">ROLE PERMISSION</h3>
                                         </div>
                                         <div class="panel-body no-padding">
                                             <table class="table table-striped" style="margin: auto;">
                                                 <thead>
-                                                <th><input type="checkbox" name="all" id="checkAll"
-                                                           style="cursor: pointer;" /> All</th>
+                                                <tr><th><input type="checkbox" name="all" id="checkAll"
+                                                               style="cursor: pointer;" /> All</th>
+                                                    <th style=" font-weight: bolder;color: #c0a16b;">NO</th>
+                                                    <th style=" font-weight: bolder;color: #c0a16b;">Key</th>
+                                                    <th style=" font-weight: bolder;color: #c0a16b;">Name</th>
+                                                    <th style=" font-weight: bolder;color: #c0a16b;">Short Description</th>
+
+                                                </tr>
 
                                                 </thead>
                                                 <tbody>
-                                                <c:forEach items="${permissions}" var="permission" varStatus="loop">
-                                                    <td style="vertical-align: middle;"><input
-                                                            class="checkbox" type="checkbox" name="ids"
-                                                            value="${permission.id}" id="${loop.count}"
-                                                            style="cursor: pointer;" />${permission.permissionName}</td>
-
-                                                </c:forEach>
+                                                        <c:forEach items="${permissions}" var="permission" varStatus="loop">
+                                                         <tr>
+                                                            <td style="vertical-align: middle;"><input
+                                                                    class="checkbox" type="checkbox"
+                                                                    <c:forEach items="${userPermission}" var="item">
+                                                                        <c:if test="${item.id == permission.id}">checked="checked"</c:if>
+                                                                    </c:forEach>
+                                                                    name="ids"
+                                                                    value="${permission.id}" id="${loop.count}"
+                                                                    style="cursor: pointer;" /></td>
+                                                             <td>${permission.id}</td>
+                                                             <td>${permission.permissionKey}</td>
+                                                             <td>${permission.permissionName}</td>
+                                                             <td>${permission.description}</td>
+                                                         </tr>
+                                                        </c:forEach>
                                                 </tbody>
-                                                <button type="submit" class="btn btn-info">Submit</button>
+                                                <button style=" margin-right:20px;color: #FFFFFF;font-weight: bold;background: #3e3e3e" type="submit" class="btn btn-info">Submit</button>
+
                                             </table>
 
                                         </div>

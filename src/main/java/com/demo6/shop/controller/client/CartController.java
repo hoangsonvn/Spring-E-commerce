@@ -22,7 +22,7 @@ public class CartController {
     private static final Logger logger = LoggerFactory.getLogger(CartController.class);
     @Autowired
     private ICartService cartService;
-    @PostMapping(value = "client/addcart")
+    @PostMapping(value = "/client/addcart")
     public String addCart1(HttpServletRequest request, HttpSession session,
                            @RequestParam(value = "productId") Long id,
                            @RequestParam(value = "quantity", required = false) Integer quantity) {
@@ -47,7 +47,7 @@ public class CartController {
         return "redirect:" + request.getHeader("Referer");
     }
 
-    @RequestMapping(value = "client/deletecart/{id}")
+    @RequestMapping(value = "/client/deletecart/{id}")
     public String deleteCart(HttpServletRequest request, HttpSession session, @PathVariable long id) {
         HashMap<Long, CartDTO> cart = Optional.ofNullable((HashMap<Long, CartDTO>) session.getAttribute("cart")).orElseGet(() -> new HashMap<>());
         cart = cartService.Delete(id, cart);
@@ -57,7 +57,7 @@ public class CartController {
         return "redirect:" + request.getHeader("Referer");
     }
 
-    @GetMapping("client/listcart")
+    @GetMapping("/client/listcart")
     public String cart1(HttpServletRequest request, HttpSession session) {
         String message = request.getParameter("limit");
         if(message != null){
@@ -69,6 +69,6 @@ public class CartController {
         } catch (ClassCastException e) {
             logger.error("invalid details user");
         }
-        return "client/listcart";
+        return "/client/listcart";
     }
 }

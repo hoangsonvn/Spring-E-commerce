@@ -1,0 +1,40 @@
+[33m5d028ec[m[33m ([m[1;36mHEAD -> [m[1;32mdev[m[33m)[m HEAD@{0}: commit: handle exception admin
+[33mebea0db[m[33m ([m[1;31morigin/dev[m[33m)[m HEAD@{1}: commit: before AWS file
+[33m5b38cbd[m HEAD@{2}: checkout: moving from dev to dev
+[33m5b38cbd[m HEAD@{3}: commit: before AWS file
+[33m4c5d07b[m HEAD@{4}: reset: moving to 4c5d07b
+[33m2e9ee35[m HEAD@{5}: checkout: moving from main to dev
+[33m7fd6492[m[33m ([m[1;31morigin/main[m[33m, [m[1;32mmain[m[33m)[m HEAD@{6}: reset: moving to 7fd6492
+[33m78878c2[m[33m ([m[1;31mheroku/main[m[33m, [m[1;32m4e58c9b[m[33m)[m HEAD@{7}: reset: moving to 4e58c9b
+[33m78878c2[m[33m ([m[1;31mheroku/main[m[33m, [m[1;32m4e58c9b[m[33m)[m HEAD@{8}: reset: moving to 4e58c9b
+[33m78878c2[m[33m ([m[1;31mheroku/main[m[33m, [m[1;32m4e58c9b[m[33m)[m HEAD@{9}: reset: moving to HEAD^1
+[33m7fd6492[m[33m ([m[1;31morigin/main[m[33m, [m[1;32mmain[m[33m)[m HEAD@{10}: checkout: moving from main to main
+[33m7fd6492[m[33m ([m[1;31morigin/main[m[33m, [m[1;32mmain[m[33m)[m HEAD@{11}: checkout: moving from dev to main
+[33m2e9ee35[m HEAD@{12}: rebase (skip) (finish): returning to refs/heads/dev
+[33m2e9ee35[m HEAD@{13}: rebase (skip) (pick): aws.xml
+[33m4e58c9b[m HEAD@{14}: rebase (skip) (pick): export current date
+[33mf567658[m HEAD@{15}: rebase (skip) (pick): updated entity,create CurrentDateExcel
+[33mea81e67[m HEAD@{16}: rebase (skip) (pick): updated comment function
+[33m7fd6492[m[33m ([m[1;31morigin/main[m[33m, [m[1;32mmain[m[33m)[m HEAD@{17}: rebase (start): checkout main
+[33mdcc0c9a[m HEAD@{18}: commit: aws.xml
+[33m4c5d07b[m HEAD@{19}: checkout: moving from main to dev
+[33m7fd6492[m[33m ([m[1;31morigin/main[m[33m, [m[1;32mmain[m[33m)[m HEAD@{20}: checkout: moving from dev to main
+[33m4c5d07b[m HEAD@{21}: commit: export current date
+[33m55cecd8[m HEAD@{22}: commit: updated entity,create CurrentDateExcel
+[33macc9d9a[m HEAD@{23}: commit: updated comment function
+[33m30e9395[m HEAD@{24}: checkout: moving from main to dev
+[33m7fd6492[m[33m ([m[1;31morigin/main[m[33m, [m[1;32mmain[m[33m)[m HEAD@{25}: reset: moving to 7fd6492
+[33m7fd6492[m[33m ([m[1;31morigin/main[m[33m, [m[1;32mmain[m[33m)[m HEAD@{26}: checkout: moving from dev to main
+[33m30e9395[m HEAD@{27}: checkout: moving from dev to dev
+[33m30e9395[m HEAD@{28}: checkout: moving from main to dev
+[33m7fd6492[m[33m ([m[1;31morigin/main[m[33m, [m[1;32mmain[m[33m)[m HEAD@{29}: commit: updated authorization
+[33m78878c2[m[33m ([m[1;31mheroku/main[m[33m, [m[1;32m4e58c9b[m[33m)[m HEAD@{30}: reset: moving to HEAD~1
+[33m189b32e[m HEAD@{31}: reset: moving to HEAD~1
+[33m30e9395[m HEAD@{32}: checkout: moving from dev to main
+[33m30e9395[m HEAD@{33}: checkout: moving from main to dev
+[33m30e9395[m HEAD@{34}: commit: fixed cart and builded authorization
+[33m189b32e[m HEAD@{35}: commit: fixed link FE and code
+[33m78878c2[m[33m ([m[1;31mheroku/main[m[33m, [m[1;32m4e58c9b[m[33m)[m HEAD@{36}: reset: moving to HEAD
+[33m78878c2[m[33m ([m[1;31mheroku/main[m[33m, [m[1;32m4e58c9b[m[33m)[m HEAD@{37}: reset: moving to HEAD
+[33m78878c2[m[33m ([m[1;31mheroku/main[m[33m, [m[1;32m4e58c9b[m[33m)[m HEAD@{38}: reset: moving to HEAD
+[33m78878c2[m[33m ([m[1;31mheroku/main[m[33m, [m[1;32m4e58c9b[m[33m)[m HEAD@{39}: commit (initial): first comment

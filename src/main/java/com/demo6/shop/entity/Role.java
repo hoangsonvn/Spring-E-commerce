@@ -28,6 +28,8 @@ public class Role {
     private List<User> users;
     @Column
     private Boolean status;
+@Column
+    private String description;
     @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     @JoinTable(name = "role_permission",joinColumns = @JoinColumn(name ="role_id" ),
             inverseJoinColumns =@JoinColumn(name = "permission_id"))

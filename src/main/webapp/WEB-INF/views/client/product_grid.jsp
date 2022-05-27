@@ -45,7 +45,7 @@
                     <div class="price-filter leftbar">
                         <h3 class="title">Price</h3>
                         <form class="pricing" action="search" method="get">
-                            <select name="pricing" onchange='this.form.submit()'>
+                            <select style="color:#ff1e2c;" name="pricing" onchange='this.form.submit()'>
                                 <option
                                         <c:if test="${pricing eq 'default'}">
                                             selected="selected"
@@ -53,22 +53,22 @@
                                         value="default">Find by price
                                 </option>
                                 <option
-                                        <c:if test="${pricing eq 'under50'}">
+                                        <c:if test="${pricing eq 'under15'}">
                                             selected="selected"
                                         </c:if>
-                                        value="under50">under 50 dollars
+                                        value="under15">under 15 dollars
                                 </option>
                                 <option
-                                        <c:if test="${pricing eq '50to70'}">
+                                        <c:if test="${pricing eq '15to50'}">
                                             selected="selected"
                                         </c:if>
-                                        value="50to70">50 dollars to 70 dollars
+                                        value="15to50">15 dollars to 50 dollars
                                 </option>
                                 <option
-                                        <c:if test="${pricing eq 'greaterthan70'}">
+                                        <c:if test="${pricing eq 'greaterthan50'}">
                                             selected="selected"
                                         </c:if>
-                                        value="greaterthan70">greater than 70 dollars
+                                        value="greaterthan50">greater than 50 dollars
                                 </option>
                                 <input type="hidden" name="categoryId" value="${categoryId}"/>
                                 <input type="hidden" name="text" value="${text}"/>
@@ -89,7 +89,7 @@
                                 src="../resource/client/images/fblike.png" alt="">
 							</a>
 							</span>
-                        <p>12k people like Flat Shop.</p>
+                        <p>99999k like Pi Halo ~</p>
                         <ul>
                             <li><a href="#"> </a></li>
                             <li><a href="#"> </a></li>

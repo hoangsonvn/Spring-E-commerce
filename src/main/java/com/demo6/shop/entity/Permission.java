@@ -16,8 +16,12 @@ public class Permission {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column
     private String permissionName;
+    @Column
     private String permissionKey;
+    @Column
+    private String description;
     @ManyToMany(mappedBy = "permissions")
     private List<Role> roles = new ArrayList<>();
 }

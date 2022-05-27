@@ -37,14 +37,14 @@ public class ForgotController {
             mail.setFrom("myanhm55@gmail.com");
             mail.setTo(email);
             mail.setSubject("reset password");
-            mail.setText("Hello, " + email.split("@")[0] + " code cua ban la: " + code);
+            mail.setText("Hello, " + email.split("@")[0] + " your code is : " + code);
             mailSender.send(mail);
             String mess = "  please check email:  ";
             session.setAttribute("mess", mess);
             session.setAttribute("code", code);
             return "redirect:/code";
         } else {
-            request.setAttribute("wrong", "khong ton tai gmail");
+            request.setAttribute("wrong", "Email is not exist");
             return "authen/forgotpassword";
         }
     }
@@ -82,7 +82,9 @@ public class ForgotController {
 
 
     @GetMapping("newpassword")
-    public String newPasswordGet() {
+    public String newPasswordGet(HttpServletRequest request) {
+       String error= request.getParameter("error");
+       request.setAttribute("error",error);
         return "authen/newpassword";
     }
 
@@ -97,10 +99,8 @@ public class ForgotController {
             userDTO.setPassword(new BCryptPasswordEncoder().encode(password));
             userService.update(userDTO);
             return "redirect:/login";
-        } else {
-            request.setAttribute("error", "password not match");
-            return "authen/newpassword";
         }
+            return "redirect:/newpassword?error=password not match";
     }
     public void sendEmail(String from, String to, String subject, String content) {
         SimpleMailMessage mailMessage = new SimpleMailMessage();

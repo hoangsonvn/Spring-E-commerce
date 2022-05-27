@@ -137,7 +137,7 @@
 									<tr>
 										<th>Image:</th>
 										<td><img src="<c:url value="/download?image=${product.image}"/>"
-											style="width: 20%; margin-top: -20px;">
+											style="width: 20%; margin-top: -20px;" >
 											<input type="hidden" name="image" value="${product.image}" />
 											<input type="file" name="imageFile" />
 									</tr>

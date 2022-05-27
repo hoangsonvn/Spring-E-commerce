@@ -16,6 +16,8 @@ public class RoleConverter {
         Role role = new Role();
         role.setRoleId(roleDTO.getRoleId());
         role.setRoleName(roleDTO.getRoleName());
+        role.setTitle(role.getTitle());
+        role.setDescription(roleDTO.getDescription());
         try {
             role.setPermissions(roleDTO.getPermissionDTOS().stream().map(s -> permissionConverter.toEntity(s)).collect(Collectors.toList()));
         } catch (Exception e) {
@@ -23,12 +25,12 @@ public class RoleConverter {
         return role;
     }
 
-
-
     public RoleDTO toDto(Role role) {
         RoleDTO roleDTO = new RoleDTO();
         roleDTO.setRoleId(role.getRoleId());
         roleDTO.setRoleName(role.getRoleName());
+        roleDTO.setTitle(role.getTitle());
+        roleDTO.setDescription(role.getDescription());
         return roleDTO;
     }
 }

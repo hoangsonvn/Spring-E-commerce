@@ -7,7 +7,7 @@ import com.demo6.shop.dto.UserDTO;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserConvert {
+public class UserConverter {
     public UserDTO toDTO(User user) {
         RoleDTO roleDTO = new RoleDTO();
         roleDTO.setRoleId(user.getRole().getRoleId());

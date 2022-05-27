@@ -8,16 +8,15 @@ import com.demo6.shop.service.ProductService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
-
 @Controller
 public class StatsController {
     private static final Logger logger = LoggerFactory.getLogger(StatsController.class);
@@ -28,6 +27,7 @@ public class StatsController {
     @Autowired
     private CanvasjsChartProductService canvasjsChartProductService;
 
+    @PreAuthorize("hasAuthority('STATS_READ')")
     @GetMapping("admin/statistical")
     public String stats(@RequestParam(value = "month", required = false) Integer month,
                         @RequestParam(value = "year", required = false) Integer year,
@@ -45,18 +45,10 @@ public class StatsController {
         } catch (NoSuchElementException e) {
             logger.error("" + e);
         }
-        List<StatsDTO> statsDTOList = new ArrayList<>();
-        try {
-            statsDTOList = productService.listStats(month, year, pageIndex, SystemConstant.PAGESIZE);
-            request.setAttribute("dataPointsList", canvasjsChartProductService.getCanvasjsChartData(month, year));
-        } catch (NoSuchElementException e) {
-            logger.error("" + e);
-        }
+        List<StatsDTO> statsDTOList = productService.listStats(month, year, pageIndex, SystemConstant.PAGESIZE);
+        request.setAttribute("dataPointsList", canvasjsChartProductService.getCanvasjsChartData(month, year));
+
         logger.info("vẽ ra biểu đồ");
-        String message = request.getParameter("message");
-        if (message != null) {
-            request.setAttribute(message, "message");
-        }
         request.setAttribute("month", month);
         request.setAttribute("year", year);
         request.setAttribute("first", first);

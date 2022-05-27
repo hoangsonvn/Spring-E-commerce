@@ -25,7 +25,7 @@ public class ScheduleDaoImpl implements ScheduleDao {
     @Transactional
     @Override
     public List<ScheduleDTO> findAll() {
-        String sql = "select item.productName, product.quantity 'so luong con lai',product.expired_date , sum(item.quantity)'tong sp ban dc' ,sum(unit_price) as 'tong_gia', sum(unit_price)/sum(item.quantity)\n" +
+        String sql = "select item.productName, product.quantity 'so luong con lai',product.expired_date , sum(item.quantity)'tong sp ban dc' ,sum(unit_price) as 'tong_gia ban ra', sum(unit_price)/sum(item.quantity)\n" +
                 "as 'gia tb' from item  left join product on product.product_id=item.product_id \n" +
                 "inner join order_user on item.order_id=order_user.order_id where day(buy_date) = day(curdate())  group by product.product_id\n" +
                 "UNION \n" +
@@ -40,8 +40,8 @@ public class ScheduleDaoImpl implements ScheduleDao {
             scheduleDTO.setRemainingAmount((Integer) object[1]);
             scheduleDTO.setExpirationDate((Date) object[2]);
             scheduleDTO.setQuantity((BigDecimal) object[3]);
-            scheduleDTO.setPrice((Double) object[4]);
-            scheduleDTO.setTotaPrice((Double) object[5]);
+            scheduleDTO.setTotaPrice((Double) object[4]);
+            scheduleDTO.setPrice((Double) object[5]);
             if (scheduleDTO.getExpirationDate()==null){
                 scheduleDTO.setStatus(false);
             }else{

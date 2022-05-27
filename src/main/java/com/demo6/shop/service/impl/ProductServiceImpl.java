@@ -85,7 +85,8 @@ public class ProductServiceImpl implements ProductService {
         SaleDTO saleDTO = new SaleDTO();
         saleDTO.setSaleId(saleId);
         if (imageFile != null && imageFile.getSize() > 0) {
-            image = iCommon.image(imageFile);
+          //  image = iCommon.image(imageFile);
+            image = iCommon.imageUpload(imageFile);
         }
         ProductDTO productDTO = new ProductDTO(productName, price, quantity, description, image, categoryDTO, saleDTO, expirationDate);
         productDao.insert(productConverter.toEntity(productDTO));
@@ -127,8 +128,7 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductDTO findById(long productId) {
         Product product = productDao.findById(productId);
-        SaleDTO saleDTO = new SaleDTO();
-        //  product.getCategory().getCategoryName();
+       /* SaleDTO saleDTO = new SaleDTO();
         saleDTO.setSaleId(product.getSale().getSaleId());
         saleDTO.setSalePercent(product.getSale().getSalePercent());
 
@@ -147,8 +147,8 @@ public class ProductServiceImpl implements ProductService {
         productDTO.setQuantity(product.getQuantity());
         productDTO.setSaleDTO(saleDTO);
         productDTO.setCategoryDTO(categoryDTO);
-
-        return productDTO;
+*/
+        return productConverter.toDto(product);
     }
 
     @Override
@@ -156,7 +156,7 @@ public class ProductServiceImpl implements ProductService {
         List<Product> products = productDao.findAll(pageIndex, pageSize);
         List<ProductDTO> productDTOs = new ArrayList<>();
         for (Product product : products) {
-            SaleDTO saleDTO = new SaleDTO();
+          /*  SaleDTO saleDTO = new SaleDTO();
 
             saleDTO.setSaleId(product.getSale().getSaleId());
             saleDTO.setSalePercent(product.getSale().getSalePercent());
@@ -175,9 +175,9 @@ public class ProductServiceImpl implements ProductService {
             productDTO.setPrice(product.getPrice());
             productDTO.setQuantity(product.getQuantity());
             productDTO.setSaleDTO(saleDTO);
-            productDTO.setCategoryDTO(categoryDTO);
+            productDTO.setCategoryDTO(categoryDTO);*/
 
-            productDTOs.add(productDTO);
+            productDTOs.add(productConverter.toDto(product));
 
         }
         return productDTOs;
@@ -188,7 +188,7 @@ public class ProductServiceImpl implements ProductService {
         List<Product> products = productDao.findAllByCategoryId(categoryId, pageIndex, pageSize);
         List<ProductDTO> productDTOs = new ArrayList<>();
         for (Product product : products) {
-            SaleDTO saleDTO = new SaleDTO();
+    /*        SaleDTO saleDTO = new SaleDTO();
 
             saleDTO.setSaleId(product.getSale().getSaleId());
             saleDTO.setSalePercent(product.getSale().getSalePercent());
@@ -208,8 +208,8 @@ public class ProductServiceImpl implements ProductService {
             productDTO.setQuantity(product.getQuantity());
             productDTO.setSaleDTO(saleDTO);
             productDTO.setCategoryDTO(categoryDTO);
-
-            productDTOs.add(productDTO);
+*/
+            productDTOs.add(productConverter.toDto(product));
 
         }
         return productDTOs;
@@ -232,7 +232,7 @@ public class ProductServiceImpl implements ProductService {
         List<Product> products = productDao.search(categoryId, pricing, priceFrom, priceTo, sort, text, pageIndex, pageSize);
         List<ProductDTO> productDTOs = new ArrayList<>();
         for (Product product : products) {
-            SaleDTO saleDTO = new SaleDTO();
+    /*        SaleDTO saleDTO = new SaleDTO();
 
             saleDTO.setSaleId(product.getSale().getSaleId());
             saleDTO.setSalePercent(product.getSale().getSalePercent());
@@ -252,8 +252,8 @@ public class ProductServiceImpl implements ProductService {
             productDTO.setQuantity(product.getQuantity());
             productDTO.setSaleDTO(saleDTO);
             productDTO.setCategoryDTO(categoryDTO);
-
-            productDTOs.add(productDTO);
+*/
+            productDTOs.add(productConverter.toDto(product));
 
         }
         return productDTOs;

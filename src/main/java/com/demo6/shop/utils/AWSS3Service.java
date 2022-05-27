@@ -1,4 +1,4 @@
-package com.example.demo.service;
+package com.demo6.shop.utils;
 
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
@@ -11,7 +11,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.io.IOException;
-import java.util.UUID;
 
 @Service
 public class AWSS3Service implements FileService{

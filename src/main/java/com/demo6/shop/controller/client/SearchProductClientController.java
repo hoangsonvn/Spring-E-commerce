@@ -37,15 +37,15 @@ public class SearchProductClientController {
 
         if (pricing != null) {
             switch (pricing) {
-                case "under50":
+                case "under15":
+                    priceTo = 15;
+                    break;
+                case "15to50":
+                    priceFrom = 15;
                     priceTo = 50;
                     break;
-                case "50to70":
+                case "greaterthan50":
                     priceFrom = 50;
-                    priceTo = 70;
-                    break;
-                case "greaterthan70":
-                    priceFrom = 70;
                     priceTo = 1000;
                     break;
             }

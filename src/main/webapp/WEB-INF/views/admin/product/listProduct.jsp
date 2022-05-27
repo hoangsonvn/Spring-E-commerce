@@ -75,8 +75,7 @@
 													<h3 class="panel-title">PRODUCT LIST</h3>
 													<p class="demo-button">
 														<a class="btn btn-default" href="product-list"
-															style="padding: 4px 8px; text-decoration: none; border: none; box-shadow: 2px 2px gray; font-weight: bold;">All
-															Product</a> 
+															style="padding: 4px 8px; text-decoration: none; border: none; box-shadow: 2px 2px gray; font-weight: bold;">All Product</a>
 
 
 														<c:forEach items="${categories}" var="item">
@@ -125,10 +124,12 @@
 																		</c:if>
 																	</td>
 																	<td style="vertical-align: middle;">${product.quantity}</td>
-																	<td
-																		style="vertical-align: middle; color: #D9534F; font-weight: bold;">-${product.saleDTO.salePercent}%</td>
+																	<td style="vertical-align: middle; color: #D9534F; font-weight: bold;">-${product.saleDTO.salePercent}%</td>
 																	<td style="vertical-align: middle;"><img
 																		style="width: 70%;" src=" <c:url value="/download?image=${product.image}"/>"></td>
+
+																	<td style="vertical-align: middle;"><img
+																			style="width: 70%;" src="https://bucketslhs.s3.amazonaws.com/${product.image}"></td>
 																	<td style="vertical-align: middle;"><a href="<c:url value="/admin/product-update?productId=${product.productId}"/>">
 																			<span class="label label-warning"
 																			style="font-size: 15px;">Update</span>

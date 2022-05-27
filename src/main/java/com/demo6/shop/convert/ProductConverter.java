@@ -14,6 +14,7 @@ import java.sql.Date;
 public class ProductConverter {
     public ProductDTO toDto(Product productEntity) {
         ProductDTO productDTO = new ProductDTO();
+
         productDTO.setProductId(productEntity.getProductId());
         productDTO.setProductName(productEntity.getProductName());
         productDTO.setPrice(productEntity.getPrice());

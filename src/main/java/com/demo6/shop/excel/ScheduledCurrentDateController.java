@@ -35,12 +35,7 @@ public class ScheduledCurrentDateController {
         String headerValue = "attachment; filename=Stats" + currentDateTime + " .xlsx";
         response.setHeader(headerKey, headerValue);
         List<ScheduleDTO> scheduleDTOS;
-        try {
-            scheduleDTOS = scheduleService.findAll();
-        } catch (EntityNotFoundException e) {
-            logger.error("No Products");
-            return "redirect:/admin/home?message=No product found";
-        }
+        scheduleDTOS = scheduleService.findAll();
         CurrentDateExcelExpoter excelExporter = new CurrentDateExcelExpoter(scheduleDTOS);
         excelExporter.export(response);
         return "redirect:" + request.getHeader("Referer");

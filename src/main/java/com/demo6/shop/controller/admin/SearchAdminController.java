@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 
@@ -16,6 +17,7 @@ public class SearchAdminController {
     private ProductService productService;
     @Autowired
     private ICommon iCommon;
+
     @PostMapping("/admin/search")
     public String search(HttpServletRequest request,
                          @RequestParam(name = "text", required = false) String text,
@@ -27,8 +29,7 @@ public class SearchAdminController {
         request.setAttribute("pageIndex", pageIndex);
         request.setAttribute("text", text);
         request.setAttribute("totalPage", totalPage);
-        request.setAttribute("products", productService.search( text, pageIndex, SystemConstant.PAGESIZE));
+        request.setAttribute("products", productService.search(text, pageIndex, SystemConstant.PAGESIZE));
         return "/admin/product/listProduct";
     }
-
 }

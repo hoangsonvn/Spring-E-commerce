@@ -1,4 +1,4 @@
-package com.example.demo.service;
+package com.demo6.shop.utils;
 
 import org.springframework.web.multipart.MultipartFile;
 

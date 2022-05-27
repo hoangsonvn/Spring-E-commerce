@@ -4,16 +4,19 @@ import com.demo6.shop.common.ICommon;
 import com.demo6.shop.constant.SystemConstant;
 import com.demo6.shop.service.ItemService;
 import com.demo6.shop.service.OrderService;
-import org.hibernate.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.acls.model.NotFoundException;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.persistence.EntityNotFoundException;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Optional;
 import java.util.ResourceBundle;
+//@PreAuthorize("hasAnyAuthority('ORDER_READ','ORDER_DELETE')")
 
 @Controller
 @RequestMapping(value = "/admin")
@@ -27,6 +30,7 @@ public class OrderManagementAdminController {
     private ItemService itemService;
     ResourceBundle resourceBundle = ResourceBundle.getBundle("messages");
 
+    @PreAuthorize("hasAuthority('ORDER_READ')")
     @GetMapping(value = "/order-list")
     public String findAll(HttpServletRequest request, @RequestParam(value = "pageIndex", required = false) Integer pageIndex) {
         String message = request.getParameter("message");
@@ -48,13 +52,14 @@ public class OrderManagementAdminController {
         request.setAttribute("orders", orderService.findAll(pageIndex, SystemConstant.PAGESIZE));
         return "admin/order/order_list";
     }
-
+    @PreAuthorize("hasAuthority('ORDER_READ')")
     @GetMapping(value = "order-updateHome")
     public String orderUpdateHome(@RequestParam(value = "orderId") long orderId) {
         orderService.updateHome(orderId);
         return "redirect:/admin/home";
     }
 
+    @PreAuthorize("hasAuthority('ORDER_READ')")
     @GetMapping(value = "order-update")
     public String orderUpdate(HttpServletRequest request, @RequestParam(value = "orderId") long orderId) {
         orderService.updateHome(orderId);
@@ -62,6 +67,7 @@ public class OrderManagementAdminController {
     }
 
 
+    @PreAuthorize("hasAuthority('ORDER_READ')")
     @GetMapping(value = "order-details")
     public String orderDetails(HttpServletRequest request, @RequestParam(value = "orderId") long orderId) {
         try {
@@ -73,8 +79,8 @@ public class OrderManagementAdminController {
         return "admin/order/order_details";
     }
 
-    /*@ExceptionHandler(ObjectNotFoundException.class)
-    @ResponseBody*/
+    //@ExceptionHandler(ObjectNotFoundException.class)
+    @PreAuthorize("hasAuthority('ORDER_DELETE')")
     @PostMapping("/order-delete")
     public String orderDelete(HttpServletRequest request) {
         String[] orderIds = request.getParameterValues("orderId");

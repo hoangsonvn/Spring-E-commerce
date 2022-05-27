@@ -11,8 +11,9 @@ import java.util.Map;
 
 @Repository
 public class CanvasjsChartDaoImpl implements CanvasjsChartDao {
-@Autowired
-private CanvasjsChartData canvasjsChartData;
+    @Autowired
+    private CanvasjsChartData canvasjsChartData;
+
     @Override
     public List<List<Map<Object, Object>>> getCanvasjsChartData() {
         return canvasjsChartData.total();

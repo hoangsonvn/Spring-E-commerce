@@ -1,8 +1,15 @@
 package com.demo6.shop.common;
 
+import com.amazonaws.services.s3.AmazonS3Client;
+import com.amazonaws.services.s3.model.CannedAccessControlList;
+import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.demo6.shop.constant.SystemConstant;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.server.ResponseStatusException;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
@@ -13,6 +20,8 @@ import java.util.ResourceBundle;
 
 @Component
 public class Common implements ICommon {
+    @Autowired
+    private AmazonS3Client awsS3Client;
     ResourceBundle resourceBundle = ResourceBundle.getBundle("messages");
 
     public String image(MultipartFile imageFile) {
@@ -55,5 +64,22 @@ public class Common implements ICommon {
         if (tick != null) {
             request.setAttribute("tick", resourceBundle.getString(tick));
         }
+    }
+
+    @Override
+    public String imageUpload(MultipartFile imageFile) {
+        String filenameExtension = StringUtils.getFilenameExtension(imageFile.getOriginalFilename());
+        String key = System.currentTimeMillis() + "." + filenameExtension;
+        ObjectMetadata metaData = new ObjectMetadata();
+        metaData.setContentLength(imageFile.getSize());
+        metaData.setContentType(imageFile.getContentType());
+
+        try {
+            awsS3Client.putObject("bucketslhs", key, imageFile.getInputStream(), metaData);
+        } catch (IOException e) {
+            throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "An exception occured while uploading the file");
+        }
+        awsS3Client.setObjectAcl("bucketslhs", key, CannedAccessControlList.PublicRead);
+        return key;
     }
 }

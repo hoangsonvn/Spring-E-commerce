@@ -54,4 +54,12 @@ public class PermissionServiceImpl implements PermissionService {
         return permissionConverter.toDto(permissionDao.findOneById(id));
 
     }
+
+    @Override
+    public List<PermissionDTO> findByRoleId(Long roleId) {
+        List<PermissionDTO> permissionDTOS = new ArrayList<>();
+        List<Permission> permissions = permissionDao.findByRoleId(roleId);
+        permissions.forEach(s -> permissionDTOS.add(permissionConverter.toDto(s)));
+        return permissionDTOS;
+    }
 }

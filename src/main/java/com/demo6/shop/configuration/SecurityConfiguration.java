@@ -82,15 +82,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 				.anyRequest().permitAll().and().exceptionHandling().accessDeniedPage("/logout");*/
         http.csrf().disable().cors().disable()
                 .authorizeRequests()
-                //   .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/client/profile/**").hasAnyRole("USER", "ADMIN")
-                .antMatchers("/client/my-order/**", "/client/pay/**", "/client/order-details/**").hasAnyRole("USER", "ADMIN")
+                 .antMatchers("/admin/**").hasAnyRole("MANAGER","ADMIN","STAFF","EDITOR")
+                .antMatchers("/client/profile/**","/client/my-order/**","/client/pay/**" ,
+                        "/client/order-details/**","/client/checkout/**").hasAnyRole("USER", "MANAGER","ADMIN","STAFF","EDITOR")
                 .anyRequest().permitAll().and().exceptionHandling().accessDeniedPage("/403");
         http.rememberMe().key("uniqueAndSecret").tokenValiditySeconds(1500);
 
         http.formLogin().loginPage("/login").loginProcessingUrl("/j_spring_security_check").usernameParameter("account")
                 .passwordParameter("password").defaultSuccessUrl("/home")
-                .failureUrl("/login?err=Invalid. Please try again?");
+                .failureUrl("/login?err=Invalid. Please try again");
         http.logout().logoutUrl("/logout").logoutSuccessUrl("/client/home")
                 .deleteCookies("JSESSIONID", "remember-me")
                 .deleteCookies("JSESSIONID");

@@ -33,13 +33,13 @@ public class CurrentDateExcelExpoter {
         font.setFontHeight(15);
         style.setFont(font);
 
-        createCell(row, 0, "Name", style);
-        createCell(row, 1, "Quantity", style);
-        createCell(row, 2, "RemainingAmount", style);
-        createCell(row, 3, "Price", style);
+        createCell(row, 0, "Tên sản phẩm", style);
+        createCell(row, 1, "Số lượng bán ra", style);
+        createCell(row, 2, "Số lượng còn lại", style);
+        createCell(row, 3, "Giá sản phẩm", style);
         createCell(row, 4, "ExpirationDate", style);
-        createCell(row, 5, "TotaPriceInDay", style);
-        createCell(row,6,"Exist",style);
+        createCell(row, 5, "Tổng giá trong ngày", style);
+        createCell(row, 6, "Exist", style);
 
 
     }
@@ -61,7 +61,7 @@ public class CurrentDateExcelExpoter {
             cell.setCellValue((Date) value);
             formatDateCell(workbook, cell);
         } else if (value instanceof BigDecimal) {
-            cell.setCellValue( ((BigDecimal) value).intValue());
+            cell.setCellValue(((BigDecimal) value).intValue());
         } else if (value instanceof String) {
             cell.setCellValue((String) value);
         }
@@ -79,15 +79,22 @@ public class CurrentDateExcelExpoter {
             int columnCount = 0;
             Integer remainingAmount = scheduleDTO.getRemainingAmount() == null ? 0 : scheduleDTO.getRemainingAmount();
             createCell(row, columnCount++, scheduleDTO.getName(), style);
+            if (scheduleDTO.getQuantity() == null) {
+                scheduleDTO.setQuantity(BigDecimal.valueOf(0));
+            }
             createCell(row, columnCount++, scheduleDTO.getQuantity(), style);
             createCell(row, columnCount++, remainingAmount, style);
-            createCell(row, columnCount++, scheduleDTO.getPrice(), style);
+            createCell(row, columnCount++, Math.ceil(scheduleDTO.getPrice()), style);
             createCell(row, columnCount++, scheduleDTO.getExpirationDate(), style);
-            createCell(row, columnCount++, Math.ceil(scheduleDTO.getTotaPrice()), style);
+            if(scheduleDTO.getTotaPrice() == null){
+                scheduleDTO.setTotaPrice((double) 0);
+            }
+            createCell(row, columnCount++, scheduleDTO.getTotaPrice(), style);
             createCell(row, columnCount++, scheduleDTO.getStatus(), style);
         }
 
     }
+
     private void formatDateCell(XSSFWorkbook workbook, Cell cell) {
         CellStyle cellStyle = workbook.createCellStyle();
         CreationHelper creationHelper = workbook.getCreationHelper();

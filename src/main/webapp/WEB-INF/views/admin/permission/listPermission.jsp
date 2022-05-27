@@ -4,7 +4,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Dashboard</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport"
@@ -66,6 +65,8 @@
 														<tr>
 															<th style=" font-weight: bolder;color: #c0a16b;">NO</th>
 															<th style=" font-weight: bolder;color: #c0a16b;">Name</th>
+															<th style=" font-weight: bolder;color: #c0a16b;">Title</th>
+															<th style=" font-weight: bolder;color: #c0a16b;">description</th>
 															<th style=" font-weight: bolder;color: #c0a16b;">Edit</th>
 														</tr>
 													</thead>
@@ -75,6 +76,9 @@
 																<td style="vertical-align: middle;">
 																	No.${role.roleId}</td>
 																<td>${role.roleName}</td>
+																<td>${role.title}</td>
+																<td>${role.description}</td>
+
 																<td><a style="color: #5c2c5d;size: 15px;font-weight: bold;" class="btn btn-secondary btn-sm" href="<c:url value="/admin/editpermission?roleId=${role.roleId}"/>" >Edit</a></td>
 															</tr>
 														</c:forEach>

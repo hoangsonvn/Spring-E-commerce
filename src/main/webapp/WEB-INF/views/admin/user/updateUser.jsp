@@ -135,8 +135,8 @@
 										<th>Avatar:</th>
 										<td style="display: flex;"><c:if test="${user.avatar != null}">
 												<img src="../download?image=${user.avatar}" alt="Avatar"
-													class="avatar img-circle" style="width: 15%;">
-											</c:if> <input type="file" name="avatarFile" style="margin-left: 5px; margin-top: 30px;"/>
+													class="avatar img-circle" style="width: 15%;" >
+											</c:if> <input type="file" name="avatarFile" style="margin-left: 5px; margin-top: 30px;"   />
 											<input type="hidden" name="avatar" value="${user.avatar}"/>	
 										</td>
 									</tr>

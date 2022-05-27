@@ -28,7 +28,7 @@ public class LoginController {
             return "redirect:/client/home";
         }
         return "authen/login";
-        // xu lis da dang nhap nhung truy cap login
+        // xu li da dang nhap nhung truy cap login
     }
 
     @GetMapping(value = "/403")
@@ -41,14 +41,13 @@ public class LoginController {
         UserPrincipal userPrincipal = (UserPrincipal) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         session.setAttribute("user", userPrincipal);
         String username = userPrincipal.getFullname();
-
         session.setAttribute("username", username);
-        if (request.isUserInRole("ADMIN")) { // neu role la admin thi chuyen den trang admin
-            return "redirect:/admin/home";
+        if (request.isUserInRole("USER")) { // neu role la admin thi chuyen den trang admin
+            return "redirect:/client/home";
         } else if (session.getAttribute("TotalQuantyCart") != null) {
             return "redirect:/client/listcart";
         } else {
-            return "redirect:/client/home"; // khong phai admin chuyen den trang client
+            return "redirect:/admin/home"; // khong phai admin chuyen den trang client
         }
     }
 

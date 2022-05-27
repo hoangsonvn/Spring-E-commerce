@@ -1,8 +1,11 @@
 package com.demo6.shop.controller.authen;
 
+import com.demo6.shop.dao.impl.ScheduleDaoImpl;
 import com.demo6.shop.dto.RoleDTO;
 import com.demo6.shop.dto.UserDTO;
 import com.demo6.shop.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
@@ -21,7 +24,7 @@ public class RegisterController {
 
 	@Autowired
 	private UserService userService;
-
+	private static Logger logger = LoggerFactory.getLogger(RegisterController.class);
 	@Autowired
 	private MailSender mailSender;
 
@@ -39,13 +42,13 @@ public class RegisterController {
 			if (userDTO.isVerify()) {
 				request.setAttribute("error", "The email address is already exist!");
 				return "authen/register";
-			} else {
+			} else { logger.info("có tk nhưng chưa xác thực");
 				if (!password.equals(repassword)) {
 					request.setAttribute("error", "The password do not match!");
 					request.setAttribute("email", email);
-					userDTO.setPassword(repassword);
-					userDTO.setAvatar("1608484153089.png");
-					userService.update(userDTO);
+				/*	userDTO.setPassword(repassword);
+					userDTO.setAvatar("1653498098352.png");
+					userService.update(userDTO);*/
 					return "authen/register";
 				} else {
 					userDTO.setPassword(new BCryptPasswordEncoder().encode(password));
@@ -63,9 +66,9 @@ public class RegisterController {
 				UserDTO userDTO = new UserDTO();
 				userDTO.setEmail(email);
 				userDTO.setPassword(new BCryptPasswordEncoder().encode(password));
-				userDTO.setAvatar("1608484153089.png");
+				userDTO.setAvatar("1653498098352.png");
 				RoleDTO roleDTO = new RoleDTO();
-				roleDTO.setRoleId(2);
+				roleDTO.setRoleId(5);
 				userDTO.setRoleDTO(roleDTO);
 				userService.insert(userDTO);
 				sendEmail("myanhm55@gmail.com", email, "Welcome to PiFood!",
@@ -106,14 +109,7 @@ public class RegisterController {
 		}
 		return "authen/verify";
 	}
-	
-	@PostMapping(value = "get-news")
-	public String getNews(@RequestParam(name = "email") String email) {
-		sendEmail("myanhm55@gmail.com", email, "Welcome to PiFood!",
-				"Thank you for your interest, we will send you the latest notice if any. Please pay attention to your mail.");
-		return "client/get_news";
-	}
-	
+
 	public void sendEmail(String from, String to, String subject, String content) {
 		SimpleMailMessage mailMessage = new SimpleMailMessage();
 		mailMessage.setFrom(from);

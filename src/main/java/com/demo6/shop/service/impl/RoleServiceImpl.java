@@ -31,10 +31,7 @@ public class RoleServiceImpl implements RoleService {
         List<Role> roles = roleDao.findAll();
         List<RoleDTO> roleDTOs = new ArrayList<RoleDTO>();
         for (Role role : roles) {
-            RoleDTO roleDTO = new RoleDTO();
-            roleDTO.setRoleId(role.getRoleId());
-            roleDTO.setRoleName(role.getRoleName());
-            roleDTOs.add(roleDTO);
+            roleDTOs.add(roleConvert.toDto(role));
         }
         return roleDTOs;
     }

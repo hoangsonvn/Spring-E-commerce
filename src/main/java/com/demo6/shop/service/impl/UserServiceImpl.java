@@ -1,7 +1,7 @@
 package com.demo6.shop.service.impl;
 
 import com.demo6.shop.common.ICommon;
-import com.demo6.shop.convert.UserConvert;
+import com.demo6.shop.convert.UserConverter;
 import com.demo6.shop.dao.UserDao;
 import com.demo6.shop.dto.RoleDTO;
 import com.demo6.shop.dto.UserDTO;
@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Autowired
     private UserDao userDao;
     @Autowired
-    private UserConvert userConvert;
+    private UserConverter userConverter;
     @Autowired
     private ICommon iCommon;
     @Autowired
@@ -65,14 +65,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Override
     public UserDTO insert(UserDTO userDTO) {
-        User user = userConvert.toEntity(userDTO);
+        User user = userConverter.toEntity(userDTO);
         userDao.insert(user);
-        return userConvert.toDTO(user);
+        return userConverter.toDTO(user);
     }
 
     @Override
     public void update(UserDTO userDTO) {
-        userDao.update(userConvert.toEntity(userDTO));
+        userDao.update(userConverter.toEntity(userDTO));
     }
 
     @Override
@@ -84,29 +84,28 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public UserDTO findById(long userId) {
         User user = userDao.findById(userId);
-        return userConvert.toDTO(user);
+        return userConverter.toDTO(user);
     }
 
     @Override
     public List<UserDTO> findAll(int pageIndex, int PageSize) {
         List<User> users = userDao.findAll(pageIndex, PageSize);
-        return users.stream().map(s -> userConvert.toDTO(s)).collect(Collectors.toList());
+        return users.stream().map(s -> userConverter.toDTO(s)).collect(Collectors.toList());
     }
 
     @Override
     public UserDTO findByEmailOrPhoneAndPassword(String account, String password, boolean verity) {
         User user = userDao.findByEmailOrPhoneAndPassword(account, password, verity);
-        return userConvert.toDTO(user);
+        return userConverter.toDTO(user);
     }
 
     @Override
     public UserDetails loadUserByUsername(String account) throws UsernameNotFoundException {
         System.out.println("0--------------");
+
         User user = userDao.loadUserByUsername(account);
         System.out.println("1---------------");
-        if (user == null) {
-            throw new UsernameNotFoundException("Not Found!");
-        }
+
 
         List<SimpleGrantedAuthority> roleList = new ArrayList<>();
         user.getRole().getPermissions().forEach(s -> {
@@ -127,7 +126,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public UserDTO findByEmail(String email) {
         User user = userDao.findByEmail(email);
         if (user != null) {
-            return userConvert.toDTO(user);
+            return userConverter.toDTO(user);
         }
         return null;
     }

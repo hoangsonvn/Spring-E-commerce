@@ -15,7 +15,6 @@ public class CanvasjsChartData {
     @Autowired
     private ProductDao productDao;
 
-
     public List<List<Map<Object, Object>>> total() {
         List<List<Map<Object, Object>>> list = new ArrayList<List<Map<Object, Object>>>();
         List<Map<Object, Object>> dataPoints1 = new ArrayList<Map<Object, Object>>();

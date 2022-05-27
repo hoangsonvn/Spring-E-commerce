@@ -142,14 +142,14 @@
                                     <div class="shippingbox">
                                         <h5>Estimate Shipping And Tax</h5>
                                         <label> Address * </label> <input type="text" name=""
-                                                                          value="${sessionScope.user.address}"
+                                                                          value="${user.address}"
                                                                           style="color: red;"
                                                                           readonly="readonly"/> <label> Phone number
                                         * </label> <input
-                                            type="text" name="" value="${sessionScope.user.phone}"
+                                            type="text" name="" value="${user.phone}"
                                             style="color: red;" readonly="readonly"/> <label>
                                         Change of shipping address * </label>
-                                        <c:if test="${sessionScope.user != null}">
+                                        <c:if test="${user != null}">
                                             <a href="<c:url value="/client/profile"/> ">
                                                 <button>Go To Profile</button>
                                             </a>
@@ -189,6 +189,12 @@
                                                  test="${user.address == null || user.phone == null}">
                                              <a href="<c:url value="/client/profile-from-cart"/>"><button>Process To Checkout</button></a>
                                          </c:if>--%>
+                                        <c:if
+                                                test="${user.address == null && user.phone == null }">
+                                            <p style="color: #ff1e2c;font-weight: bold;">Please update your information</p>
+                                            <a href="<c:url value="/client/profile"/> " type="button" class="btn btn-light">Profile</a>
+
+                                        </c:if>
                                         <c:if
                                                 test="${user.address != null && user.phone != null }">
                                             <form action="<c:url value="/client/checkout"/>" method="get">

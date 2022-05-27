@@ -35,7 +35,7 @@
 								Get <strong> newsletter </strong>
 							</h3>
 							<p>Casio G Shock Digital Dial Black.</p>
-							<form action="<c:url value="/get-news"/>" method="post">
+							<form>
 								<input class="email" type="text" name="email"
 									placeholder="Your Email..." required="required"> <input class="submit"
 									type="submit" value="Submit">
@@ -60,7 +60,11 @@
 										</c:if>
 										<c:if test="${messageSuccess != null}">
 											<span
-												style="width: 100%; margin-top: 15px; font-size: 15px; color: green;">${messageSuccess}</span>
+												style="width: 100%; margin-top: 15px; font-size: 15px; color: #00c300;">${messageSuccess}</span>
+										</c:if>
+										<c:if test="${messageinvalid != null}">
+											<span
+													style="width: 100%; margin-top: 15px; font-size: 15px; color: #ff1e2c;">${messageinvalid}</span>
 										</c:if>
 									</div>
 									<div class="step-description">
@@ -99,7 +103,7 @@
 													<div><label class="lebel-abs"> Avatar <strong
 																class="red"> * </strong></label>											</tr>															<th>Avatar:</th>
 															<<input type="file"
-																	name="avatarFile" /></div>
+																	name="avatarFile" required="required" /></div>
 														<button type="submit">Update Your Information</button>
 													</div>
 												</form>

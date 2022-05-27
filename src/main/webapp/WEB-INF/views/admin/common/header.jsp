@@ -18,6 +18,7 @@
         </div>
         <div class="container-fluid">
             <div id="navbar-menu">
+
                 <form action="<c:url value="/admin/search"/>" method="post" class="navbar-form navbar-left">
                     <div class="input-group">
                         <input type="text"  name="text" class="form-control"
@@ -33,6 +34,12 @@
 
                     <sec:authorize access="isAuthenticated()">
                         <ul class="usermenu" style="display: flex;">
+                            <li style="list-style:none; margin-top: 10px;margin-right: 15px;">
+
+                                <span
+                                        style="margin-left:10px;margin-right:15px;color: #001c4a; font-size: 14px;font-weight: bold; ">
+Login as: <%=SecurityUtils.getPrincipal().getRole().getRoleName()%></span>
+                            </li>
                             <li style="list-style:none; margin-top: 10px;margin-right: 15px;">
                                 <img class="img-circle" src="../download?image=<%=SecurityUtils.getPrincipal().getAvatar()%>"
                                      style="width: 26px;height:26px; margin-top: -4px;">

@@ -8,4 +8,5 @@ public interface ICommon {
      String image(MultipartFile imageFile);
      int totalPage(int count,int pageSize);
      void notificate(HttpServletRequest request);
+     String imageUpload(MultipartFile imageFile);
 }

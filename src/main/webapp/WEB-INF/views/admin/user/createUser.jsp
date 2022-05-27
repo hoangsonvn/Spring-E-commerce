@@ -122,8 +122,8 @@
                                 </tr>
                                 <tr>
                                     <th>Avatar:</th>
-                                    <td><input type="file"
-                                               name="avatarFile"/></td>
+                                    <td><input type="file" required="required"
+                                               name="avatarFile" /></td>
                                 </tr>
                                 <tr>
                                     <th>Password:</th>
